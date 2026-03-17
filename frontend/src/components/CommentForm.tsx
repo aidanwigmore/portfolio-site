@@ -19,6 +19,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { CustomTypography } from "../materials/Typography";
+import { Tooltip } from "@mui/material";
 
 export interface CommentDialogProps {
   open: boolean;
@@ -73,6 +74,7 @@ function CommentDialog(props: CommentDialogProps) {
         justifyContent: "top",
         paddingBottom: "2rem",
         maxWidth: "none",
+        borderRadius: { xs: "1.5rem", sm: "0.5rem" },
       },
       }} 
       onClose={handleClose} 
@@ -154,15 +156,17 @@ export default function CommentDialogDemo() {
   };
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleClickOpen}>
-        Send a message
-      </Button>
+    <>
+      <Tooltip title="Send a message" arrow>
+        <Button color="inherit" onClick={handleClickOpen}>
+          Message me
+        </Button>
+      </Tooltip>
       <CommentDialog
         selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
       />
-    </div>
+    </>
   );
 }

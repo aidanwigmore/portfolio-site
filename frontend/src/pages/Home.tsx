@@ -1,5 +1,3 @@
-import CommentForm from "../components/CommentForm";
-
 import { CustomTypography } from "../materials/Typography";
 
 export default function Home() {
@@ -12,7 +10,6 @@ export default function Home() {
       <CustomTypography variant="body1" gutterBottom>
         Full-stack developer specializing in React and Django.
       </CustomTypography>
-      <CommentForm />
     </>
   )
 }
