@@ -12,6 +12,7 @@
     "@mantine/hooks": "^8.3.17",
     "@mantine/notifications": "^8.3.17",
     "@mui/icons-material": "^7.3.9",
+    "@mui/lab": "^7.0.1-beta.23",
     "@mui/material": "^7.3.9",
     "@mui/styled-engine-sc": "^7.3.9",
     "@tabler/icons-react": "^3.40.0",
