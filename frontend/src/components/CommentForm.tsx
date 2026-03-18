@@ -70,29 +70,28 @@ function CommentDialog(props: CommentDialogProps) {
     <Dialog 
       PaperProps={{
         sx: {
-        alignItems: "center",
-        justifyContent: "top",
-        paddingBottom: "2rem",
-        maxWidth: "none",
-        borderRadius: { xs: "1.5rem", sm: "0.5rem" },
+          alignItems: "center",
+          justifyContent: "top",
+          paddingBottom: "2rem",
+          maxWidth: "none",
       },
       }} 
       onClose={handleClose} 
       open={open}
     >
-      <DialogTitle>
-        <CustomTypography style={{textAlign: "center"}} variant="h3" gutterBottom>
-          Send a message
-        </CustomTypography>
-      </DialogTitle>
-      <form onSubmit={submit}>
-
       <Box
         component="form"
-        sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-        noValidate
-        autoComplete="off"
-      >
+        sx= {{
+          display: "flex",
+          flexDirection: "column",
+          padding: "2rem",
+      }}>
+        <DialogTitle>
+          <CustomTypography style={{textAlign: "center"}} variant="h3" gutterBottom>
+            Send a message
+          </CustomTypography>
+        </DialogTitle>
+
         <TextField 
           name="name" 
           id="filled-basic" 
@@ -101,13 +100,6 @@ function CommentDialog(props: CommentDialogProps) {
           variant="filled" 
           onChange={handleChange} 
         />
-      </Box>
-      <Box
-        component="form"
-        sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-        noValidate
-        autoComplete="off"
-      >
         <TextField 
           name="email" 
           id="filled-basic" 
@@ -116,13 +108,6 @@ function CommentDialog(props: CommentDialogProps) {
           value={comment.email} 
           onChange={handleChange}
         />
-      </Box>
-      <Box
-        component="form"
-        sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-        noValidate
-        autoComplete="off"
-      >
         <TextareaAutosize
           aria-label="message-textarea"
           placeholder="Message"
@@ -130,14 +115,10 @@ function CommentDialog(props: CommentDialogProps) {
           value={comment.message}
           onChange={handleChange}
         />
+        <Button variant="contained" type="submit">
+          Send
+        </Button>
       </Box>
-
-      <Button variant="contained" type="submit">
-        Send
-      </Button>
-
-      </form>
-        
     </Dialog>
   );
 }

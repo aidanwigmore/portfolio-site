@@ -15,7 +15,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-export default function Contact() {
+export default function Videos() {
   const items= [
     {
       title: "Batched Support",
@@ -84,7 +84,7 @@ export default function Contact() {
     },
     {
       title: "Mohawk College Capstone",
-      description: "TeaBank Final Demonstrations",
+      description: "TeaBank Demonstrations",
       channel: "aidanOdyssey",
       src: [
         "https://www.youtube.com/embed/fVJ_0QYCSoI?si=p7jX3Wn7ylXdaZxE",
