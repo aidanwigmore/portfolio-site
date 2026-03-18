@@ -87,7 +87,7 @@ function CommentDialog(props: CommentDialogProps) {
           padding: "2rem",
       }}>
         <DialogTitle>
-          <CustomTypography style={{textAlign: "center"}} variant="h3" gutterBottom>
+          <CustomTypography style={{textAlign: "center"}} gutterBottom>
             Send a message
           </CustomTypography>
         </DialogTitle>
