@@ -131,7 +131,7 @@ export default function Videos() {
       <>
       <TabContext value={value}>
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: 2 }}>
-          <Typography variant="caption" component="span" sx={{ ml: 2 }}>
+          <Typography variant="h4" gutterBottom component="span" sx={{ ml: 2, flexWrap: 'wrap', textAlign: 'center' }}>
             {items[currentPage - 1].title} - {items[currentPage - 1].description}
           </Typography>
         </Box>
