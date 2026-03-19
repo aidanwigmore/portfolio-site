@@ -2,8 +2,8 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Videos from "./pages/Videos";
-import Projects from "./pages/Projects";
+import Videos from "./pages/Videos/Videos";
+import Projects from "./pages/Projects/Projects";
 
 import Navbar from "./components/Navbar";
 

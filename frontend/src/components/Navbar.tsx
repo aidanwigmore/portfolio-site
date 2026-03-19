@@ -1,11 +1,10 @@
-import CommentForm from "../components/CommentForm";
+import { Link } from "react-router-dom";
 
 import { Box, Button, Tooltip } from "@mui/material";
 
-import { Link } from "react-router-dom";
+import CommentDialogButton from "../components/CommentForm";
 
 export default function NavBar() {
-
   return (
     <>
       <Box sx={{ display: { xs: "none", sm: "block", paddingBottom: '5vh' } }}>
@@ -24,7 +23,7 @@ export default function NavBar() {
               Videos
             </Button>
           </Tooltip>
-          <CommentForm />
+          <CommentDialogButton />
       </Box>
     </>
   )
