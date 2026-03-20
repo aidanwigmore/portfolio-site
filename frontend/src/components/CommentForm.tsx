@@ -85,32 +85,34 @@ function CommentDialog(props: CommentDialogProps) {
           </CustomTypography>
         </DialogTitle>
 
-        <TextField 
-          name="name" 
-          id="filled-basic" 
-          value={comment.name} 
-          label="Name" 
-          variant="filled" 
-          onChange={handleChange} 
-        />
-        <TextField 
-          name="email" 
-          id="filled-basic" 
-          label="Email" 
-          variant="filled" 
-          value={comment.email} 
-          onChange={handleChange}
-        />
-        <TextareaAutosize
-          aria-label="message-textarea"
-          placeholder="Message"
-          name="message"
-          value={comment.message}
-          onChange={handleChange}
-        />
-        <CustomButton variant="contained" type="submit" onClick={() => onmessage} >
-          Send
-        </CustomButton>
+        <form>
+          <TextField
+            name="name" 
+            id="filled-basic" 
+            value={comment.name} 
+            label="Name" 
+            variant="filled" 
+            onChange={handleChange} 
+          />
+          <TextField 
+            name="email" 
+            id="filled-basic" 
+            label="Email" 
+            variant="filled" 
+            value={comment.email} 
+            onChange={handleChange}
+          />
+          <TextareaAutosize
+            aria-label="message-textarea"
+            placeholder="Message"
+            name="message"
+            value={comment.message}
+            onChange={handleChange}
+          />
+          <CustomButton variant="contained" type="submit" onClick={submit} >
+            Send
+          </CustomButton>
+        </form>
       </Box>
     </Dialog>
   );
