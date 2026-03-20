@@ -1,7 +1,6 @@
 import { useState } from "react"
 import api from "../api/axios"
 import { Comment } from "../types/Comment"
-import Button from '@mui/material/Button';
 import * as React from 'react';
 
 import Dialog from '@mui/material/Dialog';
@@ -12,6 +11,8 @@ import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { CustomTypography } from "../materials/Typography";
 import { Tooltip } from "@mui/material";
+
+import { CustomButton } from "../materials/Button";
 
 export interface CommentDialogProps {
   open: boolean;
@@ -107,9 +108,9 @@ function CommentDialog(props: CommentDialogProps) {
           value={comment.message}
           onChange={handleChange}
         />
-        <Button variant="contained" type="submit">
+        <CustomButton variant="contained" type="submit" onClick={() => onmessage} >
           Send
-        </Button>
+        </CustomButton>
       </Box>
     </Dialog>
   );
@@ -131,9 +132,9 @@ export default function CommentDialogButton() {
   return (
     <>
       <Tooltip title="Send a message" arrow>
-        <Button color="inherit" onClick={handleClickOpen}>
+        <CustomButton variant="contained" onClick={handleClickOpen}>
           Message me
-        </Button>
+        </CustomButton>
       </Tooltip>
       <CommentDialog
         selectedValue={selectedValue}

@@ -1,30 +1,33 @@
 import { Link } from "react-router-dom";
 
-import { Box, Button, Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 
 import CommentDialogButton from "../components/CommentForm";
+import { CustomButton } from "../materials/Button";
+import { CustomDivider } from "../materials/Divider";
 
 export default function NavBar() {
   return (
     <>
-      <Box sx={{ display: { xs: "none", sm: "block", paddingBottom: '5vh' } }}>
+      <Box sx={{ display: { justifyContent: 'center', paddingBottom: '1vh', display: 'flex', flexDirection: 'row', gap: '1rem'} }}>
           <Tooltip title="Navigate to Home Page" arrow>
-            <Button color="inherit" component={Link} to="/">
+            <CustomButton component={Link} to="/">
               Home
-            </Button>
+            </CustomButton>
           </Tooltip>
           <Tooltip title="View Projects I've Worked On" arrow>
-            <Button color="inherit" component={Link} to="/projects">
+            <CustomButton component={Link} to="/projects">
               Projects
-            </Button>
+            </CustomButton>
           </Tooltip>
           <Tooltip title="View Technical Documentation Videos" arrow>
-            <Button color="inherit" component={Link} to="/videos">
+            <CustomButton component={Link} to="/videos">
               Videos
-            </Button>
+            </CustomButton>
           </Tooltip>
           <CommentDialogButton />
       </Box>
+      <CustomDivider/>
     </>
   )
 }

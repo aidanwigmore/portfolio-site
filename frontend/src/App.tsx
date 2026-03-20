@@ -6,11 +6,15 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import Router from "./Router";
+import Theme from "./Theme";
+import { ThemeProvider } from '@mui/material';
 
 function App() {
   return (
     <>
-      <Router />
+      <ThemeProvider theme={Theme}>
+        <Router />
+      </ThemeProvider>
     </>
   )
 }

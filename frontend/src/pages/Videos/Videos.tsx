@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-import { Pagination, AccordionDetails, AccordionSummary, Box, Button, Step, StepLabel, Stepper, Typography, Tab } from '@mui/material';
+import { Pagination, AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Typography, Tab } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -12,6 +12,8 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 
 import VideoData from "./VideoData";
+
+import { CustomButton } from "../../materials/Button";
 
 export default function Videos() {
   const items = VideoData;
@@ -181,35 +183,34 @@ export default function Videos() {
                       </CustomTypography>
                       <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={() => handleReset(itemIndex)}>Reset</Button>
+                        <CustomButton onClick={() => handleReset(itemIndex)}>Reset</CustomButton>
                       </Box>
                     </React.Fragment>
                   ) : (
                     <React.Fragment>
                       <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Button
-                          color="inherit"
+                        <CustomButton
                           disabled={currentStep === 0}
                           onClick={() => handleBack(itemIndex)}
                           sx={{ mr: 1 }}
                         >
                           Back
-                        </Button>
+                        </CustomButton>
                         <Box sx={{ flex: '1 1 auto' }} />
                         {isStepOptional(currentStep) && (
-                          <Button
+                          <CustomButton
                             color="inherit"
                             onClick={() => handleSkip(itemIndex)}
                             sx={{ mr: 1 }}
                           >
                             Skip
-                          </Button>
+                          </CustomButton>
                         )}
-                        <Button onClick={() => handleNext(itemIndex)}>
+                        <CustomButton onClick={() => handleNext(itemIndex)}>
                           {currentStep === item.steps.length - 1
                             ? 'Finish'
                             : 'Next'}
-                        </Button>
+                        </CustomButton>
                       </Box>
                     </React.Fragment>
                   )}

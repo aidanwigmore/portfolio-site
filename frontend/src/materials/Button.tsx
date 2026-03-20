@@ -1,0 +1,45 @@
+import { Button, ButtonProps } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import React from 'react';
+
+interface CustomButtonProps extends ButtonProps {
+    variant?: 'text' | 'outlined' | 'contained';
+    children: React.ReactNode;
+    gutterBottom?: boolean;
+    to?: string;
+}
+
+export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
+    (
+        {
+            variant = 'contained',
+            children,
+            gutterBottom = false,
+            to,
+            sx = {},
+            ...props
+        },
+        ref
+    ) => {
+        return (
+            <Button
+                ref={ref}
+                component={to ? RouterLink : 'button'}
+                to={to}
+                variant={variant}
+                sx={{
+                    display: 'inline-block',
+                    width: 'auto',
+                    padding: '8px 16px',
+                    ...(gutterBottom && { marginBottom: '1rem' }),
+                    ...sx,
+                }}
+                {...props}
+            >
+                {children}
+            </Button>
+        );
+    }
+);
+
+CustomButton.displayName = 'CustomButton';
