@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Videos from "./pages/Videos/Videos";
 import Projects from "./pages/Projects/Projects";
+import ImageGallery from "./pages/Gallery/ImageGallery";
 
 import Navbar from "./components/Navbar";
 
@@ -32,6 +33,11 @@ export default function Router() {
           <Route path="/projects" element={
             <PageTransition>
               <Projects />
+            </PageTransition>
+          } />
+          <Route path="/gallery" element={
+            <PageTransition>
+              <ImageGallery />
             </PageTransition>
           } />
         
