@@ -1,5 +1,11 @@
 from django.contrib import admin
+from django.shortcuts import render
+from django.urls import path, reverse
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.utils.html import format_html
 from .models import AccessPassword, PasswordUsageLog, PortfolioImage, Tag
+from datetime import datetime
 
 
 @admin.register(Tag)
@@ -37,6 +43,102 @@ class PortfolioImageAdmin(admin.ModelAdmin):
     def get_tags(self, obj):
         return ", ".join([tag.name for tag in obj.tags.all()])
     get_tags.short_description = 'Tags'
+    
+    # Add custom URL for bulk upload
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('bulk-upload/', self.admin_site.admin_view(self.bulk_upload_view), name='images_portfolioimage_bulk_upload'),
+        ]
+        return custom_urls + urls
+    
+    def bulk_upload_view(self, request):
+        """Handle bulk upload of images"""
+        if request.method == 'POST':
+            uploaded_count = 0
+            error_count = 0
+            errors = []
+            
+            # Get form data
+            category = request.POST.get('category', 'visitors')
+            date_taken_str = request.POST.get('date_taken', '')
+            coordinates = request.POST.get('coordinates', '')
+            camera_used = request.POST.get('camera_used', '')
+            description = request.POST.get('description', '')
+            tag_ids = request.POST.getlist('tags')
+            
+            # Parse date
+            if date_taken_str:
+                try:
+                    date_taken = datetime.strptime(date_taken_str, '%Y-%m-%d').date()
+                except ValueError:
+                    date_taken = datetime.now().date()
+            else:
+                date_taken = datetime.now().date()
+            
+            # Get uploaded files
+            files = request.FILES.getlist('images')
+            
+            if not files:
+                messages.error(request, 'No images selected for upload.')
+            else:
+                for file in files:
+                    try:
+                        # Create image
+                        image = PortfolioImage.objects.create(
+                            name=file.name.split('.')[0],
+                            image=file,
+                            date_taken=date_taken,
+                            coordinates=coordinates if coordinates else None,
+                            camera_used=camera_used if camera_used else None,
+                            description=description if description else None,
+                            category=category
+                        )
+                        
+                        # Add tags
+                        if tag_ids:
+                            for tag_id in tag_ids:
+                                try:
+                                    tag = Tag.objects.get(id=int(tag_id))
+                                    image.tags.add(tag)
+                                except (Tag.DoesNotExist, ValueError):
+                                    pass
+                        
+                        uploaded_count += 1
+                    except Exception as e:
+                        error_count += 1
+                        errors.append(f"{file.name}: {str(e)}")
+                
+                # Display results
+                if uploaded_count > 0:
+                    messages.success(request, f'✓ Successfully uploaded {uploaded_count} image(s)!')
+                if error_count > 0:
+                    error_msg = f'✗ Failed to upload {error_count} image(s).'
+                    if errors:
+                        error_msg += f' Errors: {", ".join(errors[:3])}'
+                    messages.warning(request, error_msg)
+            
+            return HttpResponseRedirect(reverse('admin:images_portfolioimage_changelist'))
+        
+        # GET request - show form
+        context = {
+            'title': 'Bulk Upload Images',
+            'opts': self.model._meta,
+            'has_view_permission': self.has_view_permission(request),
+            'site_header': self.admin_site.site_header,
+            'site_title': self.admin_site.site_title,
+            'index_title': self.admin_site.index_title,
+            'tags': Tag.objects.all(),
+            'app_label': self.model._meta.app_label,
+        }
+        
+        return render(request, 'admin/images/bulk_upload.html', context)
+    
+    # Add button to change list view
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['bulk_upload_url'] = reverse('admin:images_portfolioimage_bulk_upload')
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 @admin.register(AccessPassword)

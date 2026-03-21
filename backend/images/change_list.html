@@ -1,0 +1,13 @@
+{% extends "admin/change_list.html" %}
+
+{% block result_list %}
+    {% if bulk_upload_url %}
+        <div style="margin-bottom: 20px;">
+            <a href="{{ bulk_upload_url }}" class="button" 
+               style="background-color: #417690; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; display: inline-block;">
+                ⬆️ Bulk Upload Images
+            </a>
+        </div>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}
