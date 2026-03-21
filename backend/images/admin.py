@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.shortcuts import render
 from django.urls import path, reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -80,7 +79,7 @@ class PortfolioImageAdmin(admin.ModelAdmin):
             files = request.FILES.getlist('images')
             
             if not files:
-                messages.error(request, 'No images selected for upload.')
+                messages.error(request, '❌ No images selected for upload.')
             else:
                 for file in files:
                     try:
@@ -111,30 +110,33 @@ class PortfolioImageAdmin(admin.ModelAdmin):
                 
                 # Display results
                 if uploaded_count > 0:
-                    messages.success(request, f'✓ Successfully uploaded {uploaded_count} image(s)!')
+                    messages.success(request, f'✅ Successfully uploaded {uploaded_count} image(s)!')
                 if error_count > 0:
-                    error_msg = f'✗ Failed to upload {error_count} image(s).'
+                    error_msg = f'❌ Failed to upload {error_count} image(s).'
                     if errors:
-                        error_msg += f' Errors: {", ".join(errors[:3])}'
-                    messages.warning(request, error_msg)
+                        error_msg += f' {", ".join(errors[:3])}'
+                    messages.error(request, error_msg)
             
             return HttpResponseRedirect(reverse('admin:images_portfolioimage_changelist'))
         
-        # GET request - show form
+        # GET request - show form inline
+        tags = Tag.objects.all()
+        csrf_token = request.META.get('CSRF_COOKIE', '')
+        
         context = {
             'title': 'Bulk Upload Images',
-            'opts': self.model._meta,
             'has_view_permission': self.has_view_permission(request),
             'site_header': self.admin_site.site_header,
             'site_title': self.admin_site.site_title,
-            'index_title': self.admin_site.index_title,
-            'tags': Tag.objects.all(),
-            'app_label': self.model._meta.app_label,
+            'opts': self.model._meta,
+            'tags': tags,
+            'csrf_token': csrf_token,
         }
         
-        return render(request, 'admin/images/bulk_upload.html', context)
+        # Return response with inline HTML
+        from django.shortcuts import render
+        return render(request, 'admin/base_site.html', context)
     
-    # Add button to change list view
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
         extra_context['bulk_upload_url'] = reverse('admin:images_portfolioimage_bulk_upload')
