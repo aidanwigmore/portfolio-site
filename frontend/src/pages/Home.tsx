@@ -40,14 +40,16 @@ export default function Home() {
           display: 'flex',
           justifyContent: 'center',
           alignSelf: 'center',
-          marginTop: '5vw', 
-          padding: '3vw', 
-          backgroundColor: Theme.palette.primary.main, 
+          padding: '3vw',
+          margin: '1vh',
+          marginLeft: 0,
+          marginRight: 0,
+          backgroundColor: Theme.palette.primary.light, 
           borderRadius: '8px'
         }}>
           <Box sx={{ 
             padding: '3vw',
-            backgroundColor: Theme.palette.primary.light,
+            backgroundColor: Theme.palette.primary.main,
             borderRadius: '8px'
           }}>
             <CustomTypography variant="h1" textAlign="center" gutterBottom>
@@ -69,7 +71,7 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
         variants={contentVariants}
       >
-        <Projects />
+        <Projects home={true}/>
       </motion.div>
 
       <CustomDivider />
@@ -80,7 +82,7 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
         variants={contentVariants}
       >
-        <Videos />
+        <Videos home={true}/>
       </motion.div>
     </>
   );

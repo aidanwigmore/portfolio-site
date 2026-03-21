@@ -17,6 +17,8 @@ import PasswordPrompt from './PasswordPrompt';
 import { getImagesByCategory, getImageUrl } from '../../api/galleryService';
 import { PortfolioImage } from '../../types/Gallery';
 
+import Title from '../../components/Title';
+
 import Theme from "../../Theme";
 
 export default function ImageGallery() {
@@ -62,14 +64,7 @@ export default function ImageGallery() {
   return (
     <Box sx={{ p: 3, backgroundColor: Theme.palette.primary.main, borderRadius: '8px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
-        <Typography variant="h4">
-          Gallery
-        </Typography>
-        
-        <Typography variant="h4">
-          Welcome, { category }
-        </Typography>
-
+        <Title children={`Welcome to my Gallery`}/>
         <CustomButton onClick={handleLogout}>
           Go Back
         </CustomButton>

@@ -12,10 +12,16 @@ import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
 
 import ProjectData from "./ProjectData";
 import { CustomTypography } from "../../materials/Typography";
+import Title from '../../components/Title';
+import { lighten, darken } from '@mui/material/styles';
 
 import Theme from "../../Theme";
 
-export default function Projects() {
+interface ProjectProps {
+  home?: boolean;
+}
+
+export default function Projects( { home } : ProjectProps ) {
     const [openImageModal, setOpenImageModal] = useState(false);
     const [carouselIndices, setCarouselIndices] = useState<number[]>(
       ProjectData.map(() => 0)
@@ -68,33 +74,13 @@ export default function Projects() {
 
     return (
     <>
-      <Box sx={{ 
-        display: 'flex',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        marginTop: '5vw', 
-        padding: '2vw', 
-        backgroundColor: Theme.palette.secondary.main, 
-        borderRadius: '8px',
-        marginBottom: '-3vh',
-      }}>
-        <Box sx={{ 
-          padding: '2vw',
-          backgroundColor: Theme.palette.secondary.light,
-          borderRadius: '8px'
-        }}>
-          <CustomTypography variant="h2" color={Theme.palette.secondary.dark}textAlign="center" gutterBottom>
-            Projects I've Worked On
-          </CustomTypography>
-        </Box>
-      </Box>
-      
+      <Title children={"Projects I've Worked On"} />
       <List dense={false}>
         {items.map((item, index) => (
           <ListItem
             key={index}
             sx={{
-              backgroundColor: index % 2 === 0 ? Theme.palette.primary.main : Theme.palette.primary.light,
+              backgroundColor: index % 2 !== 0 ? Theme.palette.primary.light : lighten(Theme.palette.primary.light, 0.4),
               borderRadius: index === 0 ? '8px 8px 0px 0px' : index === items.length - 1 ? '0px 0px 8px 8px' : '0px',
               flexDirection: 'column',
             }}
@@ -132,8 +118,7 @@ export default function Projects() {
                         fontSize: 'clamp(0.75rem, 2vw, 1rem)'
                       }}
                     >
-                      -{desc}
-                      <br />
+                      {home === undefined && `-${desc}<br />`}
                     </span>
                   ))
                 } 

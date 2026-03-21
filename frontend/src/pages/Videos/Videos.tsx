@@ -14,10 +14,15 @@ import TabList from '@mui/lab/TabList';
 import VideoData from "./VideoData";
 
 import { CustomButton } from "../../materials/Button";
+import Title from '../../components/Title';
 
 import Theme from "../../Theme";
 
-export default function Videos() {
+interface HomeProps {
+  home?: boolean;
+}
+
+export default function Videos({ home }: HomeProps) {
   const items = VideoData;
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -133,59 +138,44 @@ export default function Videos() {
 
   return (
       <>
-      <Box sx={{ 
-        display: 'flex',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        marginTop: '5vw', 
-        padding: '3vw', 
-        marginBottom: '-3vh',
-        backgroundColor: Theme.palette.secondary.main, 
-        borderRadius: '8px'
-      }}>
-        <Box sx={{ 
-          padding: '3vw',
-          backgroundColor: Theme.palette.secondary.light,
-          borderRadius: '8px'
-        }}>
-          <CustomTypography variant="h2" color={Theme.palette.secondary.dark}textAlign="center" gutterBottom>
-            Videos I've Made
-          </CustomTypography>
-        </Box>
-      </Box>
+      <Title children={"Videos I've Made"} />
       <TabContext value={value}>
         <Box sx={{
           padding: '2vw',
           display: 'flex', 
           flexDirection: 'column', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
           backgroundColor: Theme.palette.primary.main, 
-          borderRadius: '8px' 
+          borderRadius: '8px',
         }}>
           <List dense={true}>
             <TabList onChange={handleChange} aria-label="tabslist" sx={{ 
-              backgroundColor: Theme.palette.secondary.dark,
+              backgroundColor: Theme.palette.secondary.light,
               display: 'flex',
               borderRadius: '8px',
-              justifyContent: 'center',
+              gap: "1rem",
               width: '100%',
               '& .MuiTabs-flexContainer': {
                 justifyContent: 'center',
               },
               '& .MuiTabs-indicator': {
-                backgroundColor: Theme.palette.secondary.light,
+                backgroundColor: Theme.palette.secondary.contrastText,
+                height: '7px',
+                borderRadius: '8px',
+              },
+              '& .MuiTabs-active': {
+                backgroundColor: Theme.palette.secondary.dark,
                 height: '7px',
               },
               '& .MuiTab-root': {
                 color: '#fff',
+                backgroundColor: Theme.palette.secondary.main,
                 minWidth: 'auto',
                 transition: 'all 0.3s ease',
-                '&.Mui-selected': {
-                  backgroundColor: Theme.palette.secondary.main,
-                  color: Theme.palette.secondary.dark,
-                  borderRadius: '8px',
-                }
+                borderRadius: '8px',
+              '&.Mui-selected': {
+                backgroundColor: Theme.palette.secondary.dark,
+                color: Theme.palette.secondary.contrastText,
+              }
               }
             }}>
             {items.map((item, index) => (
