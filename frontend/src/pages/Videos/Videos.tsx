@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-import { Pagination, AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Typography, Tab } from '@mui/material';
+import { Pagination, AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Typography, Tab, IconButton } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -12,10 +12,11 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 
 import VideoData from "./VideoData";
+import { ThumbUp } from '@mui/icons-material';
 
 import { CustomButton } from "../../materials/Button";
 import Title from '../../components/Title';
-
+import { useThumbsUp } from '../../hooks/useThumbsUp';
 import Theme from "../../Theme";
 
 interface HomeProps {
@@ -23,6 +24,9 @@ interface HomeProps {
 }
 
 export default function Videos({ home }: HomeProps) {
+  
+  const { thumbsUpCounts, handleThumbsUp } = useThumbsUp('video');
+
   const items = VideoData;
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -293,6 +297,19 @@ export default function Videos({ home }: HomeProps) {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     ></iframe>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}>
+                      <IconButton 
+                        onClick={() => handleThumbsUp(item.title)}
+                        size="large"
+                        sx={{color: Theme.palette.primary.dark, backgroundColor: Theme.palette.primary.main}}
+                      >
+                        <ThumbUp />
+                      </IconButton>
+                      <Typography variant="body2">
+                        {thumbsUpCounts[item.title] || 0}
+                      </Typography>
+                    </Box>
                     {item.stepsLabels ? (
                     <Accordion sx={{maxHeight: '200px', overflowY: 'auto' }}>
                       <AccordionSummary
@@ -308,7 +325,6 @@ export default function Videos({ home }: HomeProps) {
                   ) : (
                     ''
                   )}
-                  </Box>
                   </Box>
                   </ListItem>
             );     })}

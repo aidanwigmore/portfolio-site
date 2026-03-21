@@ -22,6 +22,11 @@ export default [
           '',
           '',
         ],
+        ratingCodes: [
+          'batched-support-1',
+          'batched-support-2',
+          'batched-support-3',
+        ],
         uploadDates: [
           '2 Oct 2024',
           '2 Oct 2024',
@@ -50,6 +55,11 @@ export default [
           '',
           '',
         ],
+        ratingCodes: [
+          'capstone-1',
+          'capstone-1',
+          'capstone-1',
+        ],
         uploadDates: [
           '13 Dec 2024',
           '18 Nov 2024',
@@ -76,6 +86,11 @@ export default [
           '',
           '',
         ],
+        ratingCodes: [
+          'php-1',
+          'php-2',
+          'php-3',
+        ],
         uploadDates: [
           '25 Mar 2023',
           '7 Apr 2023',
@@ -101,6 +116,11 @@ export default [
           'test',
           '',
           '',
+        ],
+        ratingCodes: [
+          'soft-skills-1',
+          'soft-skills-2',
+          'soft-skills-3',
         ],
         uploadDates: [
           '7 Dec 2022',
