@@ -58,6 +58,122 @@ export default [
         (
           <CustomTypography variant="caption" component="span" sx={{ whiteSpace: 'pre-wrap' }}>
             {
+              "Hi there Professor my name is Aiden Wigmore student number ######## and this is my final Capstone presentation"+
+              "\n\n__0:088 seconds__and so I'll just start by uh registering as a user and it needs to be an email that is not taken before but and also"+
+              "\n\n__0:1717 seconds__phone number is not required Additionally the password is now required to be uh it's required to be eight"+
+              "\n\n__0:2424 seconds__characters long it's requires three special characters and three numbers and this request should fail and it"+
+              "\n\n__0:3232 seconds__should indicate that the username is it already exists and it does so then I"+
+              "\n\n__0:3939 seconds__will just attempt to create a new one and now we should have successfully registered great I'm going to save that"+
+              "\n\n__0:4747 seconds__password actually that's very useful um next is address so great and"+
+              "\n\n__0:5454 seconds it should have saved now we can just refresh this if you want to check that it did create that address we can see it here maybe I'll add that as well and"+
+              "\n\n__1:021 minute, 2 seconds__next I'll want to just update that address maybe I'll updated successfully and yeah it updated great"+
+              "\n\n__1:111 minute, 11 seconds__now we can go to well we're on the homepage I'll show off my so some of my filters um I created t accessories last"+
+              "\n\n__1:211 minute, 21 seconds__that's why it's at the bottom but if I wanted to sort by newer first I could flip that switch and then it just inverts the the actual ordering of these"+
+              "\n\n__1:291 minute, 29 seconds__products actually you can see a little bit of my reactiveness there alphabetical should put t accessories at the front as well the logic is actually"+
+              "\n\n__1:361 minute, 36 seconds__flipped and that will be just a small change that I will make uh maybe I'll input pots yeah I"+
+              "\n\n__1:431 minute, 43 seconds__want to look at teapots so we can teapots uh maybe I might need to go to the actual category page to start"+
+              "\n\n__1:501 minute, 50 seconds__filtering by that so Diamond yep uh additionally on this uh category page we"+
+              "\n\n__1:571 minute, 57 seconds__can sort by Price uh mean I figure you already you can already tell that the diamond teapot is the most money uh"+
+              "\n\n__2:062 minutes, 6 seconds__alphabetical so b c d w additionally newer as well I just remember off the top of my head that I created this one"+
+              "\n\n__2:142 minutes, 14 seconds__last and next I'm just going to navigate to the product page and basically oh yep so teapot of gold well doesn't have any"+
+              "\n\n__2:232 minutes, 23 seconds__ingredients it's just a teapot but it does weigh 45 grams and a the coins are not included that's a shame uh maybe I'll look and see if there's"+
+              "\n\n__2:312 minutes, 31 seconds__any ratings no no ratings exist that's unfortunate well maybe I can create one um I don't necessarily want to though"+
+              "\n\n__2:392 minutes, 39 seconds__because I haven't actually purchased it but that's fine I can try creating a rating oh create a rating"+
+              "\n\n__2:472 minutes, 47 seconds__great so uh this too"+
+              "\n\n__2:542 minutes, 54 seconds__expensive I cannot even afford this t pot why would you even"+
+              "\n\n__3:033 minutes, 3 seconds__put it on the website yeah that's a good point you got a good point I think that one star"+
+              "\n\n__3:103 minutes, 10 seconds__rating is probably deserved um maybe this person you can choose to be a coward or not um that's a"+
+              "\n\n__3:173 minutes, 17 seconds__bad way of saying it apologies uh you can choose to be anonymous or not"+
+              "\n\n__3:253 minutes, 25 seconds__and so this brings me to my next point which is across my website the way I initially set up how my data is all"+
+              "\n\n__3:323 minutes, 32 seconds__shared between all my components I do require occasional refreshes in the top left corner just to get the data"+
+              "\n\n__3:413 minutes, 41 seconds__there uh up up and refresh but now as I go here I should be able to see yes I created a rating and I can see it from"+
+              "\n\n__3:493 minutes, 49 seconds__here uh now that I'm actually well I'm still logged in I can go to my ratings and I can I can see it here uh"+
+              "\n\n__3:563 minutes, 56 seconds__additionally I can create a new rating completely um maybe I'll want to choose the actual product first deot of"+
+              "\n\n__4:044 minutes, 4 seconds__gold doesn't make any sense why does it show the coins but it doesn't include"+
+              "\n\n__4:134 minutes, 13 seconds__them misleading product and they'll be a little bit more generous because maybe they liked it and that'll be"+
+              "\n\n__4:224 minutes, 22 seconds__Justin now we hit refresh and we go back to ratings and we can see it exists unfortunately the updating functionality"+
+              "\n\n__4:304 minutes, 30 seconds__doesn't actually exist yet um and I think that's more of a feature uh but the delete does work uh we can see yes"+
+              "\n\n__4:394 minutes, 39 seconds__and then if we go back to PO of gold we shouldn't be able to see any ratings yeah no ratings"+
+              "\n\n__4:464 minutes, 46 seconds__exist great and now well maybe I'll go back to that tto gold maybe I'll try"+
+              "\n\n__4:534 minutes, 53 seconds__adding it to my wish list but first I'll just check and see if I even have a wish list oh yeah I have that hibiscus tea"+
+              "\n\n__5:015 minutes, 1 second__and you know that's kind of fine with me but maybe I'll just want to navigate to it oh yeah okay it looks good I mean"+
+              "\n\n__5:095 minutes, 9 seconds__people seem well okay we got wow okay this person's a fan maybe I'll maybe I'll have to add that to my wish list"+
+              "\n\n__5:165 minutes, 16 seconds__now when I go to my wish list then I'll see the Hibiscus there's a chance I just needed"+
+              "\n\n__5:235 minutes, 23 seconds__to refresh that nope I will go back and add the teapot of gold as well oh that"+
+              "\n\n__5:455 minutes, 45 seconds__see um I'll actually I'll go to my wish list now maybe I'll add a couple more"+
+              "\n\n__5:535 minutes, 53 seconds__products I like I like these all oh great that's a big list I don't think I want want to buy I definitely don't want"+
+              "\n\n__6:016 minutes, 1 second__to buy that one I definitely don't want to buy that one that one that one or that one I can only afford uh 5 cents"+
+              "\n\n__6:096 minutes, 9 seconds__because I'm actually testing it with my PayPal as you'll see later but now we're ready to add it to our cart I'll just"+
+              "\n\n__6:166 minutes, 16 seconds__refresh to exit the modal go back to our cart and you can see the price was 5 cents and now maybe I'll just navigate"+
+              "\n\n__6:266 minutes, 26 seconds__through PayPal real quick oh great they recognized me okay sounds good to"+
+              "\n\n__6:336 minutes, 33 seconds__me I'm willing to pay up big bucks for that habiscus t i mean it has a great"+
+              "\n\n__6:406 minutes, 40 seconds__rating let's just double check on our timing we're at 9 minutes"+
+              "\n\n__6:486 minutes, 48 seconds__so I will oh transaction completed fantastic now when I exit maybe I'll refresh just in case well it is it is"+
+              "\n\n__6:566 minutes, 56 seconds__still in our cart but we should be able to see now we have created an order and we did pay 5"+
+              "\n\n__7:047 minutes, 4 seconds__cents um now uh now we can yeah we look into our"+
+              "\n\n__7:117 minutes, 11 seconds__orders uh we can see all our ratings um now we'll we'll just show off the admin side of this so I'll just need to log"+
+              "\n\n__7:187 minutes, 18 seconds__out go here input the URL admin attempt logging in I don't want to"+
+              "\n\n__7:267 minutes, 26 seconds__do this one now but ######## at Mohawk"+
+              "\n\n__7:347 minutes, 34 seconds__c.ca the password is Aiden Wigmore one uh the way I got past"+
+              "\n\n__7:427 minutes, 42 seconds__the extra complicated passwords was I actually created these users well I created this admin in the database uh"+
+              "\n\n__7:517 minutes, 51 seconds__from the server and great let's give it one more refresh just get those products all the data"+
+              "\n\n__8:018 minutes, 1 second__and I just I created I created the accounts before the I added the restrictions which is okay that's okay"+
+              "\n\n__8:088 minutes, 8 second__with me and so now we're on the admin side of things so we can see all the new customers um let's just see Aiden wig"+
+              "\n\n__8:188 minutes, 18 seconds__was it Aiden W gmail.com yeah id28 we yeah we didn't input a phone number that's"+
+              "\n\n__8:258 minutes, 25 seconds__fine um we can attempt to delete customers but it is not sugges did"+
+              "\n\n__8:338 minutes, 33 seconds__usually um Additionally you can see well as an admin you can see all the orders coming through you can see Aiden Wiggy actually made three orders previously"+
+              "\n\n__8:428 minutes, 42 seconds__and then Aiden Wigmore that new one just ordered viscus T if I want to set it as delivered maybe I can go back to that"+
+              "\n\n__8:508 minutes, 50 seconds__orders and yep it's been delivered great we can see all of the different ratings we can this edit will"+
+              "\n\n__8:598 minutes, 59 seconds__be Tak taken out uh you can delete them on behalf of a"+
+              "\n\n__9:109 minutes, 10 seconds__user and then there's uh creating reading updating deleting products so I have uh search search in here so I can search by"+
+              "\n\n__9:199 minutes, 19 seconds__price I can search by ID I can search by name anything really and we can also"+
+              "\n\n__9:279 minutes, 27 seconds__edit and delete them from here including the profile or not the profile but the actual image maybe I'll add a add that"+
+              "\n\n__9:359 minutes, 35 seconds__there and if I go back to products yeah viscus t now has a different image and great"+
+              "\n\n__9:429 minutes, 42 seconds__okay we can then go to categories make a new category test demo"+
+              "\n\n__9:499 minutes, 49 seconds__category best test category ever okay and then I'll just add maybe I'll add"+
+              "\n\n__9:559 minutes, 55 seconds__empty cup and that new viscous te and we should be able to see it down here yes great"+
+              "\n\n__10:0410 minutes, 4 seconds__fantastic uh next if we wanted to remove them we can also do that here so remove remove and then"+
+              "\n\n__10:1310 minutes, 13 seconds__update so then we go back to here yes we can see there are no yep there are no products in that"+
+              "\n\n__10:2110 minutes, 21 seconds__category uh next is so I actually duplicated this and"+
+              "\n\n__10:2810 minutes, 28 seconds__that's my bad that would be moved in post we can create a new store address this was a little oneoff thing for uh"+
+              "\n\n__10:3610 minutes, 36 seconds__showing off the different locations so uh there's the main tbank headquarters and then the mountain"+
+              "\n\n__10:4310 minutes, 43 seconds__pickup which has no description as an admin we can go to the addresses you can"+
+              "\n\n__10:5110 minutes, 51 seconds__see these are ones we created maybe I'll delete that one and just create a new one with more details so Mountain pickup"+
+              "\n\n__11:0011 minutes__uh Walmart Hamilton"+
+              "\n\n__11:0911 minutes, 9 seconds__Ontario and then I'll just get those coordinates once again Google Maps and just paste"+
+              "\n\n__11:1711 minutes, 17 seconds__them and now we have one saved now when we navigate back to the our stores page oh refresh it once"+
+              "\n\n__11:2611 minutes, 26 seconds__more yep uh next next is to message the admin as a customer uh hoping to you"+
+              "\n\n__11:3511 minutes, 35 seconds__know just ask a a quick question so oh I think it just autofilled as the wrong"+
+              "\n\n__11:5011 minutes, 50 seconds__authenticated as a customer and you try to go with the admin it references you back to the customer app so I I now know I'm"+
+              "\n\n__11:4211 minutes, 42 seconds__person but this is good now I can actually I just know this off the top of my head when you're yep when you'"+
+              "\n\n__11:5711 minutes, 57 seconds__uh well I just know I'm A customer from that um next yeah I'll just send a new"+
+              "\n\n__11:4211 minutes, 42 seconds__person but this is good now I can actually I just know this off the top of my head when you're yep when you'"+
+              "\n\n__12:0412 minutes, 4 seconds__message so it's going to be uh gal in"+
+              "\n\n__12:1112 minutes, 11 seconds__inquiry hey I've got a question why is the T so good oh wow that's so"+
+              "\n\n__12:2012 minutes, 20 seconds__nice of them so now when we go back to support yep we can see that General inquiry was created on a user unreadable date which"+
+              "\n\n__12:2912 minutes, 29 seconds__I will take the marks off for that and then we can view it have got a question why is the T so good"+
+              "\n\n__12:3512 minutes, 35 seconds__great okay refresh and then go to support and then yep General inquiry we can see it here it was with customer"+
+              "\n\n__12:4412 minutes, 44 seconds__customer 28 if we wanted to go to the customers and look for 28 we can see yep their name is Aiden Wigmore fantastic"+
+              "\n\n__12:5112 minutes, 51 seconds__just going to view it hey Aiden the t is so good because we grow"+
+              "\n\n__12:5912 minutes, 59 seconds__it with love and now when we go back to the customer oh this is broken that is one"+
+              "\n\n__13:0713 minutes, 7 seconds__of my features which was working initially but I I know where it's gone wrong uh as a customer we can go back to our orders"+
+              "\n\n__13:1613 minutes, 16 seconds__and then we can see it's been delivered great"+
+              "\n\n__13:2313 minutes, 23 seconds__um here is my about page it contains an image and just a little bit of information about the company it lets the user know this is not a legal"+
+              "\n\n__13:3213 minutes, 32 seconds__e-commerce platform do not expect to receive any products fantastic uh here's the FAQ there's also a sarch on here for"+
+              "\n\n__13:3913 minutes, 39 seconds__when more of these were added uh so order if you have an order question you can just look for these great and the mainly the functionality"+
+              "\n\n__13:4813 minutes, 48 seconds__that I left out was uh light and dark mode uh ratings Flags um button for submitting a refund"+
+              "\n\n__13:5713 minutes, 57 seconds__request uh that's just done from the the admin side now uh requesting a new user password uh notification preferences so"+
+              "\n\n__14:0614 minutes, 6 seconds__basically um the admin will have to reach out the admin"+
+              "\n\n__14:1414 minutes, 14 seconds__the way I set up the messaging the admins can't actually create messages and send them to the customers um like a new or they can't"+
+              "\n\n__14:2214 minutes, 22 seconds__update it or uh they can't create a new one I mean and so that means that uh you would have to"+
+              "\n\n__14:3114 minutes, 31 seconds__actually go in if you wanted to create a new conversation you would have to do it on your own cellular device I'm I'm fine with that that's a fine work around "+
+              "\n\n__14:3914 minutes, 39 seconds__additionally it does render pretty well on mobile I will demonstrate that so uh mobile S no I don't want mobile S I want"+
+              "\n\n__14:4914 minutes, 49 seconds__iPhone 14 Max and great yes that has been My Capstone demonstration thank you very much for watching"}
+          </CustomTypography>
+        ),
+        (
+          <CustomTypography variant="caption" component="span" sx={{ whiteSpace: 'pre-wrap' }}>
+            {
             "hi there my name is Aiden Wigmore student number ######## and today I'm demonstrating my third Capstone"+
             "\n\n__0:08 seconds__report and I'll just be demonstrating all the features I've implemented since my last report um there's a bit of the"+
             "\n\n__0:15 seconds__admin features um I've created the database including products categories line items and the cart just to start"+
@@ -173,122 +289,6 @@ export default [
               "\n\n__5:575 minutes, 57 seconds__stores then I see it"+
               "\n\n__6:046 minutes, 4 seconds__and yes the next three days I will be fixing the cart I'll be fixing uh those messages and support and I will be"+
               "\n\n__6:136 minutes, 13 seconds__testing thoroughly and thank you very much for watching My Capstone Milestone report"}
-          </CustomTypography>
-        ),
-        (
-          <CustomTypography variant="caption" component="span" sx={{ whiteSpace: 'pre-wrap' }}>
-            {
-              "Hi there Professor my name is Aiden Wigmore student number ######## and this is my final Capstone presentation"+
-              "\n\n__0:088 seconds__and so I'll just start by uh registering as a user and it needs to be an email that is not taken before but and also"+
-              "\n\n__0:1717 seconds__phone number is not required Additionally the password is now required to be uh it's required to be eight"+
-              "\n\n__0:2424 seconds__characters long it's requires three special characters and three numbers and this request should fail and it"+
-              "\n\n__0:3232 seconds__should indicate that the username is it already exists and it does so then I"+
-              "\n\n__0:3939 seconds__will just attempt to create a new one and now we should have successfully registered great I'm going to save that"+
-              "\n\n__0:4747 seconds__password actually that's very useful um next is address so great and"+
-              "\n\n__0:5454 seconds it should have saved now we can just refresh this if you want to check that it did create that address we can see it here maybe I'll add that as well and"+
-              "\n\n__1:021 minute, 2 seconds__next I'll want to just update that address maybe I'll updated successfully and yeah it updated great"+
-              "\n\n__1:111 minute, 11 seconds__now we can go to well we're on the homepage I'll show off my so some of my filters um I created t accessories last"+
-              "\n\n__1:211 minute, 21 seconds__that's why it's at the bottom but if I wanted to sort by newer first I could flip that switch and then it just inverts the the actual ordering of these"+
-              "\n\n__1:291 minute, 29 seconds__products actually you can see a little bit of my reactiveness there alphabetical should put t accessories at the front as well the logic is actually"+
-              "\n\n__1:361 minute, 36 seconds__flipped and that will be just a small change that I will make uh maybe I'll input pots yeah I"+
-              "\n\n__1:431 minute, 43 seconds__want to look at teapots so we can teapots uh maybe I might need to go to the actual category page to start"+
-              "\n\n__1:501 minute, 50 seconds__filtering by that so Diamond yep uh additionally on this uh category page we"+
-              "\n\n__1:571 minute, 57 seconds__can sort by Price uh mean I figure you already you can already tell that the diamond teapot is the most money uh"+
-              "\n\n__2:062 minutes, 6 seconds__alphabetical so b c d w additionally newer as well I just remember off the top of my head that I created this one"+
-              "\n\n__2:142 minutes, 14 seconds__last and next I'm just going to navigate to the product page and basically oh yep so teapot of gold well doesn't have any"+
-              "\n\n__2:232 minutes, 23 seconds__ingredients it's just a teapot but it does weigh 45 grams and a the coins are not included that's a shame uh maybe I'll look and see if there's"+
-              "\n\n__2:312 minutes, 31 seconds__any ratings no no ratings exist that's unfortunate well maybe I can create one um I don't necessarily want to though"+
-              "\n\n__2:392 minutes, 39 seconds__because I haven't actually purchased it but that's fine I can try creating a rating oh create a rating"+
-              "\n\n__2:472 minutes, 47 seconds__great so uh this too"+
-              "\n\n__2:542 minutes, 54 seconds__expensive I cannot even afford this t pot why would you even"+
-              "\n\n__3:033 minutes, 3 seconds__put it on the website yeah that's a good point you got a good point I think that one star"+
-              "\n\n__3:103 minutes, 10 seconds__rating is probably deserved um maybe this person you can choose to be a coward or not um that's a"+
-              "\n\n__3:173 minutes, 17 seconds__bad way of saying it apologies uh you can choose to be anonymous or not"+
-              "\n\n__3:253 minutes, 25 seconds__and so this brings me to my next point which is across my website the way I initially set up how my data is all"+
-              "\n\n__3:323 minutes, 32 seconds__shared between all my components I do require occasional refreshes in the top left corner just to get the data"+
-              "\n\n__3:413 minutes, 41 seconds__there uh up up and refresh but now as I go here I should be able to see yes I created a rating and I can see it from"+
-              "\n\n__3:493 minutes, 49 seconds__here uh now that I'm actually well I'm still logged in I can go to my ratings and I can I can see it here uh"+
-              "\n\n__3:563 minutes, 56 seconds__additionally I can create a new rating completely um maybe I'll want to choose the actual product first deot of"+
-              "\n\n__4:044 minutes, 4 seconds__gold doesn't make any sense why does it show the coins but it doesn't include"+
-              "\n\n__4:134 minutes, 13 seconds__them misleading product and they'll be a little bit more generous because maybe they liked it and that'll be"+
-              "\n\n__4:224 minutes, 22 seconds__Justin now we hit refresh and we go back to ratings and we can see it exists unfortunately the updating functionality"+
-              "\n\n__4:304 minutes, 30 seconds__doesn't actually exist yet um and I think that's more of a feature uh but the delete does work uh we can see yes"+
-              "\n\n__4:394 minutes, 39 seconds__and then if we go back to PO of gold we shouldn't be able to see any ratings yeah no ratings"+
-              "\n\n__4:464 minutes, 46 seconds__exist great and now well maybe I'll go back to that tto gold maybe I'll try"+
-              "\n\n__4:534 minutes, 53 seconds__adding it to my wish list but first I'll just check and see if I even have a wish list oh yeah I have that hibiscus tea"+
-              "\n\n__5:015 minutes, 1 second__and you know that's kind of fine with me but maybe I'll just want to navigate to it oh yeah okay it looks good I mean"+
-              "\n\n__5:095 minutes, 9 seconds__people seem well okay we got wow okay this person's a fan maybe I'll maybe I'll have to add that to my wish list"+
-              "\n\n__5:165 minutes, 16 seconds__now when I go to my wish list then I'll see the Hibiscus there's a chance I just needed"+
-              "\n\n__5:235 minutes, 23 seconds__to refresh that nope I will go back and add the teapot of gold as well oh that"+
-              "\n\n__5:455 minutes, 45 seconds__see um I'll actually I'll go to my wish list now maybe I'll add a couple more"+
-              "\n\n__5:535 minutes, 53 seconds__products I like I like these all oh great that's a big list I don't think I want want to buy I definitely don't want"+
-              "\n\n__6:016 minutes, 1 second__to buy that one I definitely don't want to buy that one that one that one or that one I can only afford uh 5 cents"+
-              "\n\n__6:096 minutes, 9 seconds__because I'm actually testing it with my PayPal as you'll see later but now we're ready to add it to our cart I'll just"+
-              "\n\n__6:166 minutes, 16 seconds__refresh to exit the modal go back to our cart and you can see the price was 5 cents and now maybe I'll just navigate"+
-              "\n\n__6:266 minutes, 26 seconds__through PayPal real quick oh great they recognized me okay sounds good to"+
-              "\n\n__6:336 minutes, 33 seconds__me I'm willing to pay up big bucks for that habiscus t i mean it has a great"+
-              "\n\n__6:406 minutes, 40 seconds__rating let's just double check on our timing we're at 9 minutes"+
-              "\n\n__6:486 minutes, 48 seconds__so I will oh transaction completed fantastic now when I exit maybe I'll refresh just in case well it is it is"+
-              "\n\n__6:566 minutes, 56 seconds__still in our cart but we should be able to see now we have created an order and we did pay 5"+
-              "\n\n__7:047 minutes, 4 seconds__cents um now uh now we can yeah we look into our"+
-              "\n\n__7:117 minutes, 11 seconds__orders uh we can see all our ratings um now we'll we'll just show off the admin side of this so I'll just need to log"+
-              "\n\n__7:187 minutes, 18 seconds__out go here input the URL admin attempt logging in I don't want to"+
-              "\n\n__7:267 minutes, 26 seconds__do this one now but ######## at Mohawk"+
-              "\n\n__7:347 minutes, 34 seconds__c.ca the password is Aiden Wigmore one uh the way I got past"+
-              "\n\n__7:427 minutes, 42 seconds__the extra complicated passwords was I actually created these users well I created this admin in the database uh"+
-              "\n\n__7:517 minutes, 51 seconds__from the server and great let's give it one more refresh just get those products all the data"+
-              "\n\n__8:018 minutes, 1 second__and I just I created I created the accounts before the I added the restrictions which is okay that's okay"+
-              "\n\n__8:088 minutes, 8 second__with me and so now we're on the admin side of things so we can see all the new customers um let's just see Aiden wig"+
-              "\n\n__8:188 minutes, 18 seconds__was it Aiden W gmail.com yeah id28 we yeah we didn't input a phone number that's"+
-              "\n\n__8:258 minutes, 25 seconds__fine um we can attempt to delete customers but it is not sugges did"+
-              "\n\n__8:338 minutes, 33 seconds__usually um Additionally you can see well as an admin you can see all the orders coming through you can see Aiden Wiggy actually made three orders previously"+
-              "\n\n__8:428 minutes, 42 seconds__and then Aiden Wigmore that new one just ordered viscus T if I want to set it as delivered maybe I can go back to that"+
-              "\n\n__8:508 minutes, 50 seconds__orders and yep it's been delivered great we can see all of the different ratings we can this edit will"+
-              "\n\n__8:598 minutes, 59 seconds__be Tak taken out uh you can delete them on behalf of a"+
-              "\n\n__9:109 minutes, 10 seconds__user and then there's uh creating reading updating deleting products so I have uh search search in here so I can search by"+
-              "\n\n__9:199 minutes, 19 seconds__price I can search by ID I can search by name anything really and we can also"+
-              "\n\n__9:279 minutes, 27 seconds__edit and delete them from here including the profile or not the profile but the actual image maybe I'll add a add that"+
-              "\n\n__9:359 minutes, 35 seconds__there and if I go back to products yeah viscus t now has a different image and great"+
-              "\n\n__9:429 minutes, 42 seconds__okay we can then go to categories make a new category test demo"+
-              "\n\n__9:499 minutes, 49 seconds__category best test category ever okay and then I'll just add maybe I'll add"+
-              "\n\n__9:559 minutes, 55 seconds__empty cup and that new viscous te and we should be able to see it down here yes great"+
-              "\n\n__10:0410 minutes, 4 seconds__fantastic uh next if we wanted to remove them we can also do that here so remove remove and then"+
-              "\n\n__10:1310 minutes, 13 seconds__update so then we go back to here yes we can see there are no yep there are no products in that"+
-              "\n\n__10:2110 minutes, 21 seconds__category uh next is so I actually duplicated this and"+
-              "\n\n__10:2810 minutes, 28 seconds__that's my bad that would be moved in post we can create a new store address this was a little oneoff thing for uh"+
-              "\n\n__10:3610 minutes, 36 seconds__showing off the different locations so uh there's the main tbank headquarters and then the mountain"+
-              "\n\n__10:4310 minutes, 43 seconds__pickup which has no description as an admin we can go to the addresses you can"+
-              "\n\n__10:5110 minutes, 51 seconds__see these are ones we created maybe I'll delete that one and just create a new one with more details so Mountain pickup"+
-              "\n\n__11:0011 minutes__uh Walmart Hamilton"+
-              "\n\n__11:0911 minutes, 9 seconds__Ontario and then I'll just get those coordinates once again Google Maps and just paste"+
-              "\n\n__11:1711 minutes, 17 seconds__them and now we have one saved now when we navigate back to the our stores page oh refresh it once"+
-              "\n\n__11:2611 minutes, 26 seconds__more yep uh next next is to message the admin as a customer uh hoping to you"+
-              "\n\n__11:3511 minutes, 35 seconds__know just ask a a quick question so oh I think it just autofilled as the wrong"+
-              "\n\n__11:5011 minutes, 50 seconds__authenticated as a customer and you try to go with the admin it references you back to the customer app so I I now know I'm"+
-              "\n\n__11:4211 minutes, 42 seconds__person but this is good now I can actually I just know this off the top of my head when you're yep when you'"+
-              "\n\n__11:5711 minutes, 57 seconds__uh well I just know I'm A customer from that um next yeah I'll just send a new"+
-              "\n\n__11:4211 minutes, 42 seconds__person but this is good now I can actually I just know this off the top of my head when you're yep when you'"+
-              "\n\n__12:0412 minutes, 4 seconds__message so it's going to be uh gal in"+
-              "\n\n__12:1112 minutes, 11 seconds__inquiry hey I've got a question why is the T so good oh wow that's so"+
-              "\n\n__12:2012 minutes, 20 seconds__nice of them so now when we go back to support yep we can see that General inquiry was created on a user unreadable date which"+
-              "\n\n__12:2912 minutes, 29 seconds__I will take the marks off for that and then we can view it have got a question why is the T so good"+
-              "\n\n__12:3512 minutes, 35 seconds__great okay refresh and then go to support and then yep General inquiry we can see it here it was with customer"+
-              "\n\n__12:4412 minutes, 44 seconds__customer 28 if we wanted to go to the customers and look for 28 we can see yep their name is Aiden Wigmore fantastic"+
-              "\n\n__12:5112 minutes, 51 seconds__just going to view it hey Aiden the t is so good because we grow"+
-              "\n\n__12:5912 minutes, 59 seconds__it with love and now when we go back to the customer oh this is broken that is one"+
-              "\n\n__13:0713 minutes, 7 seconds__of my features which was working initially but I I know where it's gone wrong uh as a customer we can go back to our orders"+
-              "\n\n__13:1613 minutes, 16 seconds__and then we can see it's been delivered great"+
-              "\n\n__13:2313 minutes, 23 seconds__um here is my about page it contains an image and just a little bit of information about the company it lets the user know this is not a legal"+
-              "\n\n__13:3213 minutes, 32 seconds__e-commerce platform do not expect to receive any products fantastic uh here's the FAQ there's also a sarch on here for"+
-              "\n\n__13:3913 minutes, 39 seconds__when more of these were added uh so order if you have an order question you can just look for these great and the mainly the functionality"+
-              "\n\n__13:4813 minutes, 48 seconds__that I left out was uh light and dark mode uh ratings Flags um button for submitting a refund"+
-              "\n\n__13:5713 minutes, 57 seconds__request uh that's just done from the the admin side now uh requesting a new user password uh notification preferences so"+
-              "\n\n__14:0614 minutes, 6 seconds__basically um the admin will have to reach out the admin"+
-              "\n\n__14:1414 minutes, 14 seconds__the way I set up the messaging the admins can't actually create messages and send them to the customers um like a new or they can't"+
-              "\n\n__14:2214 minutes, 22 seconds__update it or uh they can't create a new one I mean and so that means that uh you would have to"+
-              "\n\n__14:3114 minutes, 31 seconds__actually go in if you wanted to create a new conversation you would have to do it on your own cellular device I'm I'm fine with that that's a fine work around "+
-              "\n\n__14:3914 minutes, 39 seconds__additionally it does render pretty well on mobile I will demonstrate that so uh mobile S no I don't want mobile S I want"+
-              "\n\n__14:4914 minutes, 49 seconds__iPhone 14 Max and great yes that has been My Capstone demonstration thank you very much for watching"}
           </CustomTypography>
         ),
       ],

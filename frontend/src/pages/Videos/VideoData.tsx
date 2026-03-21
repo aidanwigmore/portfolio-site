@@ -35,13 +35,15 @@ export default [
       description: "TeaBank Demonstrations",
       channel: "aidanOdyssey",
       src: [
-        "https://www.youtube.com/embed/fVJ_0QYCSoI?si=p7jX3Wn7ylXdaZxE",
-        "https://www.youtube.com/embed/1SbgMCq4-PM?si=yABv-EKPftpFo7fv",
         "https://www.youtube.com/embed/aFiUmvcF3Xw?si=R-781N2WEAGsqnZF",
+        "https://www.youtube.com/embed/1SbgMCq4-PM?si=yABv-EKPftpFo7fv",
+        "https://www.youtube.com/embed/fVJ_0QYCSoI?si=p7jX3Wn7ylXdaZxE",
       ],
       steps: {
         titles: [
-          'Capstone Report 3', 'Capstone Report 4', 'Capstone Final Report'
+          'Capstone Final Report',
+          'Capstone Report 3', 
+          'Capstone Report 4', 
         ],
         descriptions: [
           '',
@@ -49,9 +51,9 @@ export default [
           '',
         ],
         uploadDates: [
+          '13 Dec 2024',
           '18 Nov 2024',
           '9 Dec 2024',
-          '13 Dec 2024',
         ]
       },
       stepsLabels: Transcriptions[1].transcriptions,
