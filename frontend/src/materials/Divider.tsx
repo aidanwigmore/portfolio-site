@@ -13,8 +13,8 @@ interface CustomDividerProps extends DividerProps {
 export const CustomDivider: React.FC<CustomDividerProps> = ({
     gutterBottom = false,
     gutterTop = false,
-    color = Theme.palette.text.primary,
-    thickness = 1,
+    color = Theme.palette.secondary,
+    thickness = 3,
     sx = {},
     ...props
 }) => {
@@ -23,6 +23,7 @@ export const CustomDivider: React.FC<CustomDividerProps> = ({
             sx={{
                 borderColor: `${color}.main`,
                 borderWidth: thickness,
+                borderRadius: `8px`,
                 ...(gutterTop && { marginTop: '1rem' }),
                 ...(gutterBottom && { marginBottom: '1rem' }),
                 ...sx,
