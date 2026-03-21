@@ -84,8 +84,11 @@ function CommentDialog(props: CommentDialogProps) {
             Send a message
           </CustomTypography>
         </DialogTitle>
-
-        <form>
+        <form 
+          style={{
+            display: "flex",
+            flexDirection: "column"
+        }}>
           <TextField
             name="name" 
             id="filled-basic" 
@@ -102,12 +105,15 @@ function CommentDialog(props: CommentDialogProps) {
             value={comment.email} 
             onChange={handleChange}
           />
-          <TextareaAutosize
-            aria-label="message-textarea"
-            placeholder="Message"
-            name="message"
-            value={comment.message}
+          <TextField 
+            name="message" 
+            id="filled-basic" 
+            label="Message" 
+            variant="filled" 
+            value={comment.message} 
             onChange={handleChange}
+            multiline
+            maxRows={4}
           />
           <CustomButton variant="contained" type="submit" onClick={submit} >
             Send

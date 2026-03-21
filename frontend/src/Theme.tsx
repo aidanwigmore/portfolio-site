@@ -1,27 +1,62 @@
 import { createTheme } from '@mui/material';
+import { lighten, darken } from '@mui/material/styles';
+
+const colors = {
+    primary: '#03F5E9',
+    secondary: '#7501F2',
+    error: '#F23901',
+    warning: '#EBAD03',
+    info: '#F20386',
+    success: '#7AEB01',
+}
 
 export default (
+
     createTheme({
         palette: {
             primary: {
-                main: '#1976d2',
-                light: '#42a5f5',
-                dark: '#1565c0',
-                contrastText: '#fff',
+                main: colors.primary, 
+                light: lighten(colors.primary, 0.4),
+                dark: darken(colors.primary, 0.4),
+                contrastText: '#030503',
             },
             secondary: {
-                main: '#dc004e',
-                light: '#f73378',
-                dark: '#9a0036',
-                contrastText: '#fff',
+                main: colors.secondary, 
+                light: lighten(colors.secondary, 0.4),
+                dark: darken(colors.secondary, 0.4),
+                contrastText: '#ffffff',
+            },
+            error: {
+                main: colors.error, 
+                light: lighten(colors.error, 0.4),
+                dark: darken(colors.error, 0.4),
+                contrastText: '#ffffff',
+            },
+            warning: {
+                main: colors.warning, 
+                light: lighten(colors.warning, 0.4),
+                dark: darken(colors.warning, 0.4),
+                contrastText: '#ffffff',
+            },
+            info: {
+                main: colors.info, 
+                light: lighten(colors.info, 0.4),
+                dark: darken(colors.info, 0.4),
+                contrastText: '#ffffff',
+            },
+            success: {
+                main: colors.success, 
+                light: lighten(colors.success, 0.4),
+                dark: darken(colors.success, 0.4),
+                contrastText: '#ffffff',
             },
             background: {
-                default: '#fafafa',
-                paper: '#fff',
+                default: '#ebd488',
+                paper: '#ffffff',
             },
             text: {
-                primary: 'rgba(0, 0, 0, 0.87)',
-                secondary: 'rgba(0, 0, 0, 0.60)',
+                primary: '#030503',
+                secondary: '#030503', 
             },
         },
         components: {

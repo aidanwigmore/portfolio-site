@@ -17,6 +17,8 @@ import PasswordPrompt from './PasswordPrompt';
 import { getImagesByCategory, getImageUrl } from '../../api/galleryService';
 import { PortfolioImage } from '../../types/Gallery';
 
+import Theme from "../../Theme";
+
 export default function ImageGallery() {
   const [category, setCategory] = useState<'friends' | 'employers' | 'visitors' | null>(null);
   const [images, setImages] = useState<PortfolioImage[]>([]);
@@ -58,13 +60,18 @@ export default function ImageGallery() {
   }
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+    <Box sx={{ p: 3, backgroundColor: Theme.palette.primary.main, borderRadius: '8px' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
         <Typography variant="h4">
           Gallery
         </Typography>
-        <CustomButton variant="outlined" onClick={handleLogout}>
-          Logout
+        
+        <Typography variant="h4">
+          Welcome, { category }
+        </Typography>
+
+        <CustomButton onClick={handleLogout}>
+          Go Back
         </CustomButton>
       </Box>
 
@@ -88,14 +95,37 @@ export default function ImageGallery() {
         {images.map((img) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={img.id}>
             <Card
-              sx={{ cursor: 'pointer', height: '100%' }}
               onClick={() => setSelectedImage(img)}
+              sx={{
+                cursor: 'pointer',
+                height: '100%', 
+                animation: 'none',
+                '&:hover': {
+                  animation: 'pulse 2s infinite',
+                    '@keyframes pulse': {
+                    '100%': { opacity: 1 },
+                    '50%': { opacity: 0.6 },
+                    '0%': { opacity: 1 },
+                  }
+              },    
+              }}
             >
               <CardMedia
                 component="img"
                 height="200"
                 image={getImageUrl(img.image)}
                 alt={img.name}
+                sx={{
+                  animation: 'none',
+                  '&:hover': {
+                    animation: 'pulse 2s infinite',
+                    '@keyframes pulse': {
+                    '100%': { opacity: 1 },
+                    '50%': { opacity: 0.8 },
+                    '0%': { opacity: 1 },
+                  }
+                },                
+              }}
               />
               <CardContent>
                 <Typography variant="subtitle1" noWrap>{img.name}</Typography>
@@ -120,9 +150,10 @@ export default function ImageGallery() {
         onClose={() => setSelectedImage(null)}
         maxWidth="md"
         fullWidth
+        sx={{backgroundColour: Theme.palette.primary.dark}}
       >
         {selectedImage && (
-          <>
+          <Box sx={{backgroundColor: Theme.palette.primary.dark,}}>
             <DialogTitle>{selectedImage.name}</DialogTitle>
             <DialogContent>
               <Box
@@ -152,7 +183,7 @@ export default function ImageGallery() {
                 </Typography>
               )}
             </DialogContent>
-          </>
+          </Box>
         )}
       </Dialog>
     </Box>

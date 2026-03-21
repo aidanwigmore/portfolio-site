@@ -11,11 +11,23 @@ export default [
         "https://www.youtube.com/embed/eX7XDNOrv90?si=qR4uxR5TTRUHuZ-B",
         "https://www.youtube.com/embed/lQwYJoPhWwQ?si=WmTaPeI0Ib-7s82c",
       ],
-      steps: [
-        'Picking Up Catering Orders from Strathcona MRKT', 
-        'Subscribing To MRKTBox', 
-        'Signing Up To MRKTBox'
-      ],
+      steps: {
+        titles: [
+          'Picking Up Catering Orders from Strathcona MRKT',
+          'Subscribing To MRKTBox',
+          'Signing Up To MRKTBox',
+        ],
+        descriptions: [
+          '',
+          '',
+          '',
+        ],
+        uploadDates: [
+          '2 Oct 2024',
+          '2 Oct 2024',
+          '2 Oct 2024',
+        ]
+      },
         stepsLabels: Transcriptions[0].transcriptions,
     },
     {
@@ -27,7 +39,21 @@ export default [
         "https://www.youtube.com/embed/1SbgMCq4-PM?si=yABv-EKPftpFo7fv",
         "https://www.youtube.com/embed/aFiUmvcF3Xw?si=R-781N2WEAGsqnZF",
       ],
-      steps: ['Capstone Report 3', 'Capstone Report 4', 'Capstone Final Report'],
+      steps: {
+        titles: [
+          'Capstone Report 3', 'Capstone Report 4', 'Capstone Final Report'
+        ],
+        descriptions: [
+          '',
+          '',
+          '',
+        ],
+        uploadDates: [
+          '18 Nov 2024',
+          '9 Dec 2024',
+          '13 Dec 2024',
+        ]
+      },
       stepsLabels: Transcriptions[1].transcriptions,
     }, 
     {
@@ -39,7 +65,21 @@ export default [
         "https://www.youtube.com/embed/otVmSjKBpyQ?si=2JoxDWcCQPJFrSVl",
         "https://www.youtube.com/embed/XFhhSQ-mEgM?si=-UdqBiqhLYOWUhhK",
       ],
-      steps: ['Assignment 5', 'Assignment 6','Assignment 7'],
+      steps: {
+        titles: [
+          'Assignment 5', 'Assignment 6','Assignment 7'
+        ],
+        descriptions: [
+          '',
+          '',
+          '',
+        ],
+        uploadDates: [
+          '25 Mar 2023',
+          '7 Apr 2023',
+          '15 Apr 2023',
+        ]
+      },
       stepsLabels: Transcriptions[2].transcriptions,
     },
     {
@@ -51,7 +91,21 @@ export default [
         "https://www.youtube.com/embed/ZinB2DRHXHg?si=2dpYRMK34Yukf63_",
         "https://www.youtube.com/embed/8etYVCmutxc?si=i9NOLv4AkUvkNQDg",
       ],
-      steps: ["Entrepreneurship in today's world - Video Pitch", "Tech Writing Presentation - Product Evaluation and Recommendation", "Tech Writing Presentation 3 (Job posting)"],
+      steps: {
+        titles: [
+          "Entrepreneurship in today's world - Video Pitch", "Tech Writing Presentation - Product Evaluation and Recommendation", "Tech Writing Presentation 3 (Job posting)"
+        ],
+        descriptions: [
+          'test',
+          '',
+          '',
+        ],
+        uploadDates: [
+          '7 Dec 2022',
+          '1 Apr 2021',
+          '30 Mar 2021',
+        ]
+      },
       stepsLabels: Transcriptions[3].transcriptions,
     },
   ];

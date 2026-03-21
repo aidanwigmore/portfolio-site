@@ -11,6 +11,8 @@ import {
 import { CustomButton } from '../../materials/Button';
 import { verifyPassword } from '../../api/galleryService';
 
+import Theme from "../../Theme";
+
 interface PasswordPromptProps {
   onSuccess: (category: 'friends' | 'employers' | 'visitors') => void;
 }
@@ -42,7 +44,7 @@ export default function PasswordPrompt({ onSuccess }: PasswordPromptProps) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #1565c0 0%, #42a5f5 100%)',
+        background: Theme.palette.primary.main,
       }}
     >
       <Card sx={{ width: '100%', maxWidth: 400, p: 2 }}>

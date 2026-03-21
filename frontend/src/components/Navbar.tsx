@@ -9,7 +9,7 @@ import { CustomDivider } from "../materials/Divider";
 export default function NavBar() {
   return (
     <>
-      <Box sx={{ display: { justifyContent: 'center', paddingBottom: '1vh', display: 'flex', flexDirection: 'row', gap: '1rem'} }}>
+      <Box sx={{ display: { justifyContent: 'center', paddingBottom: '1vw', display: 'flex', flexDirection: 'row', gap: '1rem'} }}>
           <Tooltip title="Navigate to Home Page" arrow>
             <CustomButton component={Link} to="/">
               Home
@@ -23,6 +23,11 @@ export default function NavBar() {
           <Tooltip title="View Technical Documentation Videos" arrow>
             <CustomButton component={Link} to="/videos">
               Videos
+            </CustomButton>
+          </Tooltip>
+          <Tooltip title="View Gallery" arrow>
+            <CustomButton component={Link} to="/gallery">
+              Gallery
             </CustomButton>
           </Tooltip>
           <CommentDialogButton />

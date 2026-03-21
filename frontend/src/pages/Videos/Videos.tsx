@@ -15,13 +15,15 @@ import VideoData from "./VideoData";
 
 import { CustomButton } from "../../materials/Button";
 
+import Theme from "../../Theme";
+
 export default function Videos() {
   const items = VideoData;
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const youtubeWidth = window.innerWidth > 600 ? "50%" : "100%";
-  const youtubeHeight = window.innerWidth > 600 ? "50vh" : "30vh";
+  const youtubeHeight = window.innerWidth > 600 ? "50vw" : "30vw";
   
   const [elapsedTimes, setElapsedTimes] = useState<number[]>(items.map(() => 0));
 
@@ -131,134 +133,197 @@ export default function Videos() {
 
   return (
       <>
-      <TabContext value={value}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: 2 }}>
-          <Typography variant="h4" gutterBottom component="span" sx={{ ml: 2, flexWrap: 'wrap', textAlign: 'center' }}>
-            {items[currentPage - 1].title} - {items[currentPage - 1].description}
-          </Typography>
+      <Box sx={{ 
+        display: 'flex',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginTop: '5vw', 
+        padding: '3vw', 
+        marginBottom: '-3vh',
+        backgroundColor: Theme.palette.secondary.main, 
+        borderRadius: '8px'
+      }}>
+        <Box sx={{ 
+          padding: '3vw',
+          backgroundColor: Theme.palette.secondary.light,
+          borderRadius: '8px'
+        }}>
+          <CustomTypography variant="h2" color={Theme.palette.secondary.dark}textAlign="center" gutterBottom>
+            Videos I've Made
+          </CustomTypography>
         </Box>
-        <List dense={false}>
-        <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}>
-          {items.map((item, index) => (
-            <Tab key={index} label={`${item.title}`} value={index + 1} />
-          ))}
-        </TabList>
-        {items
-          .filter((item) => items.indexOf(item) === currentPage - 1)
-          .map((item, index) => {
-            const itemIndex = items.indexOf(item);
-            const currentStep = activeSteps[itemIndex];
-            const isCompleted = currentStep === item.steps.length;
+      </Box>
+      <TabContext value={value}>
+        <Box sx={{
+          padding: '2vw',
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          backgroundColor: Theme.palette.primary.main, 
+          borderRadius: '8px' 
+        }}>
+          <List dense={true}>
+            <TabList onChange={handleChange} aria-label="tabslist" sx={{ 
+              backgroundColor: Theme.palette.secondary.dark,
+              display: 'flex',
+              borderRadius: '8px',
+              justifyContent: 'center',
+              width: '100%',
+              '& .MuiTabs-flexContainer': {
+                justifyContent: 'center',
+              },
+              '& .MuiTabs-indicator': {
+                backgroundColor: Theme.palette.secondary.light,
+                height: '7px',
+              },
+              '& .MuiTab-root': {
+                color: '#fff',
+                minWidth: 'auto',
+                transition: 'all 0.3s ease',
+                '&.Mui-selected': {
+                  backgroundColor: Theme.palette.secondary.main,
+                  color: Theme.palette.secondary.dark,
+                  borderRadius: '8px',
+                }
+              }
+            }}>
+            {items.map((item, index) => (
+              <Tab key={index} label={`${item.title}`} value={index + 1} />
+            ))}
+          </TabList>
+          {items
+            .filter((item) => items.indexOf(item) === currentPage - 1)
+            .map((item, index) => {
+              const itemIndex = items.indexOf(item);
+              const currentStep = activeSteps[itemIndex];
+              const isCompleted = currentStep === item.steps.titles.length;
 
-          return (
-            <ListItem
-              key={itemIndex}
-              sx={{
-                backgroundColor: itemIndex % 2 === 0 ? "#f9f9f9" : "#eaeaea",
-                borderRadius: "8px",
-                marginBottom: "16px",
-              }}
-            >
-              <Box sx={{ width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-                <Stepper activeStep={currentStep}>
-                  {item.steps.map((label, stepIndex) => {
-                    const stepProps: { completed?: boolean } = {};
+            return (
+              <ListItem
+                key={itemIndex}
+                sx={{
+                  backgroundColor: Theme.palette.primary.main,
+                  borderRadius: "8px",
+                }}
+              >
+                <Box sx={{ marginTop: 0, width: '100%', padding: '2vw', justifyContent: 'center', alignItems: 'center', display: 'flex', backgroundColor: Theme.palette.primary.light, flexDirection: 'column', borderRadius: '8px' }}>
+                  <Typography variant="h4" gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
+                    {items[currentPage - 1].title} - {items[currentPage - 1].description}
+                  </Typography>
+                  <Stepper activeStep={currentStep}>
+                    {item.steps.titles.map((label, stepIndex) => {
+                      const stepProps: { completed?: boolean } = {};
 
-                    if (isStepSkipped(itemIndex, stepIndex)) {
-                      stepProps.completed = false;
-                    }
+                      if (isStepSkipped(itemIndex, stepIndex)) {
+                        stepProps.completed = false;
+                      }
 
-                    return (
-                      <Step key={`step-${itemIndex}-${stepIndex}`} {...stepProps}>
-                        <StepLabel>{label}</StepLabel>
-                      </Step>
-                    );
-                  })}
-                </Stepper>
-                <>
-                {isCompleted ? (
-                    <React.Fragment>
-                      <CustomTypography sx={{ mt: 1, mb: 1 }}>
-                        You can find more videos on the {item.channel} Youtube Channel. Thank you.
-                      </CustomTypography>
-                      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <CustomButton onClick={() => handleReset(itemIndex)}>Reset</CustomButton>
-                      </Box>
-                    </React.Fragment>
-                  ) : (
-                    <React.Fragment>
-                      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <CustomButton
-                          disabled={currentStep === 0}
-                          onClick={() => handleBack(itemIndex)}
-                          sx={{ mr: 1 }}
-                        >
-                          Back
-                        </CustomButton>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        {isStepOptional(currentStep) && (
+                      return (
+                        <Step key={`step-${itemIndex}-${stepIndex}`} {...stepProps}>
+                          <StepLabel>
+                            <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                              <div>
+                                {label}
+                              </div>
+                              <div>
+                                {item.steps.descriptions[stepIndex]}
+                              </div>
+                              <div>
+                                Uploaded: {item.steps.uploadDates[stepIndex]}
+                              </div>
+                            </Box>
+                          </StepLabel>
+                        </Step>
+                      );
+                    })}
+                  </Stepper>
+                  <>
+                  {isCompleted ? (
+                      <React.Fragment>
+                        <CustomTypography sx={{ mt: 1, mb: 1 }}>
+                          You can find more videos on the {item.channel} Youtube Channel. Thank you.
+                        </CustomTypography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                          <Box sx={{ flex: '1 1 auto' }} />
+                          <CustomButton onClick={() => handleReset(itemIndex)}>Reset</CustomButton>
+                        </Box>
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                           <CustomButton
-                            color="inherit"
-                            onClick={() => handleSkip(itemIndex)}
+                            disabled={currentStep === 0}
+                            onClick={() => handleBack(itemIndex)}
                             sx={{ mr: 1 }}
                           >
-                            Skip
+                            Back
                           </CustomButton>
-                        )}
-                        <CustomButton onClick={() => handleNext(itemIndex)}>
-                          {currentStep === item.steps.length - 1
-                            ? 'Finish'
-                            : 'Next'}
-                        </CustomButton>
-                      </Box>
-                    </React.Fragment>
-                  )}
-                </>
-                
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: youtubeWidth,
-                    height: { sm: '25vw' },
-                    marginY: 2,
-                  }}
-                >
-                  <iframe
-                    src={item.src[currentStep % item.src.length]}
-                    title="YouTube video player"
-                    style={{
-                      borderRadius: "8px",
-                      width: "100%",
-                      height: "100%",
+                          <Box sx={{ flex: '1 1 auto' }} />
+                          {isStepOptional(currentStep) && (
+                            <CustomButton
+                              color="inherit"
+                              onClick={() => handleSkip(itemIndex)}
+                              sx={{ mr: 1 }}
+                            >
+                              Skip
+                            </CustomButton>
+                          )}
+                          <CustomButton onClick={() => handleNext(itemIndex)}>
+                            {currentStep === item.steps.titles.length - 1
+                              ? 'Finish'
+                              : 'Next'}
+                          </CustomButton>
+                        </Box>
+                      </React.Fragment>
+                    )}
+                  </>
+                  
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      width: youtubeWidth,
+                      height: { sm: '25vw' },
+
                     }}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                  {item.stepsLabels ? (
-                  <Accordion sx={{maxHeight: '200px', overflowY: 'auto' }}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1-content"
-                    >
-                      <CustomTypography component="span">Click for Transcriptions</CustomTypography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      {item.stepsLabels[currentStep]}
-                    </AccordionDetails>
-                  </Accordion>
-                ) : (
-                  ''
-                )}
-                </Box>
-                </Box>
-                </ListItem>
-          );     })}
-        </List>
+                  >
+                    <iframe
+                      src={item.src[currentStep % item.src.length]}
+                      title="YouTube video player"
+                      style={{
+                        borderRadius: "8px",
+                        width: "100%",
+                        height: "100%",
+                        marginTop: "1vw",
+                      }}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                    {item.stepsLabels ? (
+                    <Accordion sx={{maxHeight: '200px', overflowY: 'auto' }}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1-content"
+                      >
+                        <CustomTypography component="span">Click for Transcriptions</CustomTypography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        {item.stepsLabels[currentStep]}
+                      </AccordionDetails>
+                    </Accordion>
+                  ) : (
+                    ''
+                  )}
+                  </Box>
+                  </Box>
+                  </ListItem>
+            );     })}
+          </List>
+        </Box>
         
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: 2 }}>
           

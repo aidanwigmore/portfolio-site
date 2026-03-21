@@ -1,6 +1,8 @@
 import { Divider, DividerProps } from '@mui/material';
 import React from 'react';
 
+import Theme from '../Theme';
+
 interface CustomDividerProps extends DividerProps {
     gutterBottom?: boolean;
     gutterTop?: boolean;
@@ -11,7 +13,7 @@ interface CustomDividerProps extends DividerProps {
 export const CustomDivider: React.FC<CustomDividerProps> = ({
     gutterBottom = false,
     gutterTop = false,
-    color = 'primary',
+    color = Theme.palette.text.primary,
     thickness = 1,
     sx = {},
     ...props
