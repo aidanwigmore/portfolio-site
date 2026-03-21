@@ -5,11 +5,14 @@ import Home from "./pages/Home";
 import Videos from "./pages/Videos/Videos";
 import Projects from "./pages/Projects/Projects";
 import ImageGallery from "./pages/Gallery/ImageGallery";
+import FilmGallery from "./pages/Gallery/FilmGallery"
 
 import Navbar from "./components/Navbar";
 
 import { PageTransition } from "./components/PageTransition"
 import { AnimatePresence } from 'framer-motion';
+
+import Instagram from './pages/Instagram';
 
 export default function Router() {
   
@@ -38,6 +41,16 @@ export default function Router() {
           <Route path="/gallery" element={
             <PageTransition>
               <ImageGallery />
+            </PageTransition>
+          } />
+          <Route path="/instagram" element={
+            <PageTransition>
+              <Instagram />
+            </PageTransition>
+          } />
+          <Route path="/film-gallery" element={
+            <PageTransition>
+              <FilmGallery />
             </PageTransition>
           } />
         

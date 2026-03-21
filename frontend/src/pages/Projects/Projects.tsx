@@ -9,8 +9,11 @@ import Box from '@mui/material/Box';
 import LanguageIcon from '@mui/icons-material/Language';
 import { IconButton, Modal, Tooltip, Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
+import { ThumbUp } from '@mui/icons-material';
 
 import ProjectData from "./ProjectData";
+import { useThumbsUp } from '../../hooks/useThumbsUp';
+
 import { CustomTypography } from "../../materials/Typography";
 import Title from '../../components/Title';
 import { lighten, darken } from '@mui/material/styles';
@@ -22,7 +25,9 @@ interface ProjectProps {
 }
 
 export default function Projects( { home } : ProjectProps ) {
-    const [openImageModal, setOpenImageModal] = useState(false);
+  const { thumbsUpCounts, handleThumbsUp } = useThumbsUp('video');
+    
+  const [openImageModal, setOpenImageModal] = useState(false);
     const [carouselIndices, setCarouselIndices] = useState<number[]>(
       ProjectData.map(() => 0)
     );
@@ -77,7 +82,8 @@ export default function Projects( { home } : ProjectProps ) {
       <Title children={"Projects I've Worked On"} />
       <List dense={false}>
         {items.map((item, index) => (
-          <ListItem
+          <>
+            <ListItem
             key={index}
             sx={{
               backgroundColor: index % 2 !== 0 ? Theme.palette.primary.light : lighten(Theme.palette.primary.light, 0.4),
@@ -85,8 +91,9 @@ export default function Projects( { home } : ProjectProps ) {
               flexDirection: 'column',
             }}
           >
-            <Box
+            <Box 
               sx={{
+                display: 'flex', flexDirection: 'row',
                 padding: '2vw',
                 borderRadius: '8px',
                 backgroundColor: index % 2 !== 0 ? Theme.palette.primary.main : Theme.palette.primary.light,
@@ -123,8 +130,18 @@ export default function Projects( { home } : ProjectProps ) {
                   ))
                 } 
               />
-            {/* </Box> */}
-
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '1rem' }}>
+                <IconButton 
+                  onClick={() => handleThumbsUp(item.ratingCode)}
+                  size="large"
+                  sx={{color: Theme.palette.primary.dark, backgroundColor: Theme.palette.primary.main}}
+                >
+                  <ThumbUp />
+                </IconButton>
+                <Typography variant="body2">
+                  {thumbsUpCounts[item.ratingCode || ``]}
+                </Typography>
+              </Box>
             {/* Single Image Carousel Display */}
             {item.images && item.images.length > 0 && (
               <Box
@@ -190,6 +207,8 @@ export default function Projects( { home } : ProjectProps ) {
             )}
             </Box>
           </ListItem>
+          </>
+          
         ))}
       </List>
 

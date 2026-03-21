@@ -1,17 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import api from '../api/axios';
 
 export function useThumbsUp(type: 'video' | 'project') {
   const [thumbsUpCounts, setThumbsUpCounts] = useState<{ [key: string]: number }>({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchThumbsUpCounts();
-  }, [type]);
-
-  const fetchThumbsUpCounts = async () => {
+  const fetchThumbsUpCounts = useCallback(async () => {
     try {
-      const response = await api.get(`/ratable-items/?type=${type}`);
+      const response = await api.get(`ratable-items/?type=${type}`);
       const counts: { [key: string]: number } = {};
       response.data.forEach((item: any) => {
         counts[item.external_id] = item.thumbs_up_count;
@@ -22,15 +18,19 @@ export function useThumbsUp(type: 'video' | 'project') {
     } finally {
       setLoading(false);
     }
-  };
+  }, [type]);
 
-  const handleThumbsUp = async (externalId: string) => {
+  useEffect(() => {
+    fetchThumbsUpCounts();
+  }, [type, fetchThumbsUpCounts]);
+
+  const handleThumbsUp = useCallback(async (externalId: string) => {
     try {
-      const response = await api.get(`/ratable-items/?type=${type}`);
+      const response = await api.get(`ratable-items/?type=${type}`);
       const item = response.data.find((i: any) => i.external_id === externalId);
       
       if (item) {
-        await api.post(`/ratable-items/${item.id}/add_thumbs_up/`);
+        await api.post(`ratable-items/${item.id}/add_thumbs_up/`);
         
         setThumbsUpCounts(prev => ({
           ...prev,
@@ -40,7 +40,7 @@ export function useThumbsUp(type: 'video' | 'project') {
     } catch (error) {
       console.error('Error adding thumbs up:', error);
     }
-  };
+  }, [type]);
 
   return { thumbsUpCounts, handleThumbsUp, loading };
 }

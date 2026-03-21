@@ -57,8 +57,8 @@ export default [
         ],
         ratingCodes: [
           'capstone-1',
-          'capstone-1',
-          'capstone-1',
+          'capstone-2',
+          'capstone-3',
         ],
         uploadDates: [
           '13 Dec 2024',

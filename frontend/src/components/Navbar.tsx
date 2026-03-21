@@ -30,6 +30,16 @@ export default function NavBar() {
               Gallery
             </CustomButton>
           </Tooltip>
+          <Tooltip title="View MRKTBox Instagram Gallery" arrow>
+            <CustomButton component={Link} to="/instagram">
+              MRKTBox Instagram
+            </CustomButton>
+          </Tooltip>
+          <Tooltip title="View Film Gallery" arrow>
+            <CustomButton component={Link} to="/film-gallery">
+              Film Photography
+            </CustomButton>
+          </Tooltip>
           <CommentDialogButton />
       </Box>
       <CustomDivider/>

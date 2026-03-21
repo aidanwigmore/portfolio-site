@@ -21,11 +21,14 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from comments.views import CommentViewSet
 from images.views import AccessPasswordViewSet, PortfolioImageViewSet
+from ratings.views import RatableItemViewSet, ThumbsUpViewSet
 
 router = routers.DefaultRouter()
 router.register(r'comments', CommentViewSet)
 router.register(r'passwords', AccessPasswordViewSet)
 router.register(r'images', PortfolioImageViewSet, basename='images')
+router.register(r'ratable-items', RatableItemViewSet)
+router.register(r'thumbs-up', ThumbsUpViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

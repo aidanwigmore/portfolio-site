@@ -298,18 +298,19 @@ export default function Videos({ home }: HomeProps) {
                       allowFullScreen
                     ></iframe>
                     </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '1rem' }}>
                       <IconButton 
-                        onClick={() => handleThumbsUp(item.title)}
+                        onClick={() => handleThumbsUp(item.steps.ratingCodes[currentStep])}
                         size="large"
                         sx={{color: Theme.palette.primary.dark, backgroundColor: Theme.palette.primary.main}}
                       >
                         <ThumbUp />
                       </IconButton>
                       <Typography variant="body2">
-                        {thumbsUpCounts[item.title] || 0}
+                        {thumbsUpCounts[item.steps.ratingCodes[currentStep]] || ``}
                       </Typography>
                     </Box>
+                      
                     {item.stepsLabels ? (
                     <Accordion sx={{maxHeight: '200px', overflowY: 'auto' }}>
                       <AccordionSummary
@@ -354,9 +355,7 @@ export default function Videos({ home }: HomeProps) {
           <Typography variant="caption" component="span" sx={{ ml: 2 }}>
             (Page {currentPage} of {items.length})
           </Typography>
-        
         </Box>
-      
       </TabContext>
       </>
   );
