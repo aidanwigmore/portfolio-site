@@ -19,14 +19,14 @@ function Title({ children, color } : TitleProps) {
                 marginLeft: 0,
                 marginRight: 0,
                 padding: '2vw',
-                backgroundColor: Theme.palette.primary.light, 
+                backgroundColor: Theme.palette.secondary.light, 
                 borderRadius: '8px',
                 marginBottom: '-3vh',
             }}>
                 <Box sx={{
                 padding: '2vw',
                 paddingBottom: '1vw',
-                backgroundColor: Theme.palette.secondary.light,
+                backgroundColor: Theme.palette.secondary.main,
                 borderRadius: '8px',
                 display: 'flex',
                 alignItems: 'center',
