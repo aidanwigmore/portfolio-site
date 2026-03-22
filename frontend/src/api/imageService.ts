@@ -1,5 +1,5 @@
-import api from './axios';
-import { PortfolioImage, AccessPassword } from '../types/Image';
+import api from 'axios';
+import { PortfolioImage, AccessPassword } from '@/types/Image';
 
 // Image endpoints
 export const uploadImage = (formData: FormData) => 

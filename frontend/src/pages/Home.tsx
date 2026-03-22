@@ -1,12 +1,12 @@
-import { CustomTypography } from "@/materials/Typography";
-import Videos from "@/pages/Videos/Videos";
-import Projects from "@/pages/Projects/Projects";
-import { CustomDivider } from "@/materials/Divider";
-import { motion } from "framer-motion";
+import { CustomTypography } from '@/materials/Typography';
+import Videos from '@/pages/Videos/Videos';
+import Projects from '@/pages/Projects/Projects';
+import { CustomDivider } from '@/materials/Divider';
+import { motion } from 'framer-motion';
 
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
 
-import Theme from "@/Theme";
+import Theme from '@/Theme';
 
 export default function Home() {
   const sectionVariants = {
@@ -82,7 +82,7 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
         variants={contentVariants}
       >
-        <Videos home={true}/>
+        <Videos/>
       </motion.div>
     </>
   );

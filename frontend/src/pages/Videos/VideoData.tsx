@@ -1,4 +1,3 @@
-import { CustomTypography } from "../../materials/Typography";
 import Transcriptions from "./Transcriptions";
 
 export default [

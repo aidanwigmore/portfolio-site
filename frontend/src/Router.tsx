@@ -1,23 +1,21 @@
-import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import Home from "@/pages/Home";
-import Videos from "@/pages/Videos/Videos";
-import Projects from "@/pages/Projects/Projects";
-import ImageGallery from "@/pages/Gallery/ImageGallery";
-import FilmGallery from "@/pages/Gallery/FilmGallery";
+import Home from '@/pages/Home';
+import Videos from '@/pages/Videos/Videos';
+import Projects from '@/pages/Projects/Projects';
+import ImageGallery from '@/pages/Gallery/ImageGallery';
 
-import Navbar from "@/components/Navbar";
+import Navbar from '@/components/Navbar';
 
 import { PageTransition } from "@/components/PageTransition"
 import { AnimatePresence } from 'framer-motion';
 
 import InstagramGallery from '@/pages/Gallery/InstagramGallery';
-import MRKTRoutes from './data/MrktRoutes';
-import FilmRoutes from './data/FilmRoutes';
-import DigitalRoutes from './data/DigitalRoutes';
+import MRKTRoutes from '@/data/MrktRoutes';
+import FilmRoutes from '@/data/FilmRoutes';
+import DigitalRoutes from '@/data/DigitalRoutes';
 
-export default function Router() {
+function Router() {
   
   const location = useLocation();
 
@@ -67,3 +65,5 @@ export default function Router() {
     </>
   );
 }
+
+export default Router;

@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import { ThumbUp as ThumbUpIcon } from '@mui/icons-material';
 import { Typography } from '@mui/material';
  
-import Theme from "@/Theme";
+import Theme from '@/Theme';
 
 interface ThumbUpProps {
     children?: React.ReactNode;
@@ -15,7 +15,7 @@ interface ThumbUpProps {
     onThumbsUp: (ratingCode: string) => void;
 }
 
-function ThumbUp({ children, index, ratingCode, count, onThumbsUp }: ThumbUpProps) {
+function ThumbUp({ index, ratingCode, count, onThumbsUp }: ThumbUpProps) {
     return (
         <Box 
             key={`thumb-up-box-${index}`}

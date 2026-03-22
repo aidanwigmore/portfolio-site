@@ -19,11 +19,7 @@ import Title from '../../components/Title';
 import { useThumbsUp } from '../../hooks/useThumbsUp';
 import Theme from "../../Theme";
 
-interface HomeProps {
-  home?: boolean;
-}
-
-export default function Videos({ home }: HomeProps) {
+export default function Videos() {
   
   const { thumbsUpCounts, handleThumbsUp } = useThumbsUp('video');
 
@@ -32,15 +28,15 @@ export default function Videos({ home }: HomeProps) {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const youtubeWidth = window.innerWidth > 600 ? "50%" : "100%";
-  const youtubeHeight = window.innerWidth > 600 ? "50vw" : "30vw";
+  // const youtubeHeight = window.innerWidth > 600 ? "50vw" : "30vw";
   
-  const [elapsedTimes, setElapsedTimes] = useState<number[]>(items.map(() => 0));
+  const [__waelapsedTimes, setElapsedTimes] = useState<number[]>(items.map(() => 0));
 
   const [activeSteps, setActiveSteps] = useState<number[]>(items.map(() => 0));
   const [skippedSteps, setSkippedSteps] = useState<Set<number>[]>(items.map(() => new Set()));
   
   const [value, setValue] = useState<number>(1);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (__event: React.SyntheticEvent, newValue: number) => {
     setCurrentPage(newValue);
     setValue(newValue);
   };
@@ -121,14 +117,14 @@ export default function Videos({ home }: HomeProps) {
     });
   };
 
-  const handlePageChange = (itemIndex: number, pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    setActiveSteps((prev) => {
-      const newSteps = [...prev];
-      newSteps[itemIndex] = 0;
-      return newSteps;
-    });
-  };
+  // const handlePageChange = (itemIndex: number, pageNumber: number) => {
+  //   setCurrentPage(pageNumber);
+  //   setActiveSteps((prev) => {
+  //     const newSteps = [...prev];
+  //     newSteps[itemIndex] = 0;
+  //     return newSteps;
+  //   });
+  // };
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -188,7 +184,7 @@ export default function Videos({ home }: HomeProps) {
           </TabList>
           {items
             .filter((item) => items.indexOf(item) === currentPage - 1)
-            .map((item, index) => {
+            .map((item, __index) => {
               const itemIndex = items.indexOf(item);
               const currentStep = activeSteps[itemIndex];
               const isCompleted = currentStep === item.steps.titles.length;
@@ -341,7 +337,7 @@ export default function Videos({ home }: HomeProps) {
           <Pagination
             count={items.length}
             page={currentPage}
-            onChange={(event, pageNumber) => {
+            onChange={(_event, pageNumber) => {
               setCurrentPage(pageNumber);
               setActiveSteps((prev) => {
                 const newSteps = [...prev];

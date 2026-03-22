@@ -1,7 +1,7 @@
-import { Box, CircularProgress, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 
 import Title from '@/components/Title';
-import Theme from "@/Theme";
+import Theme from '@/Theme';
 
 interface InstagramGalleryProps {
     title: string;

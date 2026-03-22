@@ -88,7 +88,7 @@ export default function Projects( { home } : ProjectProps ) {
     <>
       <Title children={"Projects I've Worked On"} />
       <List dense={false}>
-        {items.map((item, index) => (
+        {items.map((item: any, index: number) => (
           <Box key={`project-${index}`}>
             <ListItem
               key={`list-item-${index}`}
@@ -122,7 +122,7 @@ export default function Projects( { home } : ProjectProps ) {
                   </>
                 } 
                 secondary={
-                  item.description.map((desc, descIndex) => (
+                  item.description.map((desc: any, descIndex: any) => (
                     <span 
                       key={`${item.title}-desc-${descIndex}`}
                       style={{
@@ -261,51 +261,51 @@ export default function Projects( { home } : ProjectProps ) {
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
           }}
         >
-          {items[modalItemIndex]?.images && (
-            <>
-              <Box
-                component="img"
-                src={items[modalItemIndex].images[modalImageIndex]}
-                sx={{
-                  maxWidth: '90%',
-                  maxHeight: '90%',
-                  objectFit: 'contain',
-                }}
-              />
-
-              {/* Close Button */}
-              <IconButton
-                onClick={() => setOpenImageModal(false)}
-                sx={{ position: 'absolute', top: 20, right: 20, color: 'white' }}
-              >
-                <Close fontSize="large" />
-              </IconButton>
-
-              {/* Previous Button */}
-              {items[modalItemIndex]?.images && items[modalItemIndex].images.length > 1 && (
+          {items[modalItemIndex]?.images && (() => {
+            const currentItem = items[modalItemIndex];
+            return (
+              <>
+                <Box
+                  component="img"
+                  src={currentItem?.images?.[modalImageIndex]}
+                  sx={{
+                    maxWidth: '90%',
+                    maxHeight: '90%',
+                    objectFit: 'contain',
+                  }}
+                />
                 <IconButton
-                  onClick={handleModalPrevImage}
-                  sx={{ position: 'absolute', left: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}
+                  onClick={() => setOpenImageModal(false)}
+                  sx={{ position: 'absolute', top: 20, right: 20, color: 'white' }}
                 >
-                  <ChevronLeft fontSize="large" />
+                  <Close fontSize="large" />
                 </IconButton>
-              )}
 
-              <CustomTypography variant="body2" sx={{ position: 'absolute', bottom: 20, color: 'white' }}>
-                {modalImageIndex + 1} / {items[modalItemIndex]?.images?.length}
-              </CustomTypography>
+                {currentItem?.images && currentItem.images.length > 1 && (
+                  <IconButton
+                    onClick={handleModalPrevImage}
+                    sx={{ position: 'absolute', left: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}
+                  >
+                    <ChevronLeft fontSize="large" />
+                  </IconButton>
+                )}
 
-              {/* Next Button */}
-              {items[modalItemIndex]?.images && items[modalItemIndex].images.length > 1 && (
-                <IconButton
-                  onClick={handleModalNextImage}
-                  sx={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}
-                >
-                  <ChevronRight fontSize="large" />
-                </IconButton>
-              )}
-            </>
-          )}
+                <CustomTypography variant="body2" sx={{ position: 'absolute', bottom: 20, color: 'white' }}>
+                  {modalImageIndex + 1} / {currentItem?.images?.length}
+                </CustomTypography>
+
+                {/* Next Button */}
+                {currentItem?.images && currentItem.images.length > 1 && (
+                  <IconButton
+                    onClick={handleModalNextImage}
+                    sx={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}
+                  >
+                    <ChevronRight fontSize="large" />
+                  </IconButton>
+                )}
+              </>
+            );
+          })()}
         </Box>
       </Modal>
     </>

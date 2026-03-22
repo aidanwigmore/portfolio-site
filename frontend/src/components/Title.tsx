@@ -10,7 +10,7 @@ interface TitleProps {
     color? : string;
 }
 
-function Title({ children, color } : TitleProps) {
+function Title({ children } : TitleProps) {
     return (
         <>
             <Box sx={{ 

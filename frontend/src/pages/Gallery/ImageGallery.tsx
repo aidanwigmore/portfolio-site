@@ -19,7 +19,7 @@ import { CustomButton } from '@/materials/Button';
 import PasswordPrompt from '@/pages/Gallery/PasswordPrompt';
 import { PortfolioImage } from '@/types/Gallery';
 
-import Theme from "@/Theme";
+import Theme from '@/Theme';
 
 export default function ImageGallery() {
   const [category, setCategory] = useState<'friends' | 'employers' | 'visitors' | null>(null);

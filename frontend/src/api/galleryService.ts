@@ -1,5 +1,5 @@
-import api from './axios';
-import { PortfolioImage, PasswordVerificationResponse } from '../types/Gallery';
+import api from 'axios';
+import { PortfolioImage, PasswordVerificationResponse } from '@/types/Gallery';
 
 export const verifyPassword = (password: string) =>
   api.post<PasswordVerificationResponse>('passwords/verify_password/', { password });

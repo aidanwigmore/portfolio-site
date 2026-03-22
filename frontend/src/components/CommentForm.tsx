@@ -5,13 +5,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Tooltip } from "@mui/material";
+import { Tooltip } from '@mui/material';
 
-import api from "@/api/axios"
+import api from '@/api/axios';
 
-import { CustomTypography } from "@/materials/Typography";
-import { CustomButton } from "@/materials/Button";
-import { Comment } from "@/types/Comment"
+import { CustomTypography } from '@/materials/Typography';
+import { CustomButton } from '@/materials/Button';
+import { Comment } from '@/types/Comment';
 
 export interface CommentDialogProps {
   open: boolean;

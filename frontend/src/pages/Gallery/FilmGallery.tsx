@@ -1,6 +1,6 @@
-import { Box, CircularProgress, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import Title from '@/components/Title';
-import Theme from "@/Theme";
+import Theme from '@/Theme';
 import FilmRoutes from '@/data/FilmRoutes';
 
 export default function FilmGallery() {
