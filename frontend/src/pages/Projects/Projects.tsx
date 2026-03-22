@@ -32,7 +32,7 @@ interface ProjectProps {
 }
 
 export default function Projects( { home } : ProjectProps ) {
-  const { thumbsUpCounts, handleThumbsUp } = useThumbsUp('video');
+  const { handleThumbsUp } = useThumbsUp('video');
     
   const [openImageModal, setOpenImageModal] = useState(false);
     const [carouselIndices, setCarouselIndices] = useState<number[]>(
@@ -241,7 +241,7 @@ export default function Projects( { home } : ProjectProps ) {
                   {thumbsUpCounts[item.ratingCode || ``]}
                 </CustomTypography>
               </Box> */}
-              <ThumbUp index={index} ratingCode={item.ratingCode} count={thumbsUpCounts[item.ratingCode]} onThumbsUp={() => handleThumbsUp(item.ratingCode)}/>
+              <ThumbUp index={index} name={item.title} ratingCode={item.ratingCode} onThumbsUp={() => handleThumbsUp(item.ratingCode)}/>
             </Box>
           </ListItem>
           </Box>

@@ -3,8 +3,8 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import Router from './Router';
-import Theme from './Theme';
+import Router from '@/Router';
+import Theme from '@/Theme';
 
 import { ThemeProvider } from '@mui/material';
 

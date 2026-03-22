@@ -12,6 +12,9 @@ import api from '@/api/axios';
 import { CustomTypography } from '@/materials/Typography';
 import { CustomButton } from '@/materials/Button';
 import { Comment } from '@/types/Comment';
+import Snackbar from '@mui/material/Snackbar';
+
+import Theme from '@/Theme';
 
 export interface CommentDialogProps {
   open: boolean;
@@ -20,6 +23,8 @@ export interface CommentDialogProps {
 }
 
 function CommentDialog(props: CommentDialogProps) {
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -56,70 +61,74 @@ function CommentDialog(props: CommentDialogProps) {
     } catch (error) {
       console.error(error)
     }
+    setOpenSnackbar(true);
   }
 
   return (
-    <Dialog 
-      PaperProps={{
-        sx: {
-          alignItems: "center",
-          justifyContent: "top",
-          paddingBottom: "2rem",
-          maxWidth: "none",
-      },
-      }} 
-      onClose={handleClose} 
-      open={open}
-    >
-      <Box
-        component="form"
-        sx= {{
-          display: "flex",
-          flexDirection: "column",
-          padding: "2rem",
-      }}>
-        <DialogTitle>
-          <CustomTypography style={{textAlign: "center"}} gutterBottom>
-            Send a message
-          </CustomTypography>
-        </DialogTitle>
-        <form 
-          style={{
+    <>
+      <Snackbar
+        sx={{backgroundColor: Theme.palette.primary.light}}
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Message sent successfully"
+      />
+      <Dialog 
+        PaperProps={{
+          sx: {
+            alignItems: "center",
+            justifyContent: "top",
+            paddingBottom: "2rem",
+            maxWidth: "none",
+        },
+        }} 
+        onClose={handleClose} 
+        open={open}
+      >
+        <Box
+          component="form"
+          sx= {{
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
+            padding: "2rem",
         }}>
-          <TextField
-            name="name" 
-            id="filled-basic" 
-            value={comment.name} 
-            label="Name" 
-            variant="filled" 
-            onChange={handleChange} 
-          />
-          <TextField 
-            name="email" 
-            id="filled-basic" 
-            label="Email" 
-            variant="filled" 
-            value={comment.email} 
-            onChange={handleChange}
-          />
-          <TextField 
-            name="message" 
-            id="filled-basic" 
-            label="Message" 
-            variant="filled" 
-            value={comment.message} 
-            onChange={handleChange}
-            multiline
-            maxRows={4}
-          />
-          <CustomButton variant="contained" type="submit" onClick={submit} >
-            Send
-          </CustomButton>
-        </form>
-      </Box>
-    </Dialog>
+          <DialogTitle>
+            <CustomTypography style={{textAlign: "center"}} gutterBottom>
+              Send a message
+            </CustomTypography>
+          </DialogTitle>
+            <TextField
+              name="name" 
+              id="filled-basic" 
+              value={comment.name} 
+              label="Name" 
+              variant="filled" 
+              onChange={handleChange} 
+            />
+            <TextField 
+              name="email" 
+              id="filled-basic" 
+              label="Email" 
+              variant="filled" 
+              value={comment.email} 
+              onChange={handleChange}
+            />
+            <TextField 
+              name="message" 
+              id="filled-basic" 
+              label="Message" 
+              variant="filled" 
+              value={comment.message} 
+              onChange={handleChange}
+              multiline
+              maxRows={4}
+            />
+            <CustomButton variant="contained" type="submit" onClick={submit} >
+              Send
+            </CustomButton>
+        </Box>
+      </Dialog>
+    </>
   );
 }
 
@@ -140,7 +149,9 @@ export default function CommentDialogButton() {
     <>
       <Tooltip title="Send a message" arrow>
         <CustomButton variant="contained" onClick={handleClickOpen}>
-          Message me
+          <CustomTypography>
+            Message me
+          </CustomTypography>
         </CustomButton>
       </Tooltip>
       <CommentDialog

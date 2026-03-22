@@ -2,6 +2,8 @@ import { Button, ButtonProps } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
 
+import Theme from '@/Theme';
+
 interface CustomButtonProps extends ButtonProps {
     variant?: 'text' | 'outlined' | 'contained';
     children: React.ReactNode;
@@ -33,6 +35,10 @@ export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProp
                     padding: '8px 16px',
                     ...(gutterBottom && { marginBottom: '1rem' }),
                     ...sx,
+                    '&:hover': {
+                        backgroundColor: Theme.palette.primary.light,
+                        color: Theme.palette.primary.contrastText,
+                    },
                 }}
                 {...props}
             >

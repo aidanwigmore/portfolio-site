@@ -3,25 +3,26 @@ import React, { useEffect, useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-import { Pagination, AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Typography, Tab, IconButton } from '@mui/material';
+import { AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Typography, Tab } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { CustomTypography } from "../../materials/Typography";
+import { CustomTypography } from "@/materials/Typography";
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
+import ThumbUp from '@/components/ThumbUp';
 
-import VideoData from "./VideoData";
-import { ThumbUp } from '@mui/icons-material';
+import VideoData from "@/pages/Videos/VideoData";
+import { lighten } from '@mui/material/styles';
 
-import { CustomButton } from "../../materials/Button";
-import Title from '../../components/Title';
-import { useThumbsUp } from '../../hooks/useThumbsUp';
-import Theme from "../../Theme";
+import { CustomButton } from "@/materials/Button";
+import Title from '@/components/Title';
+import { useThumbsUp } from '@/hooks/useThumbsUp';
+import Theme from "@/Theme";
 
 export default function Videos() {
   
-  const { thumbsUpCounts, handleThumbsUp } = useThumbsUp('video');
+  const { handleThumbsUp } = useThumbsUp('video');
 
   const items = VideoData;
 
@@ -147,36 +148,31 @@ export default function Videos() {
           backgroundColor: Theme.palette.primary.main, 
           borderRadius: '8px',
         }}>
-          <List dense={true}>
-            <TabList onChange={handleChange} aria-label="tabslist" sx={{ 
-              backgroundColor: Theme.palette.secondary.light,
-              display: 'flex',
-              borderRadius: '8px',
-              gap: "1rem",
-              width: '100%',
-              '& .MuiTabs-flexContainer': {
-                justifyContent: 'center',
-              },
-              '& .MuiTabs-indicator': {
-                backgroundColor: Theme.palette.secondary.contrastText,
-                height: '7px',
-                borderRadius: '8px',
-              },
-              '& .MuiTabs-active': {
-                backgroundColor: Theme.palette.secondary.dark,
-                height: '7px',
-              },
-              '& .MuiTab-root': {
-                color: '#fff',
-                backgroundColor: Theme.palette.secondary.main,
-                minWidth: 'auto',
-                transition: 'all 0.3s ease',
-                borderRadius: '8px',
-              '&.Mui-selected': {
-                backgroundColor: Theme.palette.secondary.dark,
-                color: Theme.palette.secondary.contrastText,
-              }
-              }
+          <List dense={false}>
+            <TabList 
+              onChange={handleChange} 
+              aria-label="tabslist" 
+              sx={{ 
+                '& .MuiTabs-flexContainer': {
+                  gap: "2rem",
+                  justifyContent: 'center',
+                },
+                '& .MuiTabs-indicator': {
+                  backgroundColor: Theme.palette.secondary.contrastText,
+                  height: '7px',
+                  borderRadius: '8px',
+                },
+                '& .MuiTab-root': {
+                  color: '#fff',
+                  backgroundColor: Theme.palette.secondary.main,
+                  borderRadius: '8px',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                  '&.Mui-selected': {
+                    backgroundColor: lighten(Theme.palette.secondary.main, 0.3),
+                    color: Theme.palette.secondary.contrastText,
+                    transition: 'all 0.3s ease',
+                  }
+                }
             }}>
             {items.map((item, index) => (
               <Tab key={index} label={`${item.title}`} value={index + 1} />
@@ -293,19 +289,8 @@ export default function Videos() {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     ></iframe>
-                    </Box>
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '1rem' }}>
-                      <IconButton 
-                        onClick={() => handleThumbsUp(item.steps.ratingCodes[currentStep])}
-                        size="large"
-                        sx={{color: Theme.palette.primary.dark, backgroundColor: Theme.palette.primary.main}}
-                      >
-                        <ThumbUp />
-                      </IconButton>
-                      <Typography variant="body2">
-                        {thumbsUpCounts[item.steps.ratingCodes[currentStep]] || ``}
-                      </Typography>
-                    </Box>
+                    </Box>                    
+                    <ThumbUp index={currentStep} name={item.steps.titles[currentStep]} ratingCode={item.steps.ratingCodes[currentStep]} onThumbsUp={() => handleThumbsUp(item.steps.ratingCodes[currentStep])}/>
                       
                     {item.stepsLabels ? (
                     <Accordion sx={{maxHeight: '200px', overflowY: 'auto' }}>
@@ -328,7 +313,7 @@ export default function Videos() {
           </List>
         </Box>
         
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: 2 }}>
+        {/* <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: 2 }}>
           
           <Typography variant="caption" component="span" sx={{ ml: 2 }}>
             {items[currentPage - 1].title} - {items[currentPage - 1].description}
@@ -351,7 +336,7 @@ export default function Videos() {
           <Typography variant="caption" component="span" sx={{ ml: 2 }}>
             (Page {currentPage} of {items.length})
           </Typography>
-        </Box>
+        </Box> */}
       </TabContext>
       </>
   );
