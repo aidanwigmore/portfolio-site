@@ -2,8 +2,8 @@ import { createTheme } from '@mui/material';
 import { lighten, darken } from '@mui/material/styles';
 
 const colors = {
-    primary: '#03F5E9',
-    secondary: '#7501F2',
+    primary: '#4854F0',
+    secondary: '#EB9447',
     error: '#F23901',
     warning: '#EBAD03',
     info: '#F20386',
