@@ -1,12 +1,12 @@
-import { CustomTypography } from "../materials/Typography";
-import Videos from "./Videos/Videos";
-import Projects from "./Projects/Projects";
-import { CustomDivider } from "../materials/Divider";
+import { CustomTypography } from "@/materials/Typography";
+import Videos from "@/Pages/Videos/Videos";
+import Projects from "@/Pages/Projects/Projects";
+import { CustomDivider } from "@/materials/Divider";
 import { motion } from "framer-motion";
 
 import Box from "@mui/material/Box";
 
-import Theme from "../Theme";
+import Theme from "@/Theme";
 
 export default function Home() {
   const sectionVariants = {

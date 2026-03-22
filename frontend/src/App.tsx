@@ -1,5 +1,5 @@
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import Navbar from "@/components/Navbar";
+import Home from "@/Pages/Home";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';

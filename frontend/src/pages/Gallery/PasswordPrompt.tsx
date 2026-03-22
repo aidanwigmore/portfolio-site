@@ -8,10 +8,11 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
-import { CustomButton } from '../../materials/Button';
-import { verifyPassword } from '../../api/galleryService';
 
-import Theme from "../../Theme";
+import { CustomButton } from '@/materials/Button';
+import { verifyPassword } from '@/api/galleryService';
+
+import Theme from "@/Theme";
 
 interface PasswordPromptProps {
   onSuccess: (category: 'friends' | 'employers' | 'visitors') => void;

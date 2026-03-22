@@ -1,25 +1,31 @@
 import { useState } from 'react';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import Box from '@mui/material/Box';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+  IconButton, 
+  Modal, 
+  Tooltip, 
+} from '@mui/material';
 
-import LanguageIcon from '@mui/icons-material/Language';
-import { IconButton, Modal, Tooltip } from '@mui/material';
-import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  Close,
+} from '@mui/icons-material';
 
-import ProjectData from "./ProjectData";
-
-import ThumbUp from '../../components/ThumbUp';
-import { useThumbsUp } from '../../hooks/useThumbsUp';
-
-import { CustomTypography } from "../../materials/Typography";
-import Title from '../../components/Title';
 import { lighten } from '@mui/material/styles';
 
-import Theme from "../../Theme";
+import ProjectData from "@/Pages/Projects/ProjectData";
+
+import { useThumbsUp } from '@/hooks/useThumbsUp';
+import ThumbUp from '@/components/ThumbUp';
+import Title from '@/components/Title';
+import { CustomTypography } from "@/materials/Typography";
+
+import Theme from "@/Theme";
 
 interface ProjectProps {
   home?: boolean;
@@ -276,7 +282,7 @@ export default function Projects( { home } : ProjectProps ) {
               </IconButton>
 
               {/* Previous Button */}
-              {items[modalItemIndex].images.length > 1 && (
+              {items[modalItemIndex]?.images && items[modalItemIndex].images.length > 1 && (
                 <IconButton
                   onClick={handleModalPrevImage}
                   sx={{ position: 'absolute', left: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}
@@ -286,11 +292,11 @@ export default function Projects( { home } : ProjectProps ) {
               )}
 
               <CustomTypography variant="body2" sx={{ position: 'absolute', bottom: 20, color: 'white' }}>
-                {modalImageIndex + 1} / {items[modalItemIndex].images.length}
+                {modalImageIndex + 1} / {items[modalItemIndex]?.images?.length}
               </CustomTypography>
 
               {/* Next Button */}
-              {items[modalItemIndex].images.length > 1 && (
+              {items[modalItemIndex]?.images && items[modalItemIndex].images.length > 1 && (
                 <IconButton
                   onClick={handleModalNextImage}
                   sx={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}

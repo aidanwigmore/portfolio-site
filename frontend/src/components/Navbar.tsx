@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 
 import { Box, Tooltip } from "@mui/material";
 
-import CommentDialogButton from "../components/CommentForm";
-import { CustomButton } from "../materials/Button";
-import { CustomDivider } from "../materials/Divider";
+import CommentDialogButton from "@/components/CommentForm";
+
+import { CustomButton } from "@/materials/Button";
+import { CustomDivider } from "@/materials/Divider";
 
 export default function NavBar() {
   return (

@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import { ThumbUp as ThumbUpIcon } from '@mui/icons-material';
 import { Typography } from '@mui/material';
  
-import Theme from "../Theme";
+import Theme from "@/Theme";
 
 interface ThumbUpProps {
     children?: React.ReactNode;

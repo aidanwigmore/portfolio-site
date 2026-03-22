@@ -1,21 +1,21 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Videos from "./pages/Videos/Videos";
-import Projects from "./pages/Projects/Projects";
-import ImageGallery from "./pages/Gallery/ImageGallery";
-import FilmGallery from "./pages/Gallery/FilmGallery";
+import Home from "@/Pages/Home";
+import Videos from "@/Pages/Videos/Videos";
+import Projects from "@/Pages/Projects/Projects";
+import ImageGallery from "@/Pages/Gallery/ImageGallery";
+import FilmGallery from "@/Pages/Gallery/FilmGallery";
 
-import Navbar from "./components/Navbar";
+import Navbar from "@/components/Navbar";
 
-import { PageTransition } from "./components/PageTransition"
+import { PageTransition } from "@/components/PageTransition"
 import { AnimatePresence } from 'framer-motion';
 
-import InstagramGallery from './pages/Gallery/InstagramGallery';
-import MRKTRoutes from './data/embeddedRoutes/MrktRoutes';
-import FilmRoutes from './data/embeddedRoutes/FilmRoutes';
-import DigitalRoutes from './data/embeddedRoutes/DigitalRoutes';
+import InstagramGallery from '@/Pages/Gallery/InstagramGallery';
+import MRKTRoutes from './data/MrktRoutes';
+import FilmRoutes from './data/FilmRoutes';
+import DigitalRoutes from './data/DigitalRoutes';
 
 export default function Router() {
   

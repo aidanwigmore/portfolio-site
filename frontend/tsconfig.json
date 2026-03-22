@@ -1,9 +1,25 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/api": ["src/api*"],
+      "@/components": ["src/components*"],
+      "@/materials": ["src/materials*"],
+      "@/data": ["src/data*"],
+      "@/hooks": ["src/hooks*"],
+      "@/pages": ["src/pages*"],
+      "@/types": ["src/types*"]
+    },
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ESNext",
     "jsx": "react-jsx",
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

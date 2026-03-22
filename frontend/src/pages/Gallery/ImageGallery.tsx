@@ -12,14 +12,14 @@ import {
   Alert,
   CircularProgress,
 } from '@mui/material';
-import { CustomButton } from '../../materials/Button';
-import PasswordPrompt from './PasswordPrompt';
-import { getImagesByCategory, getImageUrl } from '../../api/galleryService';
-import { PortfolioImage } from '../../types/Gallery';
 
-import Title from '../../components/Title';
+import { getImagesByCategory, getImageUrl } from '@/api/galleryService';
+import Title from '@/components/Title';
+import { CustomButton } from '@/materials/Button';
+import PasswordPrompt from '@/Pages/Gallery/PasswordPrompt';
+import { PortfolioImage } from '@/types/Gallery';
 
-import Theme from "../../Theme";
+import Theme from "@/Theme";
 
 export default function ImageGallery() {
   const [category, setCategory] = useState<'friends' | 'employers' | 'visitors' | null>(null);

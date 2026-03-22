@@ -1,7 +1,7 @@
 import { Divider, DividerProps } from '@mui/material';
 import React from 'react';
 
-import Theme from '../Theme';
+import Theme from '@/Theme';
 
 interface CustomDividerProps extends DividerProps {
     gutterBottom?: boolean;

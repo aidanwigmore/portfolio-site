@@ -1,18 +1,17 @@
 import { useState } from "react"
-import api from "../api/axios"
-import { Comment } from "../types/Comment"
 import * as React from 'react';
 
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import { CustomTypography } from "../materials/Typography";
 import { Tooltip } from "@mui/material";
 
-import { CustomButton } from "../materials/Button";
+import api from "@/api/axios"
+
+import { CustomTypography } from "@/materials/Typography";
+import { CustomButton } from "@/materials/Button";
+import { Comment } from "@/types/Comment"
 
 export interface CommentDialogProps {
   open: boolean;

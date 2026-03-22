@@ -1,8 +1,10 @@
 import React from 'react';
 
 import Box from '@mui/material/Box';
-import Theme from '../Theme';
-import { CustomTypography } from '../materials/Typography';
+
+import Theme from '@/Theme';
+import { CustomTypography } from '@/materials/Typography';
+
 interface TitleProps {
     children? : React.ReactNode;
     color? : string;
