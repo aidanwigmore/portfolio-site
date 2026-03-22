@@ -18,7 +18,7 @@ import {
 
 import { lighten } from '@mui/material/styles';
 
-import ProjectData from "@/Pages/Projects/ProjectData";
+import ProjectData from "@/pages/Projects/ProjectData";
 
 import { useThumbsUp } from '@/hooks/useThumbsUp';
 import ThumbUp from '@/components/ThumbUp';

@@ -16,7 +16,7 @@ import {
 import { getImagesByCategory, getImageUrl } from '@/api/galleryService';
 import Title from '@/components/Title';
 import { CustomButton } from '@/materials/Button';
-import PasswordPrompt from '@/Pages/Gallery/PasswordPrompt';
+import PasswordPrompt from '@/pages/Gallery/PasswordPrompt';
 import { PortfolioImage } from '@/types/Gallery';
 
 import Theme from "@/Theme";

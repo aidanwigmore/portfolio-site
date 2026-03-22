@@ -1,6 +1,6 @@
 import { CustomTypography } from "@/materials/Typography";
-import Videos from "@/Pages/Videos/Videos";
-import Projects from "@/Pages/Projects/Projects";
+import Videos from "@/pages/Videos/Videos";
+import Projects from "@/pages/Projects/Projects";
 import { CustomDivider } from "@/materials/Divider";
 import { motion } from "framer-motion";
 
