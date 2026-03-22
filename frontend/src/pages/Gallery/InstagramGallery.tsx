@@ -1,18 +1,21 @@
 import { Box, CircularProgress, Grid } from '@mui/material';
 import Title from '../../components/Title';
 import Theme from "../../Theme";
-import FilmRoutes from '../../data/embeddedRoutes/FilmRoutes';
 
-export default function FilmGallery() {
+interface InstagramGalleryProps {
+    title: string;
+    routes: Array<{ [key: string]: string }>;
+}
+
+export default function InstagramGallery({ routes, title }: InstagramGalleryProps) {
   // Extract the posts from the object
-  const posts = Object.values(FilmRoutes[0]).map(postId => 
+  const posts = Object.values(routes[0]).map(postId => 
     `https://www.instagram.com${postId}/embed`
   );
 
   return (
     <Box sx={{ p: 3, backgroundColor: Theme.palette.primary.light, borderRadius: '8px' }}>
-      <Title children={`35mm Film Gallery`}/>
-
+      <Title children={title}/>
       <Box sx={{
         display: "grid",
         gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: '1fr 1fr 1fr' },

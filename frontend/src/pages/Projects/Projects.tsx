@@ -7,16 +7,17 @@ import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
 
 import LanguageIcon from '@mui/icons-material/Language';
-import { IconButton, Modal, Tooltip, Typography } from '@mui/material';
+import { IconButton, Modal, Tooltip } from '@mui/material';
 import { ChevronLeft, ChevronRight, Close } from '@mui/icons-material';
-import { ThumbUp } from '@mui/icons-material';
 
 import ProjectData from "./ProjectData";
+
+import ThumbUp from '../../components/ThumbUp';
 import { useThumbsUp } from '../../hooks/useThumbsUp';
 
 import { CustomTypography } from "../../materials/Typography";
 import Title from '../../components/Title';
-import { lighten, darken } from '@mui/material/styles';
+import { lighten } from '@mui/material/styles';
 
 import Theme from "../../Theme";
 
@@ -82,25 +83,26 @@ export default function Projects( { home } : ProjectProps ) {
       <Title children={"Projects I've Worked On"} />
       <List dense={false}>
         {items.map((item, index) => (
-          <>
+          <Box key={`project-${index}`}>
             <ListItem
-            key={index}
-            sx={{
-              backgroundColor: index % 2 !== 0 ? Theme.palette.primary.light : lighten(Theme.palette.primary.light, 0.4),
-              borderRadius: index === 0 ? '8px 8px 0px 0px' : index === items.length - 1 ? '0px 0px 8px 8px' : '0px',
-              flexDirection: 'column',
-            }}
-          >
+              key={`list-item-${index}`}
+              sx={{
+                backgroundColor: index % 2 !== 0 ? Theme.palette.primary.light : lighten(Theme.palette.primary.light, 0.4),
+                borderRadius: index === 0 ? '8px 8px 0px 0px' : index === items.length - 1 ? '0px 0px 8px 8px' : '0px',
+                flexDirection: 'column',
+              }}
+            >
             <Box 
+              key={`box-item-${index}`}
               sx={{
                 display: 'flex', flexDirection: 'row',
                 padding: '2vw',
                 borderRadius: '8px',
-                backgroundColor: index % 2 !== 0 ? Theme.palette.primary.main : Theme.palette.primary.light,
+                backgroundColor: index % 2 !== 0 ? lighten(Theme.palette.primary.light, 0.4) : Theme.palette.primary.light,
               }}
             >
               <ListItemText 
-                key={`${item.title}-${index}`}
+                key={`list-item-text-${index}`}
                 primary={
                   <>
                     {item.title}
@@ -130,84 +132,113 @@ export default function Projects( { home } : ProjectProps ) {
                   ))
                 } 
               />
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '1rem' }}>
-                <IconButton 
-                  onClick={() => handleThumbsUp(item.ratingCode)}
-                  size="large"
-                  sx={{color: Theme.palette.primary.dark, backgroundColor: Theme.palette.primary.main}}
-                >
-                  <ThumbUp />
-                </IconButton>
-                <Typography variant="body2">
-                  {thumbsUpCounts[item.ratingCode || ``]}
-                </Typography>
-              </Box>
-            {/* Single Image Carousel Display */}
-            {item.images && item.images.length > 0 && (
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 2,
-                  mt: 2,
-                  width: '100%',
-                  justifyContent: 'center',
-                }}
-              >
+              {/* Single Image Carousel Display */}
+              {item.images && item.images.length > 0 && (
                 <Box
+                  key={`image-box-column-${index}`}
                   sx={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: 'column',
                     alignItems: 'center',
                     gap: 2,
+                    mt: 2,
                     width: '100%',
                     justifyContent: 'center',
                   }}
                 >
-                  {item.images.length > 1 && (
-                    <IconButton
-                      onClick={() => handleCarouselPrev(index)}
-                      size="small"
-                    >
-                      <ChevronLeft />
-                    </IconButton>
-                  )}
-
                   <Box
-                    component="img"
-                    src={item.images[carouselIndices[index]]}
-                    onClick={() => handleImageClick(index, carouselIndices[index])}
+                    key={`image-box-row-${index}`}
                     sx={{
-                      width: '300px',
-                      height: '200px',
-                      objectFit: 'cover',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      '&:hover': { opacity: 0.8 },
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      gap: 2,
+                      width: '100%',
+                      justifyContent: 'center',
                     }}
-                  />
+                  >
+                    {item.images.length > 1 && (
+                      <IconButton
+                        key={`image-iconbutton-prev-${index}`}
+                        onClick={() => handleCarouselPrev(index)}
+                        size="small"
+                      >
+                        <ChevronLeft 
+                          key={`image-chevron-left-${index}`}
+                        />
+                      </IconButton>
+                    )}
 
+                    <Box
+                      key={`image-box-${index}`}
+                      component="img"
+                      src={item.images[carouselIndices[index]]}
+                      onClick={() => handleImageClick(index, carouselIndices[index])}
+                      sx={{
+                        width: '300px',
+                        height: '200px',
+                        objectFit: 'cover',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        '&:hover': { opacity: 0.8 },
+                      }}
+                    />
+
+                    {item.images.length > 1 && (
+                      <IconButton
+                        key={`image-iconbutton-next-${index}`}
+                        onClick={() => handleCarouselNext(index)}
+                        size="small"
+                      >
+                        <ChevronRight 
+                          key={`image-chevron-left-${index}`}
+                        />
+                      </IconButton>
+                    )}
+                  </Box>
+                  
                   {item.images.length > 1 && (
-                    <IconButton
-                      onClick={() => handleCarouselNext(index)}
-                      size="small"
-                    >
-                      <ChevronRight />
-                    </IconButton>
+                    <Box 
+                      key={`image-index-${index}`}
+                      sx={{ 
+                        fontSize: '0.875rem', 
+                        color: 'gray' }}
+                      >
+                      {carouselIndices[index] + 1}/{item.images.length}
+                    </Box>
                   )}
                 </Box>
-                
-                {item.images.length > 1 && (
-                  <Box sx={{ fontSize: '0.875rem', color: 'gray' }}>
-                    {carouselIndices[index] + 1}/{item.images.length}
-                  </Box>
-                )}
-              </Box>
-            )}
+              )}
+              {/* <Box 
+                key={`thumb-up-box-${index}`}
+                sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.5rem', 
+                  margin: '1rem' 
+                }}
+              >
+                <IconButton 
+                  key={`thumb-up-iconbutton-${index}`}
+                  onClick={() => handleThumbsUp(item.ratingCode)}
+                  size="large"
+                  sx={{color: Theme.palette.secondary.dark, backgroundColor: Theme.palette.secondary.main}}
+                >
+                  <ThumbUp
+                    key={`thumb-up-icon-${index}`}
+                  />
+                </IconButton>
+                <CustomTypography 
+                  key={`typography-thumb-up-count-${index}`}
+                  variant="body2"
+                >
+                  {thumbsUpCounts[item.ratingCode || ``]}
+                </CustomTypography>
+              </Box> */}
+              <ThumbUp index={index} ratingCode={item.ratingCode} count={thumbsUpCounts[item.ratingCode]} onThumbsUp={() => handleThumbsUp(item.ratingCode)}/>
             </Box>
           </ListItem>
-          </>
+          </Box>
           
         ))}
       </List>
@@ -254,9 +285,9 @@ export default function Projects( { home } : ProjectProps ) {
                 </IconButton>
               )}
 
-              <Typography variant="body2" sx={{ position: 'absolute', bottom: 20, color: 'white' }}>
+              <CustomTypography variant="body2" sx={{ position: 'absolute', bottom: 20, color: 'white' }}>
                 {modalImageIndex + 1} / {items[modalItemIndex].images.length}
-              </Typography>
+              </CustomTypography>
 
               {/* Next Button */}
               {items[modalItemIndex].images.length > 1 && (

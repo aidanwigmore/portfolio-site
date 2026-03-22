@@ -31,13 +31,18 @@ export default function NavBar() {
             </CustomButton>
           </Tooltip>
           <Tooltip title="View MRKTBox Instagram Gallery" arrow>
-            <CustomButton component={Link} to="/instagram">
-              MRKTBox Instagram
+            <CustomButton component={Link} to="/mrkt-media">
+              MRKTBox Media
             </CustomButton>
           </Tooltip>
           <Tooltip title="View Film Gallery" arrow>
-            <CustomButton component={Link} to="/film-gallery">
-              Film Photography
+            <CustomButton component={Link} to="/film-media">
+              Film Photo Media
+            </CustomButton>
+          </Tooltip>
+          <Tooltip title="View Film Gallery" arrow>
+            <CustomButton component={Link} to="/digi-media">
+              Digital Photo Media
             </CustomButton>
           </Tooltip>
           <CommentDialogButton />

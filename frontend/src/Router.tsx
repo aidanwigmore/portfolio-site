@@ -5,14 +5,17 @@ import Home from "./pages/Home";
 import Videos from "./pages/Videos/Videos";
 import Projects from "./pages/Projects/Projects";
 import ImageGallery from "./pages/Gallery/ImageGallery";
-import FilmGallery from "./pages/Gallery/FilmGallery"
+import FilmGallery from "./pages/Gallery/FilmGallery";
 
 import Navbar from "./components/Navbar";
 
 import { PageTransition } from "./components/PageTransition"
 import { AnimatePresence } from 'framer-motion';
 
-import Instagram from './pages/Instagram';
+import InstagramGallery from './pages/Gallery/InstagramGallery';
+import MRKTRoutes from './data/embeddedRoutes/MrktRoutes';
+import FilmRoutes from './data/embeddedRoutes/FilmRoutes';
+import DigitalRoutes from './data/embeddedRoutes/DigitalRoutes';
 
 export default function Router() {
   
@@ -43,14 +46,19 @@ export default function Router() {
               <ImageGallery />
             </PageTransition>
           } />
-          <Route path="/instagram" element={
+          <Route path="/mrkt-media" element={
             <PageTransition>
-              <Instagram />
+              <InstagramGallery title={'MRKTBox Media'} routes={MRKTRoutes} />
             </PageTransition>
           } />
-          <Route path="/film-gallery" element={
+          <Route path="/film-media" element={
             <PageTransition>
-              <FilmGallery />
+              <InstagramGallery title={'Film Media'} routes={FilmRoutes} />
+            </PageTransition>
+          } />
+          <Route path="/digi-media" element={
+            <PageTransition>
+              <InstagramGallery title={'Digital Media'} routes={DigitalRoutes} />
             </PageTransition>
           } />
         

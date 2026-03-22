@@ -63,7 +63,7 @@ export default function ImageGallery() {
 
   return (
     <Box sx={{ p: 3, backgroundColor: Theme.palette.primary.main, borderRadius: '8px' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
         <Title children={`Welcome to my Gallery`}/>
         <CustomButton onClick={handleLogout}>
           Go Back
