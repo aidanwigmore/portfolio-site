@@ -45,12 +45,14 @@ export default function Home() {
           marginLeft: 0,
           marginRight: 0,
           backgroundColor: Theme.palette.primary.light, 
-          borderRadius: '8px'
+          borderRadius: '8px',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         }}>
           <Box sx={{ 
             padding: '3vw',
             backgroundColor: Theme.palette.primary.main,
-            borderRadius: '8px'
+            borderRadius: '8px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
           }}>
             <CustomTypography variant="h1" textAlign="center" gutterBottom>
               Aidan Wigmore

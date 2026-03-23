@@ -96,6 +96,7 @@ export default function Projects( { home } : ProjectProps ) {
                 backgroundColor: index % 2 !== 0 ? Theme.palette.primary.light : lighten(Theme.palette.primary.light, 0.4),
                 borderRadius: index === 0 ? '8px 8px 0px 0px' : index === items.length - 1 ? '0px 0px 8px 8px' : '0px',
                 flexDirection: 'column',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
               }}
             >
             <Box 
@@ -105,6 +106,7 @@ export default function Projects( { home } : ProjectProps ) {
                 padding: '2vw',
                 borderRadius: '8px',
                 backgroundColor: index % 2 !== 0 ? lighten(Theme.palette.primary.light, 0.4) : Theme.palette.primary.light,
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
               }}
             >
               <ListItemText 
@@ -138,7 +140,6 @@ export default function Projects( { home } : ProjectProps ) {
                   ))
                 } 
               />
-              {/* Single Image Carousel Display */}
               {item.images && item.images.length > 0 && (
                 <Box
                   key={`image-box-column-${index}`}
@@ -210,37 +211,13 @@ export default function Projects( { home } : ProjectProps ) {
                         fontSize: '0.875rem', 
                         color: 'gray' }}
                       >
-                      {carouselIndices[index] + 1}/{item.images.length}
+                      <CustomTypography>
+                        {carouselIndices[index] + 1}/{item.images.length}
+                      </CustomTypography>
                     </Box>
                   )}
                 </Box>
               )}
-              {/* <Box 
-                key={`thumb-up-box-${index}`}
-                sx={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '0.5rem', 
-                  margin: '1rem' 
-                }}
-              >
-                <IconButton 
-                  key={`thumb-up-iconbutton-${index}`}
-                  onClick={() => handleThumbsUp(item.ratingCode)}
-                  size="large"
-                  sx={{color: Theme.palette.secondary.dark, backgroundColor: Theme.palette.secondary.main}}
-                >
-                  <ThumbUp
-                    key={`thumb-up-icon-${index}`}
-                  />
-                </IconButton>
-                <CustomTypography 
-                  key={`typography-thumb-up-count-${index}`}
-                  variant="body2"
-                >
-                  {thumbsUpCounts[item.ratingCode || ``]}
-                </CustomTypography>
-              </Box> */}
               <ThumbUp index={index} name={item.title} ratingCode={item.ratingCode} onThumbsUp={() => handleThumbsUp(item.ratingCode)}/>
             </Box>
           </ListItem>

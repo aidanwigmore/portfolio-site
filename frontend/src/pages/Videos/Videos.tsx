@@ -158,18 +158,18 @@ export default function Videos() {
                   justifyContent: 'center',
                 },
                 '& .MuiTabs-indicator': {
-                  backgroundColor: Theme.palette.secondary.contrastText,
+                  backgroundColor: Theme.palette.primary.contrastText,
                   height: '7px',
                   borderRadius: '8px',
                 },
                 '& .MuiTab-root': {
-                  color: '#fff',
+                  color: Theme.palette.primary.contrastText,
                   backgroundColor: Theme.palette.secondary.main,
                   borderRadius: '8px',
                   boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                   '&.Mui-selected': {
                     backgroundColor: lighten(Theme.palette.secondary.main, 0.3),
-                    color: Theme.palette.secondary.contrastText,
+                    color: Theme.palette.primary.contrastText,
                     transition: 'all 0.3s ease',
                   }
                 }

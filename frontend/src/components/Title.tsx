@@ -24,6 +24,7 @@ function Title({ children } : TitleProps) {
                 backgroundColor: Theme.palette.secondary.light, 
                 borderRadius: '8px',
                 marginBottom: '-3vh',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
             }}>
                 <Box sx={{
                 padding: '2vw',
@@ -33,8 +34,9 @@ function Title({ children } : TitleProps) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                 }}>
-                <CustomTypography variant="h2" color={Theme.palette.secondary.contrastText} textAlign="center" gutterBottom>
+                <CustomTypography variant="h2" color={Theme.palette.primary.contrastText} textAlign="center" gutterBottom>
                     {children}
                 </CustomTypography>
                 </Box>

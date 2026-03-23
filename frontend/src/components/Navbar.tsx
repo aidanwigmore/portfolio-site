@@ -37,7 +37,7 @@ export default function NavBar() {
   
   return (
     <>
-      <Box sx={{ display: { justifyContent: 'center', paddingBottom: '1vw', display: 'flex', flexDirection: 'row', gap: '1rem'} }}>
+      <Box sx={{ display: { justifyContent: 'center', padding: '1vw', display: 'flex', flexDirection: 'row', gap: '1rem'} }}>
           <CustomTooltip 
             text="Navigate to the Home page?"
             children={<CustomButton component={Link} to="/">
@@ -61,13 +61,12 @@ export default function NavBar() {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
+                sx={{display: 'flex', flexDirection: 'row'}}
               >
-                <Box sx={{padding: 0, display: "flex", flexDirection: "row"}}>
-                  <CustomTypography>
-                    Media
-                  </CustomTypography>
-                  <ChevronLeft sx={{ transform: open ? 'rotate(90deg)' : 'rotate(270deg)', transition: 'transform 0.3s' }} />
-                </Box>
+                <CustomTypography>
+                  Media
+                </CustomTypography>
+                <ChevronLeft sx={{ transform: open ? 'rotate(90deg)' : 'rotate(270deg)', transition: 'transform 0.3s' }} />
               </CustomButton>
             </CustomTooltip>
             <Menu
