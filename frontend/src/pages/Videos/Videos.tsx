@@ -10,10 +10,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { CustomTypography } from "@/materials/Typography";
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import ThumbUp from '@/components/ThumbUp';
 
 import VideoData from "@/pages/Videos/VideoData";
-import { lighten } from '@mui/material/styles';
+
+import ThumbUp from '@/components/ThumbUp';
 
 import { CustomButton } from "@/materials/Button";
 import Title from '@/components/Title';
@@ -28,7 +28,7 @@ export default function Videos() {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const youtubeWidth = window.innerWidth > 600 ? "50%" : "100%";
+  // const youtubeWidth = window.innerWidth > 600 ? "50%" : "100%";
   // const youtubeHeight = window.innerWidth > 600 ? "50vw" : "30vw";
   
   const [__waelapsedTimes, setElapsedTimes] = useState<number[]>(items.map(() => 0));
@@ -139,14 +139,14 @@ export default function Videos() {
 
   return (
       <>
-      <Title children={"Videos I've Made"} />
+      <Title children={"My Youtube Videos"} />
       <TabContext value={value}>
         <Box sx={{
-          padding: '2vw',
           display: 'flex', 
           flexDirection: 'column', 
           backgroundColor: Theme.palette.primary.main, 
           borderRadius: '8px',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         }}>
           <List dense={false}>
             <TabList 
@@ -154,24 +154,26 @@ export default function Videos() {
               aria-label="tabslist" 
               sx={{ 
                 '& .MuiTabs-flexContainer': {
-                  gap: "2rem",
+                  gap: "0.5rem",
                   justifyContent: 'center',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                 },
                 '& .MuiTabs-indicator': {
-                  backgroundColor: Theme.palette.primary.contrastText,
+                  backgroundColor: Theme.palette.secondary.dark,
                   height: '7px',
                   borderRadius: '8px',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                 },
                 '& .MuiTab-root': {
                   color: Theme.palette.primary.contrastText,
-                  backgroundColor: Theme.palette.secondary.main,
+                  backgroundColor: Theme.palette.secondary.light,
                   borderRadius: '8px',
                   boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                  '&.Mui-selected': {
-                    backgroundColor: lighten(Theme.palette.secondary.main, 0.3),
-                    color: Theme.palette.primary.contrastText,
-                    transition: 'all 0.3s ease',
-                  }
+                },
+                '&.Mui-selected': {
+                  backgroundColor: Theme.palette.secondary.main,
+                  color: Theme.palette.secondary.contrastText,
+                  transition: 'all 0.3s ease',
                 }
             }}>
             {items.map((item, index) => (
@@ -193,7 +195,17 @@ export default function Videos() {
                   borderRadius: "8px",
                 }}
               >
-                <Box sx={{ marginTop: 0, width: '100%', padding: '2vw', justifyContent: 'center', alignItems: 'center', display: 'flex', backgroundColor: Theme.palette.primary.light, flexDirection: 'column', borderRadius: '8px' }}>
+                <Box 
+                  sx={{ 
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex', 
+                    backgroundColor: Theme.palette.primary.main, 
+                    flexDirection: 'column', 
+                    borderRadius: '8px',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                  }}>
                   <Typography variant="h4" gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
                     {items[currentPage - 1].title} - {items[currentPage - 1].description}
                   </Typography>
@@ -206,7 +218,19 @@ export default function Videos() {
                       }
 
                       return (
-                        <Step key={`step-${itemIndex}-${stepIndex}`} {...stepProps}>
+                        <Step
+                          sx={{
+                            '& circle': {
+                              fill: Theme.palette.secondary.light,
+                            },
+                            '&.Mui-active circle': {
+                              fill: Theme.palette.secondary.main,
+                            },
+                            '&.Mui-completed circle': {
+                              fill: Theme.palette.secondary.dark,
+                            },
+                          }}
+                         key={`step-${itemIndex}-${stepIndex}`} {...stepProps}>
                           <StepLabel>
                             <Box sx={{display: 'flex', flexDirection: 'column'}}>
                               <div>
@@ -224,8 +248,8 @@ export default function Videos() {
                       );
                     })}
                   </Stepper>
-                  <>
-                  {isCompleted ? (
+                  <Box>
+                    {isCompleted ? (
                       <React.Fragment>
                         <CustomTypography sx={{ mt: 1, mb: 1 }}>
                           You can find more videos on the {item.channel} Youtube Channel. Thank you.
@@ -263,80 +287,66 @@ export default function Videos() {
                         </Box>
                       </React.Fragment>
                     )}
-                  </>
+                  </Box>
                   
                   <Box
                     sx={{
                       display: "flex",
                       justifyContent: "center",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      width: youtubeWidth,
-                      height: { sm: '25vw' },
-
+                      flexDirection: "column"
                     }}
                   >
-                    <iframe
-                      src={item.src[currentStep % item.src.length]}
-                      title="YouTube video player"
-                      style={{
-                        borderRadius: "8px",
-                        width: "100%",
-                        height: "100%",
-                        marginTop: "1vw",
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        height: { sm: '25vw' },
                       }}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                    </Box>                    
-                    <ThumbUp index={currentStep} name={item.steps.titles[currentStep]} ratingCode={item.steps.ratingCodes[currentStep]} onThumbsUp={() => handleThumbsUp(item.steps.ratingCodes[currentStep])}/>
-                      
-                    {item.stepsLabels ? (
-                    <Accordion sx={{maxHeight: '200px', overflowY: 'auto' }}>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1-content"
-                      >
-                        <CustomTypography component="span">Click for Transcriptions</CustomTypography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        {item.stepsLabels[currentStep]}
-                      </AccordionDetails>
-                    </Accordion>
-                  ) : (
-                    ''
-                  )}
-                  </Box>
+                    >
+                      <ThumbUp
+                        index={currentStep}
+                        name={item.steps.titles[currentStep]}
+                        ratingCode={item.steps.ratingCodes[currentStep]}
+                        onThumbsUp={() => handleThumbsUp(item.steps.ratingCodes[currentStep])}
+                      />
+                      <iframe
+                        src={item.src[currentStep % item.src.length]}
+                        title="YouTube video player"
+                        style={{
+                          borderRadius: "8px",
+                          width: "100%",
+                          height: "100%",
+                          marginTop: "1vw",
+                        }}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                  
+                      </Box>                    
+                        {item.stepsLabels ? (
+                        <Accordion sx={{maxHeight: '500px', overflowY: 'auto' }}>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                          >
+                            <CustomTypography component="span">Click for Transcriptions</CustomTypography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            {item.stepsLabels[currentStep]}
+                          </AccordionDetails>
+                        </Accordion>
+                      ) : (
+                        ''
+                      )}
+                      </Box>
+                    </Box>
                   </ListItem>
             );     })}
           </List>
         </Box>
-        
-        {/* <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginBottom: 2 }}>
-          
-          <Typography variant="caption" component="span" sx={{ ml: 2 }}>
-            {items[currentPage - 1].title} - {items[currentPage - 1].description}
-          </Typography>
-          
-          <Pagination
-            count={items.length}
-            page={currentPage}
-            onChange={(_event, pageNumber) => {
-              setCurrentPage(pageNumber);
-              setActiveSteps((prev) => {
-                const newSteps = [...prev];
-                newSteps[0] = 0;
-                return newSteps;
-              });
-            }}
-            color="primary"
-          />
-          
-          <Typography variant="caption" component="span" sx={{ ml: 2 }}>
-            (Page {currentPage} of {items.length})
-          </Typography>
-        </Box> */}
       </TabContext>
       </>
   );

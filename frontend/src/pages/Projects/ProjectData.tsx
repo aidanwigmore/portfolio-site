@@ -3,7 +3,7 @@ export default [
     title: "Fxns ",
     description: [
         "Identified and resolved workflow bugs while improving frontend readability and maintainability.",
-        "Participated in bi-weekly scrum meetings with progress reporting and task tracking."
+        "Participated in bi-weekly scrum meetings with progress reporting and task tracking.",
     ],
     ratingCode: 'fxns',
     src: "https://www.fxns.ca/",
@@ -30,7 +30,7 @@ export default [
     {
     title: "TeaBank ",
     description: [
-        "Tea Purchasing Platform",
+        "Tea Purchasing Platform"+
         "Developed a full stack web application using Django and PostgreSQL/SQLite.",
         "Integrated PayPal API for secure payment processing.",
         "Implemented Google Maps API for address validation.",

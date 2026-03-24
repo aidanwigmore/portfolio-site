@@ -5,10 +5,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Tooltip } from '@mui/material';
 
 import api from '@/api/axios';
 
+import CustomTooltip from '@/materials/Tooltip';
 import { CustomTypography } from '@/materials/Typography';
 import { CustomButton } from '@/materials/Button';
 import { Comment } from '@/types/Comment';
@@ -132,7 +132,11 @@ function CommentDialog(props: CommentDialogProps) {
   );
 }
 
-export default function CommentDialogButton() {
+interface CommentDialogButtonProps {
+  icon: React.ReactNode;
+}
+
+export default function CommentDialogButton({icon}: CommentDialogButtonProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState("");
 
@@ -147,13 +151,14 @@ export default function CommentDialogButton() {
 
   return (
     <>
-      <Tooltip title="Send a message" arrow>
+      <CustomTooltip text={"Send a message?"} placement={"right"}>
         <CustomButton variant="contained" onClick={handleClickOpen}>
-          <CustomTypography>
+          <Box display='flex' flexDirection='row' gap='0.5rem'>
+            {icon}
             Message me
-          </CustomTypography>
+          </Box>
         </CustomButton>
-      </Tooltip>
+      </CustomTooltip>
       <CommentDialog
         selectedValue={selectedValue}
         open={open}

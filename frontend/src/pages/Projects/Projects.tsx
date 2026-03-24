@@ -5,11 +5,9 @@ import {
   ListItem,
   ListItemText,
   Box,
-  IconButton, 
   Modal, 
-  Tooltip, 
 } from '@mui/material';
-
+import { Card } from '@mui/material';
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -21,11 +19,17 @@ import { lighten } from '@mui/material/styles';
 import ProjectData from "@/pages/Projects/ProjectData";
 
 import { useThumbsUp } from '@/hooks/useThumbsUp';
-import ThumbUp from '@/components/ThumbUp';
 import Title from '@/components/Title';
 import { CustomTypography } from "@/materials/Typography";
 
+import CustomIconButton from '@/materials/IconButton';
+import ThumbUp from '@/components/ThumbUp';
+import LanguageTwoToneIcon from '@mui/icons-material/LanguageTwoTone';
 import Theme from "@/Theme";
+
+import { CustomDivider } from '@/materials/Divider';
+
+// import { type TooltipProps } from '@mui/material/Tooltip';
 
 interface ProjectProps {
   home?: boolean;
@@ -102,25 +106,76 @@ export default function Projects( { home } : ProjectProps ) {
             <Box 
               key={`box-item-${index}`}
               sx={{
-                display: 'flex', flexDirection: 'row',
+                display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'flex-start',
                 padding: '2vw',
                 borderRadius: '8px',
-                backgroundColor: index % 2 !== 0 ? lighten(Theme.palette.primary.light, 0.4) : Theme.palette.primary.light,
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                gap: '1rem',
               }}
             >
               <ListItemText 
                 key={`list-item-text-${index}`}
                 primary={
                   <>
-                    {item.title}
                     {
-                      <Tooltip title={item.src} arrow>
-                        <a href={item.src} target="_blank" rel="noopener noreferrer">
-                          {item.src}
-                        </a>
-                      </Tooltip>
+                      <Box display="flex" flexDirection="row" justifyContent="center" padding="1rem">
+                        <CustomTypography variant="h4" >
+                          {item.title}
+                        </CustomTypography>
+                      </Box>
                     }
+                    <CustomDivider sx={{margin: '1rem'}}/>
+                    {index > 0 && (
+                      <Card>
+                      <Box
+                        component="iframe"
+                        src={item.src}
+                        sx={{
+                          width: '50vw',
+                          height: { xs: '50vh', sm: '50vh', md: '50vh' },
+                          border: 'none',
+                          borderRadius: '8px',
+                        }}
+                      />
+                    </Card>
+                    )}
+                      
+                    { index === 0 && (
+                      <Box display="flex" flexDirection="row" justifyContent="center" padding="1rem">
+                        <CustomIconButton
+                          name={item.src}
+                          actionText={"Navigate to"}
+                          onAction={() => window.open(item.src)} 
+                          icon={
+                              <LanguageTwoToneIcon
+                              sx={{
+                                '& path': {
+                                  fill: Theme.palette.primary.main,
+                                  transition: 'fill 0.3s ease',
+                                },
+                                '& path:nth-of-type(2)': {
+                                  fill: Theme.palette.secondary.main,
+                                  transition: 'fill 0.3s ease',
+                                },
+                              }}
+                            />
+                          }
+                          ratingCode={'all'}
+                          placement={"left"}
+                        >
+                        </CustomIconButton>
+                      </Box>
+                      
+                    )
+                    }
+                    <CustomDivider sx={{margin: '1rem'}}/>
+                    {
+                      <Box display="flex" flexDirection="row" justifyContent="center" padding="1rem">
+                        <ThumbUp index={index} name={item.title} ratingCode={item.ratingCode} onThumbsUp={() => handleThumbsUp(item.ratingCode)}/>
+                      </Box>
+                    }
+                    <CustomDivider sx={{margin: '1rem'}}/>
                   </>
                 } 
                 secondary={
@@ -129,13 +184,13 @@ export default function Projects( { home } : ProjectProps ) {
                       key={`${item.title}-desc-${descIndex}`}
                       style={{
                         display: 'block',
-                        whiteSpace: 'nowrap',
+                        whiteSpace: 'wrap',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         fontSize: 'clamp(0.75rem, 2vw, 1rem)'
                       }}
                     >
-                      {home === undefined && `-${desc}<br />`}
+                      {home === undefined && `-${desc}`}
                     </span>
                   ))
                 } 
@@ -165,15 +220,29 @@ export default function Projects( { home } : ProjectProps ) {
                     }}
                   >
                     {item.images.length > 1 && (
-                      <IconButton
+                      <CustomIconButton
                         key={`image-iconbutton-prev-${index}`}
-                        onClick={() => handleCarouselPrev(index)}
-                        size="small"
-                      >
-                        <ChevronLeft 
+                        name={`Image`}
+                        actionText={"Previous"}
+                        onAction={() => handleCarouselPrev(index)}
+                        icon={<ChevronLeft 
                           key={`image-chevron-left-${index}`}
-                        />
-                      </IconButton>
+                          sx={{
+                            '& path': {
+                                fill: Theme.palette.secondary.main,
+                                transition: 'fill 0.3s ease',
+                            },
+                            '& path:nth-of-type(2)': {
+                                fill: Theme.palette.secondary.main,
+                                transition: 'fill 0.3s ease',
+                            },  
+                          }}
+                        />}
+                        size="small"
+                        ratingCode="all"
+                        placement="right"
+                      >
+                      </CustomIconButton>
                     )}
 
                     <Box
@@ -192,15 +261,29 @@ export default function Projects( { home } : ProjectProps ) {
                     />
 
                     {item.images.length > 1 && (
-                      <IconButton
+                      <CustomIconButton
+                        placement='right'
                         key={`image-iconbutton-next-${index}`}
-                        onClick={() => handleCarouselNext(index)}
+                        onAction={() => handleCarouselNext(index)}
                         size="small"
-                      >
-                        <ChevronRight 
+                        name={"Image"}
+                        actionText={"Next"}
+                        ratingCode={"all"}
+                        icon={<ChevronRight 
                           key={`image-chevron-left-${index}`}
-                        />
-                      </IconButton>
+                          sx={{
+                            '& path': {
+                                fill: Theme.palette.secondary.main,
+                                transition: 'fill 0.3s ease',
+                            },
+                            '& path:nth-of-type(2)': {
+                                fill: Theme.palette.secondary.main,
+                                transition: 'fill 0.3s ease',
+                            },  
+                          }}
+                        />}
+                      >
+                      </CustomIconButton>
                     )}
                   </Box>
                   
@@ -218,7 +301,6 @@ export default function Projects( { home } : ProjectProps ) {
                   )}
                 </Box>
               )}
-              <ThumbUp index={index} name={item.title} ratingCode={item.ratingCode} onThumbsUp={() => handleThumbsUp(item.ratingCode)}/>
             </Box>
           </ListItem>
           </Box>
@@ -229,10 +311,10 @@ export default function Projects( { home } : ProjectProps ) {
       <Modal open={openImageModal} onClose={() => setOpenImageModal(false)}>
         <Box
           sx={{
-            position: 'relative',
+            display: 'flex',
+            flexDirection: 'row',
             width: '100%',
             height: '100vw',
-            display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
@@ -251,20 +333,28 @@ export default function Projects( { home } : ProjectProps ) {
                     objectFit: 'contain',
                   }}
                 />
-                <IconButton
-                  onClick={() => setOpenImageModal(false)}
+                <CustomIconButton
+                  placement="left"
+                  onAction={() => setOpenImageModal(false)}
+                  name={`-close-icon-button${currentItem}`} 
+                  actionText={`Close ${currentItem.title}?`}
+                  icon={<Close fontSize="large" />}
+                  ratingCode={"all"}
                   sx={{ position: 'absolute', top: 20, right: 20, color: 'white' }}
                 >
-                  <Close fontSize="large" />
-                </IconButton>
+                </CustomIconButton>
 
                 {currentItem?.images && currentItem.images.length > 1 && (
-                  <IconButton
-                    onClick={handleModalPrevImage}
+                  <CustomIconButton
+                    placement={`right`}
+                    name={`Previous`}
+                    actionText={`Previous ${currentItem.title}?`}
+                    onAction={handleModalPrevImage}
+                    ratingCode={"all"}
+                    icon={<ChevronLeft fontSize="large" />}
                     sx={{ position: 'absolute', left: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}
                   >
-                    <ChevronLeft fontSize="large" />
-                  </IconButton>
+                  </CustomIconButton>
                 )}
 
                 <CustomTypography variant="body2" sx={{ position: 'absolute', bottom: 20, color: 'white' }}>
@@ -273,12 +363,16 @@ export default function Projects( { home } : ProjectProps ) {
 
                 {/* Next Button */}
                 {currentItem?.images && currentItem.images.length > 1 && (
-                  <IconButton
-                    onClick={handleModalNextImage}
+                  <CustomIconButton
+                    placement={"right"}
+                    onAction={handleModalNextImage}
+                    name={""}
+                    actionText={`Next?`}
+                    ratingCode={'all'}
+                    icon={<ChevronRight fontSize="large" />}
                     sx={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', color: 'white' }}
                   >
-                    <ChevronRight fontSize="large" />
-                  </IconButton>
+                  </CustomIconButton>
                 )}
               </>
             );

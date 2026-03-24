@@ -46,17 +46,17 @@ function Router() {
           } />
           <Route path="/mrkt-media" element={
             <PageTransition>
-              <InstagramGallery title={'MRKTBox Media'} routes={MRKTRoutes} />
+              <InstagramGallery title={'MRKTBox Appearances'} routes={MRKTRoutes}/>
             </PageTransition>
           } />
           <Route path="/film-media" element={
             <PageTransition>
-              <InstagramGallery title={'Film Media'} routes={FilmRoutes} />
+              <InstagramGallery title={'Film Media'} routes={FilmRoutes}/>
             </PageTransition>
           } />
           <Route path="/digi-media" element={
             <PageTransition>
-              <InstagramGallery title={'Digital Media'} routes={DigitalRoutes} />
+              <InstagramGallery title={'Digital Media'} routes={DigitalRoutes}/>
             </PageTransition>
           } />
         

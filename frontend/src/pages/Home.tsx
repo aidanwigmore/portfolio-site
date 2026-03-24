@@ -1,12 +1,15 @@
-import { CustomTypography } from '@/materials/Typography';
 import Videos from '@/pages/Videos/Videos';
 import Projects from '@/pages/Projects/Projects';
 import { CustomDivider } from '@/materials/Divider';
 import { motion } from 'framer-motion';
 
-import Box from '@mui/material/Box';
+import InstagramGallery from '@/pages/Gallery/InstagramGallery';
 
-import Theme from '@/Theme';
+import Title from '@/components/Title';
+
+import MRKTRoutes from '@/data/MrktRoutes';
+import FilmRoutes from '@/data/FilmRoutes';
+import DigitalRoutes from '@/data/DigitalRoutes';
 
 export default function Home() {
   const sectionVariants = {
@@ -29,54 +32,25 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
       <motion.div
-        initial="hidden"
+        initial="visible"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
-        <Box sx={{ 
-          display: 'flex',
-          justifyContent: 'center',
-          alignSelf: 'center',
-          padding: '3vw',
-          margin: '1vh',
-          marginLeft: 0,
-          marginRight: 0,
-          backgroundColor: Theme.palette.primary.light, 
-          borderRadius: '8px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-        }}>
-          <Box sx={{ 
-            padding: '3vw',
-            backgroundColor: Theme.palette.primary.main,
-            borderRadius: '8px',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-          }}>
-            <CustomTypography variant="h1" textAlign="center" gutterBottom>
-              Aidan Wigmore
-              <CustomTypography variant="body1" textAlign="center" gutterBottom>
-                Full-stack developer specializing in React and Django.
-              </CustomTypography>
-            </CustomTypography>
-          </Box>
-        </Box>
+        <Title children={"Aidan Wigmore"} />
       </motion.div>
 
       <CustomDivider />
 
-      {/* Projects Section */}
       <motion.div
-        initial="hidden"
+        initial="visible"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={contentVariants}
       >
         <Projects home={true}/>
       </motion.div>
-
-      <CustomDivider />
 
       <motion.div
         initial="hidden"
@@ -85,6 +59,37 @@ export default function Home() {
         variants={contentVariants}
       >
         <Videos/>
+      </motion.div>
+
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={contentVariants}
+      >
+        <InstagramGallery title={'MRKTBox Appearances'} routes={MRKTRoutes}/>
+      </motion.div>
+
+      <CustomDivider />
+
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={contentVariants}
+      >
+        <InstagramGallery title={'Film Media'} routes={FilmRoutes}/>
+      </motion.div>
+
+      <CustomDivider />
+
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={contentVariants}
+      >
+        <InstagramGallery title={'Digital Media'} routes={DigitalRoutes}/>
       </motion.div>
     </>
   );

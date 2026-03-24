@@ -12,36 +12,34 @@ interface TitleProps {
 
 function Title({ children } : TitleProps) {
     return (
-        <>
-            <Box sx={{ 
-                display: 'flex',
-                justifyContent: 'center',
-                alignSelf: 'center',
-                margin: '1vh',
-                marginLeft: 0,
-                marginRight: 0,
-                padding: '2vw',
-                backgroundColor: Theme.palette.secondary.light, 
-                borderRadius: '8px',
-                marginBottom: '-3vh',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-            }}>
-                <Box sx={{
+        <Box sx={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            alignSelf: 'center',
+            margin: '1vh',
+            marginLeft: 0,
+            marginRight: 0,
+            padding: '2vw',
+            backgroundColor: Theme.palette.primary.light, 
+            borderRadius: '8px',
+            marginBottom: '-3vh',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        }}>
+            <Box sx={{
                 padding: '2vw',
                 paddingBottom: '1vw',
-                backgroundColor: Theme.palette.secondary.main,
+                // backgroundColor: Theme.palette.secondary.light,
                 borderRadius: '8px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                }}>
-                <CustomTypography variant="h2" color={Theme.palette.primary.contrastText} textAlign="center" gutterBottom>
-                    {children}
-                </CustomTypography>
-                </Box>
+            }}>
+            <CustomTypography variant="h3" color={Theme.palette.primary.contrastText} textAlign="center" gutterBottom>
+                {children}
+            </CustomTypography>
             </Box>
-        </>
+        </Box>
     );
 }
 
