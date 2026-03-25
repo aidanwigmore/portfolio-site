@@ -1,4 +1,4 @@
-import api from 'axios';
+import api from '@/api/axios';  // or wherever your axios config is
 import { PortfolioImage, AccessPassword } from '@/types/Image';
 
 // Image endpoints

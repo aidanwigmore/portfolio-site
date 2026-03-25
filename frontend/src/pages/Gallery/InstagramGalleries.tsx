@@ -143,7 +143,6 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                                           flexDirection: 'column', 
                                           borderRadius: '8px',
                                           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                                          p: 3,
                                         }}
                                     >
                                       <InstagramGallery variant={true} title={itemIndex>0 ? `${gallery.title} Media` : `${gallery.title} Appearances`} routes={gallery.routes}/>
