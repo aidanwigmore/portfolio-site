@@ -151,7 +151,7 @@ export default function CommentDialogButton({icon}: CommentDialogButtonProps) {
 
   return (
     <>
-      <CustomTooltip text={"Send a message?"} placement={"right"}>
+      <CustomTooltip text={"Send a message?"} placement={"top"}>
         <CustomButton variant="contained" onClick={handleClickOpen}>
           <Box display='flex' flexDirection='row' gap='0.5rem'>
             {icon}

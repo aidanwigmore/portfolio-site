@@ -26,6 +26,8 @@ import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone
 
 import Theme from '@/Theme';
 
+import { CustomTypography } from '@/materials/Typography';
+
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -38,10 +40,32 @@ export default function NavBar() {
   
   return (
     <>
-      <Box sx={{ display: { justifyContent: 'center', padding: '1vw', display: 'flex', flexDirection: 'row', gap: '1rem'} }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexDirection: 'row', 
+        justifyContent: 'center' 
+      }}>
+        <CustomTypography variant="h1" children={"Aidan Wigmore"} />
+      </Box>
+
+      <Box sx={{ 
+        position: 'sticky',
+        top: 0,
+        zIndex: 100,
+        display: 'flex', 
+        flexDirection: 'column',
+      }}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: 'row', 
+          gap: '1rem',
+          justifyContent: 'center',
+          padding: '1vw',
+          backgroundColor: Theme.palette.primary.main,
+        }}>
           <CustomTooltip 
             text="Navigate to the Home page?"
-            placement="left"
+            placement="top"
           >
             <CustomButton component={Link} to="/">
               <Box
@@ -153,8 +177,9 @@ export default function NavBar() {
             </Menu>
           </Box>
           <CommentDialogButton icon={<QuestionAnswerTwoToneIcon/>}/>
+        </Box>
+        <CustomDivider/>
       </Box>
-      <CustomDivider/>
     </>
   )
 }

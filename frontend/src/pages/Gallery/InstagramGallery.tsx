@@ -2,23 +2,25 @@ import { Box, Pagination, MenuItem, Select, FormControl } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-import Title from '@/components/Title';
 import { CustomTypography } from '@/materials/Typography';
 import Theme from '@/Theme';
+
+import Title from '@/components/Title';
 
 import { CustomDivider } from '@/materials/Divider';
 
 interface InstagramGalleryProps {
     title: string;
+    variant?: boolean;
     routes: Array<{ [key: string]: { link: string; coord: string; developed: string; rating?: number, order?: number } }>;
 }
 
 type SortOrder = 'asc' | 'desc' | 'order';
 
-export default function InstagramGallery({ routes, title }: InstagramGalleryProps) {
+export default function InstagramGallery({ routes, title, variant }: InstagramGalleryProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState<SortOrder>('order');
-  const [itemsPerPage, setItemsPerPage] = useState(12);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
   const allPosts = Object.entries(routes[0]).map(([name, { link, coord, developed, rating, order }]) => ({
     name: name.replace(/_/g, ' '),
@@ -93,7 +95,7 @@ export default function InstagramGallery({ routes, title }: InstagramGalleryProp
 
   return (
   <>
-    <Title children={title}/>
+    <Title variant={variant} children={title} />
     <motion.div
       initial="visible"
       whileInView="visible"
@@ -130,9 +132,9 @@ export default function InstagramGallery({ routes, title }: InstagramGalleryProp
                 }
               }}
             >
+              <MenuItem value={3}>3 per page</MenuItem>
               <MenuItem value={6}>6 per page</MenuItem>
               <MenuItem value={12}>12 per page</MenuItem>
-              <MenuItem value={24}>24 per page</MenuItem>
               <MenuItem value={sortedPosts.length}>All ({sortedPosts.length})</MenuItem>
             </Select>
           </FormControl>

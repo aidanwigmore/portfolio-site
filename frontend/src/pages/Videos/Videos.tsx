@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-import { AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Typography, Tab } from '@mui/material';
+import { AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Tab } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -14,13 +14,17 @@ import TabList from '@mui/lab/TabList';
 import VideoData from "@/pages/Videos/VideoData";
 
 import ThumbUp from '@/components/ThumbUp';
-
+import CustomTooltip from '@/materials/Tooltip';
 import { CustomButton } from "@/materials/Button";
 import Title from '@/components/Title';
 import { useThumbsUp } from '@/hooks/useThumbsUp';
 import Theme from "@/Theme";
 
-export default function Videos() {
+interface VideosProps {
+  home?: boolean;
+}
+
+export default function Videos({ home }: VideosProps) {
   
   const { handleThumbsUp } = useThumbsUp('video');
 
@@ -118,24 +122,33 @@ export default function Videos() {
     });
   };
 
-  // const handlePageChange = (itemIndex: number, pageNumber: number) => {
-  //   setCurrentPage(pageNumber);
-  //   setActiveSteps((prev) => {
-  //     const newSteps = [...prev];
-  //     newSteps[itemIndex] = 0;
-  //     return newSteps;
-  //   });
-  // };
+  React.useEffect(() => {
+      const handleTabWheel = (event: Event) => {
+        const wheelEvent = event as WheelEvent;
+        if (wheelEvent.shiftKey) {
+          event.preventDefault();
+          const nextValue = wheelEvent.deltaY > 0 
+            ? Math.min(value + 1, items.length)
+            : Math.max(value - 1, 1);
+          
+          if (nextValue !== value) {
+            setValue(nextValue);
+            setCurrentPage(nextValue);
+          }
+        }
+      };
   
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setElapsedTimes((prev) =>
-        prev.map((time) => time + 0.01)
-      );
-    }, 10);
-
-    return () => clearInterval(interval);
-  }, [items.length]);
+      const tabList = document.querySelector('[aria-label="tabslist"]');
+      if (tabList) {
+        tabList.addEventListener('wheel', handleTabWheel as EventListener, { passive: false });
+      }
+  
+      return () => {
+        if (tabList) {
+          tabList.removeEventListener('wheel', handleTabWheel as EventListener);
+        }
+      };
+    }, [value, items.length]);
 
   return (
       <>
@@ -149,37 +162,42 @@ export default function Videos() {
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         }}>
           <List dense={false}>
-            <TabList 
-              onChange={handleChange} 
-              aria-label="tabslist" 
-              sx={{ 
-                '& .MuiTabs-flexContainer': {
-                  gap: "0.5rem",
-                  justifyContent: 'center',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                },
-                '& .MuiTabs-indicator': {
-                  backgroundColor: Theme.palette.secondary.dark,
-                  height: '7px',
-                  borderRadius: '8px',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                },
-                '& .MuiTab-root': {
-                  color: Theme.palette.primary.contrastText,
-                  backgroundColor: Theme.palette.secondary.light,
-                  borderRadius: '8px',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                },
-                '&.Mui-selected': {
-                  backgroundColor: Theme.palette.secondary.main,
-                  color: Theme.palette.secondary.contrastText,
-                  transition: 'all 0.3s ease',
-                }
-            }}>
-            {items.map((item, index) => (
-              <Tab key={index} label={`${item.title}`} value={index + 1} />
-            ))}
-          </TabList>
+            <CustomTooltip 
+              text="Shift + scroll or click each button" 
+              placement="top"
+            >
+              <TabList 
+                onChange={handleChange} 
+                aria-label="tabslist" 
+                sx={{ 
+                  '& .MuiTabs-flexContainer': {
+                    gap: "0.5rem",
+                    justifyContent: 'center',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                  },
+                  '& .MuiTabs-indicator': {
+                    backgroundColor: Theme.palette.secondary.dark,
+                    height: '7px',
+                    borderRadius: '8px',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                  },
+                  '& .MuiTab-root': {
+                    color: Theme.palette.primary.contrastText,
+                    backgroundColor: Theme.palette.secondary.light,
+                    borderRadius: '8px',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: Theme.palette.secondary.main,
+                    color: Theme.palette.secondary.contrastText,
+                    transition: 'all 0.3s ease',
+                  }
+              }}>
+              {items.map((item, index) => (
+                <Tab key={index} label={`${item.title}`} value={index + 1} />
+              ))}
+            </TabList>
+          </CustomTooltip>
           {items
             .filter((item) => items.indexOf(item) === currentPage - 1)
             .map((item, __index) => {
@@ -206,9 +224,9 @@ export default function Videos() {
                     borderRadius: '8px',
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                   }}>
-                  <Typography variant="h4" gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
+                  <CustomTypography variant={home ? "h6" : "h4"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
                     {items[currentPage - 1].title} - {items[currentPage - 1].description}
-                  </Typography>
+                  </CustomTypography>
                   <Stepper activeStep={currentStep}>
                     {item.steps.titles.map((label, stepIndex) => {
                       const stepProps: { completed?: boolean } = {};
