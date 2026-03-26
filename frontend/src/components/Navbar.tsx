@@ -9,7 +9,6 @@ import CommentDialogButton from '@/components/CommentForm';
 import MenuItem from '@mui/material/MenuItem';
 
 import { CustomButton } from '@/materials/Button';
-import { CustomDivider } from '@/materials/Divider';
 import Menu from '@mui/material/Menu';
 import { ChevronLeft } from '@mui/icons-material';
 import SecurityIcon from '@mui/icons-material/Security';
@@ -26,8 +25,6 @@ import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone
 
 import Theme from '@/Theme';
 
-import { CustomTypography } from '@/materials/Typography';
-
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -40,14 +37,6 @@ export default function NavBar() {
   
   return (
     <>
-      <Box sx={{ 
-        display: 'flex', 
-        flexDirection: 'row', 
-        justifyContent: 'center' 
-      }}>
-        <CustomTypography variant="h1" children={"Aidan Wigmore"} />
-      </Box>
-
       <Box sx={{ 
         position: 'sticky',
         top: 0,
@@ -178,7 +167,6 @@ export default function NavBar() {
           </Box>
           <CommentDialogButton icon={<QuestionAnswerTwoToneIcon/>}/>
         </Box>
-        <CustomDivider/>
       </Box>
     </>
   )

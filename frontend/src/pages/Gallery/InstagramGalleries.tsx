@@ -71,15 +71,16 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
 
     return (
         <>
-            <Title children={"Instagram Media"}/>
             <TabContext value={value}>
                 <Box sx={{
                     display: 'flex', 
                     flexDirection: 'column', 
-                    backgroundColor: Theme.palette.primary.main, 
+                    backgroundColor: Theme.palette.secondary.light, 
                     borderRadius: '8px',
+                    marginTop: '2vh',
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                 }}>
+                    <Title children={"Instagram Media"}/>
                     <List dense={false}>
                         <CustomTooltip 
                             text="Shift + scroll or click each tab" 
@@ -94,23 +95,6 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                                     justifyContent: 'center',
                                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                                   },
-                                  '& .MuiTabs-indicator': {
-                                    backgroundColor: Theme.palette.secondary.dark,
-                                    height: '7px',
-                                    borderRadius: '8px',
-                                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                                  },
-                                  '& .MuiTab-root': {
-                                    color: Theme.palette.primary.contrastText,
-                                    backgroundColor: Theme.palette.secondary.light,
-                                    borderRadius: '8px',
-                                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                                  },
-                                  '&.Mui-selected': {
-                                    backgroundColor: Theme.palette.secondary.main,
-                                    color: Theme.palette.secondary.contrastText,
-                                    transition: 'all 0.3s ease',
-                                  }
                               }}
                             >
                               {galleries.map((gallery, index) => (
@@ -128,7 +112,6 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                                   <ListItem
                                     key={itemIndex}
                                     sx={{
-                                        backgroundColor: Theme.palette.primary.main,
                                         borderRadius: "8px",
                                         width: '100%',
                                     }}
@@ -139,7 +122,6 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                                           justifyContent: 'center',
                                           alignItems: 'center',
                                           display: 'flex', 
-                                          backgroundColor: Theme.palette.primary.main, 
                                           flexDirection: 'column', 
                                           borderRadius: '8px',
                                           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',

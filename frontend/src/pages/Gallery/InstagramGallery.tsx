@@ -7,8 +7,6 @@ import Theme from '@/Theme';
 
 import Title from '@/components/Title';
 
-import { CustomDivider } from '@/materials/Divider';
-
 interface InstagramGalleryProps {
     title: string;
     variant?: boolean;
@@ -102,6 +100,61 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
+      <Box display="flex" flexDirection="row" gap={2}>
+        <FormControl sx={{ mb: 3, minWidth: 200 }}>
+          <Select
+            value={itemsPerPage}
+            onChange={handleItemsPerPageChange}
+            sx={{
+              backgroundColor: Theme.palette.primary.main,
+              color: Theme.palette.secondary.dark,
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: Theme.palette.secondary.main,
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: Theme.palette.secondary.main,
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: Theme.palette.secondary.main,
+              },
+              '& .MuiSvgIcon-root': {
+                color: Theme.palette.secondary.dark,
+              }
+            }}
+          >
+            <MenuItem value={3}>3 per page</MenuItem>
+            <MenuItem value={6}>6 per page</MenuItem>
+            <MenuItem value={12}>12 per page</MenuItem>
+            <MenuItem value={sortedPosts.length}>All ({sortedPosts.length})</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ mb: 3, minWidth: 200 }}>
+          <Select
+            value={sortOrder}
+            onChange={handleSortChange}
+            sx={{
+              backgroundColor: Theme.palette.primary.main,
+              color: Theme.palette.secondary.dark,
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: Theme.palette.secondary.main,
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: Theme.palette.secondary.main,
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: Theme.palette.secondary.main,
+              },
+              '& .MuiSvgIcon-root': {
+                color: Theme.palette.secondary.dark,
+              }
+            }}
+          >
+            <MenuItem value="order">Original Order</MenuItem>
+            <MenuItem value="desc">Date: New to Old</MenuItem>
+            <MenuItem value="asc">Date: Old to New</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
       <Box sx={{ 
         p: 3, 
         backgroundColor: Theme.palette.primary.light, 
@@ -110,62 +163,6 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-        <Box display="flex" flexDirection="row" gap={2}>
-          <FormControl sx={{ mb: 3, minWidth: 200 }}>
-            <Select
-              value={itemsPerPage}
-              onChange={handleItemsPerPageChange}
-              sx={{
-                backgroundColor: Theme.palette.primary.main,
-                color: Theme.palette.secondary.dark,
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: Theme.palette.secondary.main,
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: Theme.palette.secondary.main,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: Theme.palette.secondary.main,
-                },
-                '& .MuiSvgIcon-root': {
-                  color: Theme.palette.secondary.dark,
-                }
-              }}
-            >
-              <MenuItem value={3}>3 per page</MenuItem>
-              <MenuItem value={6}>6 per page</MenuItem>
-              <MenuItem value={12}>12 per page</MenuItem>
-              <MenuItem value={sortedPosts.length}>All ({sortedPosts.length})</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{ mb: 3, minWidth: 200 }}>
-            <Select
-              value={sortOrder}
-              onChange={handleSortChange}
-              sx={{
-                backgroundColor: Theme.palette.primary.main,
-                color: Theme.palette.secondary.dark,
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: Theme.palette.secondary.main,
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: Theme.palette.secondary.main,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: Theme.palette.secondary.main,
-                },
-                '& .MuiSvgIcon-root': {
-                  color: Theme.palette.secondary.dark,
-                }
-              }}
-            >
-              <MenuItem value="order">Original Order</MenuItem>
-              <MenuItem value="desc">Date: New to Old</MenuItem>
-              <MenuItem value="asc">Date: Old to New</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-
         {totalPages > 1 && (
           <Box sx={{
             display: 'flex',
@@ -193,7 +190,6 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
             />
           </Box>
         )}
-        <CustomDivider sx={{margin: '1rem', width: '60rem'}}/>
         <Box sx={{
           display: "grid",
           gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: '1fr 1fr 1fr' },
@@ -220,7 +216,6 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
                     {post.developed}
                   </CustomTypography>
                 )}
-                <CustomDivider/>
                 {post.coord && (
                   <CustomTypography 
                     variant="caption" 
@@ -261,7 +256,6 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
             </motion.div>
           ))}
         </Box>
-        <CustomDivider sx={{margin: '1rem', width: '60rem'}}/>
         {totalPages > 1 && (
           <Box sx={{
             display: 'flex',

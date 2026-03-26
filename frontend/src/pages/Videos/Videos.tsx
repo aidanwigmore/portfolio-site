@@ -152,47 +152,32 @@ export default function Videos({ home }: VideosProps) {
 
   return (
       <>
-      <Title children={"My Youtube Videos"} />
       <TabContext value={value}>
         <Box sx={{
           display: 'flex', 
           flexDirection: 'column', 
-          backgroundColor: Theme.palette.primary.main, 
+          backgroundColor: Theme.palette.secondary.light, 
           borderRadius: '8px',
+          marginTop: '2vh',
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         }}>
+          <Title children={"My Youtube Videos"} />
           <List dense={false}>
             <CustomTooltip 
               text="Shift + scroll or click each button" 
               placement="top"
             >
               <TabList 
+                id={'video-tabslist'}
                 onChange={handleChange} 
-                aria-label="tabslist" 
-                sx={{ 
-                  '& .MuiTabs-flexContainer': {
+                aria-label="video-tabslist"
+                sx={{'& .MuiTabs-flexContainer': {
                     gap: "0.5rem",
                     justifyContent: 'center',
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                  },
-                  '& .MuiTabs-indicator': {
-                    backgroundColor: Theme.palette.secondary.dark,
-                    height: '7px',
-                    borderRadius: '8px',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                  },
-                  '& .MuiTab-root': {
-                    color: Theme.palette.primary.contrastText,
-                    backgroundColor: Theme.palette.secondary.light,
-                    borderRadius: '8px',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                  },
-                  '&.Mui-selected': {
-                    backgroundColor: Theme.palette.secondary.main,
-                    color: Theme.palette.secondary.contrastText,
-                    transition: 'all 0.3s ease',
-                  }
-              }}>
+                  }, 
+                }}
+              >
               {items.map((item, index) => (
                 <Tab key={index} label={`${item.title}`} value={index + 1} />
               ))}
@@ -209,19 +194,25 @@ export default function Videos({ home }: VideosProps) {
               <ListItem
                 key={itemIndex}
                 sx={{
-                  backgroundColor: Theme.palette.primary.main,
+                  backgroundColor: Theme.palette.secondary.light,
                   borderRadius: "8px",
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 2,
                 }}
               >
                 <Box 
-                  sx={{ 
-                    width: '100%',
+                  sx={{
                     justifyContent: 'center',
                     alignItems: 'center',
                     display: 'flex', 
-                    backgroundColor: Theme.palette.primary.main, 
+                    backgroundColor: Theme.palette.primary.light,
                     flexDirection: 'column', 
                     borderRadius: '8px',
+                    padding: '1rem',
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                   }}>
                   <CustomTypography variant={home ? "h6" : "h4"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>

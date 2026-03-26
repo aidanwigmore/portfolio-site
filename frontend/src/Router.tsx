@@ -14,6 +14,9 @@ import InstagramGallery from '@/pages/Gallery/InstagramGallery';
 import MRKTRoutes from '@/data/MrktRoutes';
 import FilmRoutes from '@/data/FilmRoutes';
 import DigitalRoutes from '@/data/DigitalRoutes';
+import Box from "@mui/material/Box";
+
+import Theme from '@/Theme';
 
 function Router() {
   
@@ -46,20 +49,61 @@ function Router() {
           } />
           <Route path="/mrkt-media" element={
             <PageTransition>
-              <InstagramGallery title={'MRKTBox Appearances'} routes={MRKTRoutes}/>
+              <Box 
+                  sx={{ 
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    borderRadius: '8px',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                    backgroundColor: Theme.palette.secondary.light,
+                    p: 3,
+                  }}
+              >
+                <InstagramGallery title={'MRKTBox Appearances'} routes={MRKTRoutes}/>
+              </Box>
             </PageTransition>
           } />
           <Route path="/film-media" element={
             <PageTransition>
-              <InstagramGallery title={'Film Media'} routes={FilmRoutes}/>
+              <Box 
+                  sx={{ 
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    borderRadius: '8px',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                    backgroundColor: Theme.palette.secondary.light,
+                    p: 3,
+                  }}
+              >
+                <InstagramGallery title={'Film Media'} routes={FilmRoutes}/>
+              </Box>
             </PageTransition>
           } />
           <Route path="/digi-media" element={
             <PageTransition>
-              <InstagramGallery title={'Digital Media'} routes={DigitalRoutes}/>
+              <Box 
+                  sx={{ 
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    borderRadius: '8px',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                    backgroundColor: Theme.palette.secondary.light,
+                    p: 3,
+                  }}
+              >
+                <InstagramGallery title={'Digital Media'} routes={DigitalRoutes}/>
+              </Box>
             </PageTransition>
           } />
-        
         </Routes>
       </AnimatePresence>
     </>

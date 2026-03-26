@@ -7,6 +7,7 @@ interface CustomTypographyProps extends TypographyProps {
     variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'button' | 'caption' | 'overline';
     children: React.ReactNode;
     gutterBottom?: boolean;
+    color?: string;
 }
 
 export const CustomTypography: React.FC<CustomTypographyProps> = ({
@@ -14,6 +15,7 @@ export const CustomTypography: React.FC<CustomTypographyProps> = ({
     children,
     gutterBottom = false,
     sx = {},
+    color,
     ...props
 }) => {
     const isInlineVariant = variant === 'button' || variant === 'caption' || variant === 'overline';
@@ -23,7 +25,7 @@ export const CustomTypography: React.FC<CustomTypographyProps> = ({
             variant={variant}
             gutterBottom={gutterBottom}
             sx={{
-                color: Theme.palette.secondary.main,
+                color: color ? color : Theme.palette.primary.contrastText,
                 ...(isInlineVariant && { display: 'block' }),
                 ...sx,
             }}
