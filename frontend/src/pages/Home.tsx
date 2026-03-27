@@ -26,7 +26,8 @@ export default function Home() {
       opacity: 1, 
       y: 0,
       transition: { duration: 0.8 }
-    }
+    },
+    exit: { opacity: 0, y: 50 }
   };
 
   const contentVariants = {
@@ -35,7 +36,8 @@ export default function Home() {
       opacity: 1, 
       y: 0,
       transition: { duration: 1, delay: 0.2 }
-    }
+    },
+    exit: { opacity: 0, y: 100 }
   };
 
   const [homeImages, setHomeImages] = useState<PortfolioImage[]>([]);
@@ -76,18 +78,14 @@ export default function Home() {
   }, [currentImageIndex, homeImages.length]);
 
   return (
-    <>
       <Box
         sx={{
           backgroundColor: Theme.palette.secondary.light,
           padding: '1rem',
-          borderRadius: '8px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: '2vh',
+          justifyContent: 'center'
         }}
       >
         <Title children={
@@ -98,24 +96,21 @@ export default function Home() {
         }
         />
             
-      </Box>
       <motion.div
-        initial="visible"
+        initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        exit="exit"
+        viewport={{ once: false, amount: 0.2 }}
         variants={sectionVariants}
+        style={{ margin: '20px 0' }}
       >
         <Box sx={{ 
           display: 'flex', 
           flexDirection: 'column', 
           textAlign: 'center',
           backgroundColor: Theme.palette.secondary.light,
-          borderRadius: '8px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-          p: 4,
           gap: 2,
         }}>
-        
           <Box id={'image_slideshow'} sx={{
             display: 'flex', 
             justifyContent: 'center',
@@ -148,8 +143,10 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        exit="exit"
+        viewport={{ once: false, amount: 0.2 }}
         variants={sectionVariants}
+        style={{ margin: '20px 0' }}
       >
         <Projects home={true}/>
       </motion.div>
@@ -157,8 +154,10 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        exit="exit"
+        viewport={{ once: false, amount: 0.2 }}
         variants={contentVariants}
+        style={{ margin: '20px 0' }}
       >
         <Videos home={true}/>
       </motion.div>
@@ -166,11 +165,13 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        exit="exit"
+        viewport={{ once: false, amount: 0.2 }}
         variants={contentVariants}
+        style={{ margin: '20px 0' }}
       >
         <InstagramGalleries/>
       </motion.div>
-    </>
+    </Box>
   );
 }

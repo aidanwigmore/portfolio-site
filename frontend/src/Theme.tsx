@@ -3,7 +3,7 @@ import { lighten, darken } from '@mui/material/styles';
 
 const colors = {
     primary: '#FFFFFF',
-    secondary: '#485ae3',
+    secondary: '#00b4d7',
     error: '#F23901',
     warning: '#EBAD03',
     info: '#F20386',
@@ -51,8 +51,8 @@ export default (
                 contrastText: '#ffffff',
             },
             background: {
-                default: '#ebd488',
-                paper: '#ffffff',
+                default: '#00b4d7',
+                paper: '#00b4d7',
             },
             text: {
                 primary: '#030503',

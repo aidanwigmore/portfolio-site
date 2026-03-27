@@ -154,12 +154,9 @@ export default function Videos({ home }: VideosProps) {
       <>
       <TabContext value={value}>
         <Box sx={{
-          display: 'flex', 
-          flexDirection: 'column', 
+          display: 'flex',
+          flexDirection: 'column',
           backgroundColor: Theme.palette.secondary.light, 
-          borderRadius: '8px',
-          marginTop: '2vh',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         }}>
           <Title children={"My Youtube Videos"} />
           <List dense={false}>
@@ -174,7 +171,6 @@ export default function Videos({ home }: VideosProps) {
                 sx={{'& .MuiTabs-flexContainer': {
                     gap: "0.5rem",
                     justifyContent: 'center',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                   }, 
                 }}
               >
@@ -196,7 +192,6 @@ export default function Videos({ home }: VideosProps) {
                 sx={{
                   backgroundColor: Theme.palette.secondary.light,
                   borderRadius: "8px",
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                   display: "flex",
                   justifyContent: "center",
                   flexDirection: "column",

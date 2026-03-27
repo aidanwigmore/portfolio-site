@@ -77,13 +77,12 @@ export default function Projects( { home } : ProjectProps ) {
     <>
       <TabContext value={value}>
         <Box sx={{
-          display: 'flex', 
+          display: 'flex',
+          minHeight: '78vh',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: Theme.palette.secondary.light, 
-          borderRadius: '8px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
         }}>
           <Title children={"Projects I've Worked On"} />
           <List dense={false}>

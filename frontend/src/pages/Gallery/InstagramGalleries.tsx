@@ -76,9 +76,6 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                     display: 'flex', 
                     flexDirection: 'column', 
                     backgroundColor: Theme.palette.secondary.light, 
-                    borderRadius: '8px',
-                    marginTop: '2vh',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                 }}>
                     <Title children={"Instagram Media"}/>
                     <List dense={false}>
@@ -93,7 +90,6 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                                   '& .MuiTabs-flexContainer': {
                                     gap: "0.5rem",
                                     justifyContent: 'center',
-                                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                                   },
                               }}
                             >
@@ -123,8 +119,6 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                                           alignItems: 'center',
                                           display: 'flex', 
                                           flexDirection: 'column', 
-                                          borderRadius: '8px',
-                                          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                                         }}
                                     >
                                       <InstagramGallery variant={true} title={itemIndex>0 ? `${gallery.title} Media` : `${gallery.title} Appearances`} routes={gallery.routes}/>

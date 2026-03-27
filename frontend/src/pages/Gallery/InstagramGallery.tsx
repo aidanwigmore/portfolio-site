@@ -93,7 +93,10 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
 
   return (
   <>
-    <Title variant={variant} children={title} />
+    <Title variant={variant} children={(
+      <CustomTypography variant="h4" children={title}/>
+    )}
+    />
     <motion.div
       initial="visible"
       whileInView="visible"
