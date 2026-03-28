@@ -6,13 +6,12 @@ import { motion } from 'framer-motion';
 
 // import InstagramGallery from '@/pages/Gallery/InstagramGallery';
 import InstagramGalleries from '@/pages/Gallery/InstagramGalleries';
-import Title from '@/components/Title';
 
 // import MRKTRoutes from '@/data/MrktRoutes';
 // import FilmRoutes from '@/data/FilmRoutes';
 // import DigitalRoutes from '@/data/DigitalRoutes';
 
-import { CustomTypography } from '@/materials/Typography';
+// import { CustomTypography } from '@/materials/Typography';
 import Theme from '@/Theme';
 
 import Box from '@mui/material/Box';
@@ -87,22 +86,14 @@ export default function Home() {
           alignItems: 'center',
           justifyContent: 'center'
         }}
-      >
-        <Title children={
-          <>
-            Aidan Wigmore
-            <CustomTypography children={"Full stack web developer with a passion for mixing technology and creativity."}/>
-          </>
-        }
-        />
-            
+      >     
       <motion.div
         initial="hidden"
         whileInView="visible"
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={sectionVariants}
-        style={{ margin: '20px 0' }}
+        style={{ margin: '100px 0' }}
       >
         <Box sx={{ 
           display: 'flex', 
@@ -146,7 +137,7 @@ export default function Home() {
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={sectionVariants}
-        style={{ margin: '20px 0' }}
+        style={{ margin: '100px 0' }}
       >
         <Projects home={true}/>
       </motion.div>
@@ -157,7 +148,7 @@ export default function Home() {
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={contentVariants}
-        style={{ margin: '20px 0' }}
+        style={{ margin: '100px 0' }}
       >
         <Videos home={true}/>
       </motion.div>
@@ -168,7 +159,7 @@ export default function Home() {
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={contentVariants}
-        style={{ margin: '20px 0' }}
+        style={{ margin: '100px 0' }}
       >
         <InstagramGalleries/>
       </motion.div>

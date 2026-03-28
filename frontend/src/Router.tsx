@@ -18,13 +18,18 @@ import Box from "@mui/material/Box";
 
 import Theme from '@/Theme';
 
-function Router() {
+interface RouterProps {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+}
+
+function Router({ isDarkMode, toggleTheme }: RouterProps) {
   
   const location = useLocation();
 
   return (
     <>
-      <Navbar />
+      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={

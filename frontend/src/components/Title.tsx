@@ -8,20 +8,20 @@ import { CustomTypography } from '@/materials/Typography';
 interface TitleProps {
     children? : React.ReactNode;
     color? : string;
-    variant?: boolean;
+    variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'button' | 'caption' | 'overline';
 }
 
-function Title({ children, variant } : TitleProps) {
+function Title({ children, variant, color } : TitleProps) {
     return (
         <Box sx={{ 
             display: 'flex',
             justifyContent: 'center',
             alignSelf: 'center',
-            backgroundColor: Theme.palette.secondary.light,
+            backgroundColor: {color},
         }}>
             <Box sx={{
             }}>
-            <CustomTypography variant={variant!==true ? "h2" : "caption"} color={Theme.palette.primary.contrastText} textAlign="center" gutterBottom>
+            <CustomTypography variant={variant} color={Theme.palette.primary.contrastText} textAlign="center" gutterBottom>
                 {children}
             </CustomTypography>
             </Box>

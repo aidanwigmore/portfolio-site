@@ -121,7 +121,7 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                                           flexDirection: 'column', 
                                         }}
                                     >
-                                      <InstagramGallery variant={true} title={itemIndex>0 ? `${gallery.title} Media` : `${gallery.title} Appearances`} routes={gallery.routes}/>
+                                      <InstagramGallery title={itemIndex>0 ? `${gallery.title} Media` : `${gallery.title} Appearances`} routes={gallery.routes}/>
                                     </Box>
                                   </ListItem>
                               );

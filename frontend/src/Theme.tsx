@@ -10,59 +10,57 @@ const colors = {
     success: '#7AEB01',
 }
 
-export default (
-
-    createTheme({
-        palette: {
-            primary: {
-                main: colors.primary, 
-                light: lighten(colors.primary, 0.4),
-                dark: darken(colors.primary, 0.4),
-                contrastText: '#030503',
-            },
-            secondary: {
-                main: colors.secondary, 
-                light: lighten(colors.secondary, 0.4),
-                dark: darken(colors.secondary, 0.4),
-                contrastText: '#ffffff',
-            },
-            error: {
-                main: colors.error, 
-                light: lighten(colors.error, 0.4),
-                dark: darken(colors.error, 0.4),
-                contrastText: '#ffffff',
-            },
-            warning: {
-                main: colors.warning, 
-                light: lighten(colors.warning, 0.4),
-                dark: darken(colors.warning, 0.4),
-                contrastText: '#ffffff',
-            },
-            info: {
-                main: colors.info, 
-                light: lighten(colors.info, 0.4),
-                dark: darken(colors.info, 0.4),
-                contrastText: '#ffffff',
-            },
-            success: {
-                main: colors.success, 
-                light: lighten(colors.success, 0.4),
-                dark: darken(colors.success, 0.4),
-                contrastText: '#ffffff',
-            },
-            background: {
-                default: '#00b4d7',
-                paper: '#00b4d7',
-            },
-            text: {
-                primary: '#030503',
-                secondary: '#030503', 
-            },
+const lightTheme = createTheme({
+    palette: {
+        primary: {
+            main: '#030503',
+            light: lighten(colors.primary, 0.4),
+            dark: darken(colors.primary, 0.4),
+            contrastText: '#030503',
         },
-        components: {
-            MuiTypography: {
-            defaultProps: {
-                variantMapping: {
+        secondary: {
+            main: colors.secondary,
+            light: lighten(colors.secondary, 0.4),
+            dark: darken(colors.secondary, 0.4),
+            contrastText: '#000000',
+        },
+        error: {
+            main: colors.error,
+            light: lighten(colors.error, 0.4),
+            dark: darken(colors.error, 0.4),
+            contrastText: '#ffffff',
+        },
+        warning: {
+            main: colors.warning,
+            light: lighten(colors.warning, 0.4),
+            dark: darken(colors.warning, 0.4),
+            contrastText: '#000000',
+        },
+        info: {
+            main: colors.info,
+            light: lighten(colors.info, 0.4),
+            dark: darken(colors.info, 0.4),
+            contrastText: '#ffffff',
+        },
+        success: {
+            main: colors.success,
+            light: lighten(colors.success, 0.4),
+            dark: darken(colors.success, 0.4),
+            contrastText: '#000000',
+        },
+        background: {
+            default: '#2a2a2a',
+            paper: '#2a2a2a',
+        },
+        text: {
+            primary: '#ffffff',
+            secondary: '#cccccc',
+        },
+    },
+    components: {
+        MuiTypography: {
+        defaultProps: {
+            variantMapping: {
                 h1: 'h1',
                 h2: 'h2',
                 h3: 'h3',
@@ -71,9 +69,76 @@ export default (
                 h6: 'h6',
                 subtitle1: 'h2',
                 subtitle2: 'h2',
-                },
-            },
             },
         },
-    })
-)
+        },
+    },
+})
+
+const darkTheme = createTheme({
+    palette: {
+        primary: {
+            main: '#030503',
+            light: lighten(colors.primary, 0.4),
+            dark: darken(colors.primary, 0.4),
+            contrastText: '#ffffff',
+        },
+        secondary: {
+            main: colors.secondary,
+            light: lighten(colors.secondary, 0.4),
+            dark: darken(colors.secondary, 0.4),
+            contrastText: '#000000',
+        },
+        error: {
+            main: colors.error,
+            light: lighten(colors.error, 0.4),
+            dark: darken(colors.error, 0.4),
+            contrastText: '#ffffff',
+        },
+        warning: {
+            main: colors.warning,
+            light: lighten(colors.warning, 0.4),
+            dark: darken(colors.warning, 0.4),
+            contrastText: '#000000',
+        },
+        info: {
+            main: colors.info,
+            light: lighten(colors.info, 0.4),
+            dark: darken(colors.info, 0.4),
+            contrastText: '#ffffff',
+        },
+        success: {
+            main: colors.success,
+            light: lighten(colors.success, 0.4),
+            dark: darken(colors.success, 0.4),
+            contrastText: '#000000',
+        },
+        background: {
+            default: '#2a2a2a',
+            paper: '#2a2a2a',
+        },
+        text: {
+            primary: '#ffffff',
+            secondary: '#cccccc',
+        },
+    },
+    components: {
+        MuiTypography: {
+        defaultProps: {
+            variantMapping: {
+                h1: 'h1',
+                h2: 'h2',
+                h3: 'h3',
+                h4: 'h4',
+                h5: 'h5',
+                h6: 'h6',
+                subtitle1: 'h2',
+                subtitle2: 'h2',
+            },
+        },
+        },
+    },
+})
+
+export { lightTheme, darkTheme }
+export default lightTheme;

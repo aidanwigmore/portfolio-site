@@ -9,7 +9,7 @@ import Title from '@/components/Title';
 
 interface InstagramGalleryProps {
     title: string;
-    variant?: boolean;
+    variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'button' | 'caption' | 'overline';
     routes: Array<{ [key: string]: { link: string; coord: string; developed: string; rating?: number, order?: number } }>;
 }
 
@@ -93,10 +93,9 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
 
   return (
   <>
-    <Title variant={variant} children={(
-      <CustomTypography variant="h4" children={title}/>
-    )}
-    />
+    <Title variant={variant}>
+      {title}
+    </Title>
     <motion.div
       initial="visible"
       whileInView="visible"

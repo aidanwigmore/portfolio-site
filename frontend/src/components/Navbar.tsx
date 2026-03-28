@@ -23,14 +23,28 @@ import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import PermMediaTwoToneIcon from '@mui/icons-material/PermMediaTwoTone';
 import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
 
+import { CustomTypography } from '@/materials/Typography';
+
+import IconButton from '@mui/material/IconButton';
+
+import ContrastTwoToneIcon from '@mui/icons-material/ContrastTwoTone';
+
+// import Title from '@/components/Title';
+
 import Theme from '@/Theme';
 
-export default function NavBar() {
+interface NavBarProps {
+  isDarkMode: boolean;
+  toggleTheme: () => void;
+}
+
+export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -40,133 +54,185 @@ export default function NavBar() {
       <Box sx={{ 
         position: 'sticky',
         top: 0,
-        zIndex: 100,
         display: 'flex', 
-        flexDirection: 'column',
+        flexDirection: 'row',
+        backgroundColor: Theme.palette.secondary.light,
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
       }}>
-        <Box sx={{ 
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            whiteSpace: 'nowrap',
+            marginLeft: '2rem',
+            marginRight: '2rem',
+          }}
+        >
+          <CustomTypography color={Theme.palette.primary.contrastText} variant="h6" children={'Aidan Wigmore'}/>
+        </Box>
+        <Box
+          sx={{position: 'relative',
+          top: 0,
           display: 'flex', 
-          flexDirection: 'row', 
-          gap: '1rem',
+          flexDirection: 'row',
+          backgroundColor: Theme.palette.secondary.light,
+          padding: '0.5rem',
           justifyContent: 'center',
-          padding: '1vw',
-          backgroundColor: Theme.palette.primary.main,
-        }}>
-          <CustomTooltip 
-            text="Navigate to the Home page?"
-            placement="top"
+          alignItems: 'center',}}
+        > 
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              gap: '0.5rem',
+            }}
           >
-            <CustomButton component={Link} to="/">
-              <Box
-                sx={{
-                  display: 'flex', 
-                  flexDirection: 'row', gap: '0.5rem'
-              }}>
-                <HomeTwoToneIcon/>
-                Home
-              </Box>
-            </CustomButton>
-          </CustomTooltip>
-          <CustomTooltip text="Navigate to the Project page?" placement='top'>
-            <CustomButton component={Link} to="/projects">
-              <Box
-                sx={{
-                  display: 'flex', 
-                  flexDirection: 'row', 
-                  gap: '0.5rem',
-              }}>
-                <AccountTreeTwoToneIcon/>
-                Projects
-              </Box>
-            </CustomButton>
-          </CustomTooltip>
-          <Box>
-            <CustomTooltip text="Navigate to Media pages?" placement='top'>
-              <CustomButton
-                id="basic-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-                sx={{
-                  display: 'flex', 
-                  flexDirection: 'row', 
-                  gap: '0.5rem',
-                  '&: hover': {
-                    color: Theme.palette.primary.main,
+            <CustomTooltip 
+              text="Navigate to the Home page?"
+              placement="top"
+            >
+              <CustomButton component={Link} to="/">
+                <Box
+                  sx={{
+                    display: 'flex', 
+                    flexDirection: 'row', gap: '0.5rem',
+                }}>
+                  <HomeTwoToneIcon/>
+                  Home
+                </Box>
+              </CustomButton>
+            </CustomTooltip>
+            <CustomTooltip text="Navigate to the Project page?" placement='top'>
+              <CustomButton component={Link} to="/projects">
+                <Box
+                  sx={{
+                    display: 'flex', 
+                    flexDirection: 'row', 
+                    gap: '0.5rem',
+                }}>
+                  <AccountTreeTwoToneIcon/>
+                  Projects
+                </Box>
+              </CustomButton>
+            </CustomTooltip>
+            <Box>
+              <CustomTooltip text="Navigate to Media pages?" placement='top'>
+                <CustomButton
+                  id="basic-button"
+                  aria-controls={open ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick}
+                  sx={{
+                    display: 'flex', 
+                    flexDirection: 'row', 
+                    gap: '0.5rem',
+                    '&: hover': {
+                      color: Theme.palette.primary.main,
+                    },
+                  }}
+                >
+                  <PermMediaTwoToneIcon/>
+                  Media
+                  <ChevronLeft sx={{ transform: open ? 'rotate(90deg)' : 'rotate(270deg)', transition: 'transform 0.3s' }} />
+                </CustomButton>
+              </CustomTooltip>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                slotProps={{
+                  list: {
+                    'aria-labelledby': 'basic-button',
                   },
                 }}
               >
-                <PermMediaTwoToneIcon/>
-                Media
-                <ChevronLeft sx={{ transform: open ? 'rotate(90deg)' : 'rotate(270deg)', transition: 'transform 0.3s' }} />
-              </CustomButton>
-            </CustomTooltip>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              slotProps={{
-                list: {
-                  'aria-labelledby': 'basic-button',
-                },
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <CustomTooltip text="View My Youtube Videos?" placement="right">
-                  <CustomButton component={Link} to="/videos">
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <YouTubeIcon/>
-                      Youtube Videos
-                    </Box>
-                  </CustomButton>
-                </CustomTooltip>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomTooltip text="View MRKTBox Instagram Gallery?" placement="right">
-                  <CustomButton component={Link} to="/mrkt-media">
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <InstagramIcon/>
-                      MRKTBox
-                    </Box>
-                  </CustomButton>
-                </CustomTooltip>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomTooltip text="View Film Gallery?" placement="right">
-                  <CustomButton component={Link} to="/film-media">
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <CameraRollIcon/>
-                      Film Gallery
-                    </Box>
-                  </CustomButton>
-                </CustomTooltip>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomTooltip text="View Digital Gallery?" placement="right">
-                  <CustomButton component={Link} to="/digi-media">
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <SdCardIcon/>
-                      Digital Gallery
-                    </Box>
-                  </CustomButton>
-                </CustomTooltip>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomTooltip text="View Protected Photo Galleries?" placement="right">
-                  <CustomButton component={Link} to="/gallery">
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <SecurityIcon/>
-                      Protected Gallery
-                    </Box>
-                  </CustomButton>
-                </CustomTooltip>
-              </MenuItem>
-            </Menu>
+                <MenuItem onClick={handleClose}>
+                  <CustomTooltip text="View My Youtube Videos?" placement="right">
+                    <CustomButton component={Link} to="/videos">
+                      <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
+                        <YouTubeIcon/>
+                        Youtube Videos
+                      </Box>
+                    </CustomButton>
+                  </CustomTooltip>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <CustomTooltip text="View MRKTBox Instagram Gallery?" placement="right">
+                    <CustomButton component={Link} to="/mrkt-media">
+                      <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
+                        <InstagramIcon/>
+                        MRKTBox
+                      </Box>
+                    </CustomButton>
+                  </CustomTooltip>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <CustomTooltip text="View Film Gallery?" placement="right">
+                    <CustomButton component={Link} to="/film-media">
+                      <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
+                        <CameraRollIcon/>
+                        Film Gallery
+                      </Box>
+                    </CustomButton>
+                  </CustomTooltip>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <CustomTooltip text="View Digital Gallery?" placement="right">
+                    <CustomButton component={Link} to="/digi-media">
+                      <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
+                        <SdCardIcon/>
+                        Digital Gallery
+                      </Box>
+                    </CustomButton>
+                  </CustomTooltip>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <CustomTooltip text="View Protected Photo Galleries?" placement="right">
+                    <CustomButton component={Link} to="/gallery">
+                      <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
+                        <SecurityIcon/>
+                        Protected Gallery
+                      </Box>
+                    </CustomButton>
+                  </CustomTooltip>
+                </MenuItem>
+              </Menu>
+            </Box>
+            <CommentDialogButton icon={<QuestionAnswerTwoToneIcon/>}/>
+            <Box>
+              <CustomTooltip 
+                text={isDarkMode ? "Switch to Light Mode?" : "Switch to Dark Mode?"}
+                placement="top"
+              >
+                <IconButton onClick={toggleTheme}>
+                  <ContrastTwoToneIcon />
+                </IconButton>
+              </CustomTooltip>
+
+                {/* <CustomTooltip 
+                text="Change to dark mode?"
+                placement="top"
+              >
+                
+                <CustomButton to="/">
+                  <Box
+                    sx={{
+                      display: 'flex', 
+                      flexDirection: 'row', gap: '0.5rem',
+                  }}>
+                    <HomeTwoToneIcon/>
+                    Home
+                  </Box>
+                </CustomButton>
+              </CustomTooltip> */}
+            </Box>
           </Box>
-          <CommentDialogButton icon={<QuestionAnswerTwoToneIcon/>}/>
         </Box>
+        
       </Box>
     </>
   )

@@ -33,7 +33,8 @@ export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProp
                     display: 'inline-block',
                     width: 'auto',
                     padding: '8px 16px',
-                    backgroundColor: Theme.palette.secondary.light,
+                    textWrap: 'noWrap',
+                    backgroundColor: Theme.palette.primary.light,
                     ...(gutterBottom && { marginBottom: '1rem' }),
                     ...sx,
                     '&:hover': {
