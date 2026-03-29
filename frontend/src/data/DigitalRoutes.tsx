@@ -1,6 +1,3 @@
-//There can only be 9 10s, etc.
-
-
 export default [
     {
         Monday_Press_Flash: {

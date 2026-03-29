@@ -5,16 +5,17 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Snackbar from '@mui/material/Snackbar';
 
 import api from '@/api/axios';
 
 import CustomTooltip from '@/materials/Tooltip';
 import { CustomTypography } from '@/materials/Typography';
-import { CustomButton } from '@/materials/Button';
-import { Comment } from '@/types/Comment';
-import Snackbar from '@mui/material/Snackbar';
+import CustomButton from '@/materials/Button';
 
-import Theme from '@/Theme';
+import { Comment } from '@/types/Comment';
+
+import { useTheme } from '@mui/material/styles';
 
 export interface CommentDialogProps {
   open: boolean;
@@ -24,6 +25,7 @@ export interface CommentDialogProps {
 
 function CommentDialog(props: CommentDialogProps) {
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const theme = useTheme();
   
   const { onClose, selectedValue, open } = props;
 
@@ -67,7 +69,7 @@ function CommentDialog(props: CommentDialogProps) {
   return (
     <>
       <Snackbar
-        sx={{backgroundColor: Theme.palette.primary.light}}
+        sx={{backgroundColor: theme.palette.primary.light}}
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleClose}
@@ -153,7 +155,7 @@ export default function CommentDialogButton({icon}: CommentDialogButtonProps) {
     <>
       <CustomTooltip text={"Send a message?"} placement={"top"}>
         <CustomButton variant="contained" onClick={handleClickOpen}>
-          <Box display='flex' flexDirection='row' gap='0.5rem'>
+          <Box  sx={{display: 'flex', flexDirection: 'row', width: 'auto'}}>
             {icon}
             Message me
           </Box>

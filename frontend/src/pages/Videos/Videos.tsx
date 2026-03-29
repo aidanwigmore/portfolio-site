@@ -14,17 +14,17 @@ import TabList from '@mui/lab/TabList';
 import VideoData from "@/pages/Videos/VideoData";
 
 import ThumbUp from '@/components/ThumbUp';
-import CustomTooltip from '@/materials/Tooltip';
-import { CustomButton } from "@/materials/Button";
+import CustomButton from "@/materials/Button";
 import Title from '@/components/Title';
 import { useThumbsUp } from '@/hooks/useThumbsUp';
-import Theme from "@/Theme";
+import { useTheme } from '@mui/material/styles';
 
 interface VideosProps {
   home?: boolean;
 }
 
 export default function Videos({ home }: VideosProps) {
+  const theme = useTheme();
   
   const { handleThumbsUp } = useThumbsUp('video');
 
@@ -32,9 +32,6 @@ export default function Videos({ home }: VideosProps) {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // const youtubeWidth = window.innerWidth > 600 ? "50%" : "100%";
-  // const youtubeHeight = window.innerWidth > 600 ? "50vw" : "30vw";
-  
   const [__waelapsedTimes, setElapsedTimes] = useState<number[]>(items.map(() => 0));
 
   const [activeSteps, setActiveSteps] = useState<number[]>(items.map(() => 0));
@@ -155,30 +152,39 @@ export default function Videos({ home }: VideosProps) {
       <TabContext value={value}>
         <Box sx={{
           display: 'flex',
+          minHeight: home ? undefined : '85.2vh',
+          borderRadius: home ? '8px' : undefined,
           flexDirection: 'column',
-          backgroundColor: Theme.palette.secondary.light, 
+          paddingTop: '2vh',
+          justifyContent: 'top',
+          alignItems: 'center',
+          backgroundColor: theme.palette.secondary.main,
         }}>
-          <Title children={"My Youtube Videos"} />
+          <Title color={theme.palette.primary.contrastText} variant="h5" children={"My Youtube Videos"} />
           <List dense={false}>
-            <CustomTooltip 
-              text="Shift + scroll or click each button" 
-              placement="top"
-            >
               <TabList 
                 id={'video-tabslist'}
                 onChange={handleChange} 
                 aria-label="video-tabslist"
                 sx={{'& .MuiTabs-flexContainer': {
-                    gap: "0.5rem",
-                    justifyContent: 'center',
+                    justifyContent: 'space-evenly',
                   }, 
                 }}
               >
               {items.map((item, index) => (
-                <Tab key={index} label={`${item.title}`} value={index + 1} />
+                <Tab
+                  sx={{
+                    backgroundColor: theme.palette.primary.contrastText,
+                    color: theme.palette.primary.main,
+                    boxShadow: `0 2px 15px ${theme.palette.primary.contrastText}`,
+                    borderRadius: '8px',
+                  }} 
+                  key={index} 
+                  label={`${item.title}`} 
+                  value={index + 1} 
+                />
               ))}
             </TabList>
-          </CustomTooltip>
           {items
             .filter((item) => items.indexOf(item) === currentPage - 1)
             .map((item, __index) => {
@@ -190,7 +196,6 @@ export default function Videos({ home }: VideosProps) {
               <ListItem
                 key={itemIndex}
                 sx={{
-                  backgroundColor: Theme.palette.secondary.light,
                   borderRadius: "8px",
                   display: "flex",
                   justifyContent: "center",
@@ -204,14 +209,14 @@ export default function Videos({ home }: VideosProps) {
                     justifyContent: 'center',
                     alignItems: 'center',
                     display: 'flex', 
-                    backgroundColor: Theme.palette.primary.light,
+                    backgroundColor: theme.palette.primary.contrastText,
                     flexDirection: 'column', 
                     borderRadius: '8px',
                     padding: '1rem',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                    boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
                   }}>
-                  <CustomTypography variant={home ? "h6" : "h4"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
-                    {items[currentPage - 1].title} - {items[currentPage - 1].description}
+                  <CustomTypography color={theme.palette.primary.main} variant={home ? "h6" : "h4"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
+                    {items[currentPage - 1].title}
                   </CustomTypography>
                   <Stepper activeStep={currentStep}>
                     {item.steps.titles.map((label, stepIndex) => {
@@ -225,27 +230,27 @@ export default function Videos({ home }: VideosProps) {
                         <Step
                           sx={{
                             '& circle': {
-                              fill: Theme.palette.secondary.light,
+                              fill: theme.palette.primary.main,
                             },
                             '&.Mui-active circle': {
-                              fill: Theme.palette.secondary.main,
+                              fill: theme.palette.primary.main,
                             },
                             '&.Mui-completed circle': {
-                              fill: Theme.palette.secondary.dark,
+                              fill: theme.palette.primary.main,
                             },
                           }}
                          key={`step-${itemIndex}-${stepIndex}`} {...stepProps}>
                           <StepLabel>
                             <Box sx={{display: 'flex', flexDirection: 'column'}}>
-                              <div>
+                              <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center', textDecoration: currentStep === stepIndex ? 'underline' : 'none' }}>
                                 {label}
-                              </div>
-                              <div>
-                                {item.steps.descriptions[stepIndex]}
-                              </div>
-                              <div>
+                              </CustomTypography>
+                              <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
+                                {item.description}
+                              </CustomTypography>
+                              <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
                                 Uploaded: {item.steps.uploadDates[stepIndex]}
-                              </div>
+                              </CustomTypography>
                             </Box>
                           </StepLabel>
                         </Step>
@@ -300,6 +305,9 @@ export default function Videos({ home }: VideosProps) {
                       flexDirection: "column"
                     }}
                   >
+                    <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
+                      {item.steps.descriptions[currentStep]}
+                    </CustomTypography>
                     <Box
                       sx={{
                         display: "flex",
@@ -320,9 +328,8 @@ export default function Videos({ home }: VideosProps) {
                         title="YouTube video player"
                         style={{
                           borderRadius: "8px",
-                          width: "100%",
-                          height: "100%",
-                          marginTop: "1vw",
+                          width: "50vw",
+                          height: "20vw",
                         }}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -331,15 +338,17 @@ export default function Videos({ home }: VideosProps) {
                   
                       </Box>                    
                         {item.stepsLabels ? (
-                        <Accordion sx={{maxHeight: '500px', overflowY: 'auto' }}>
+                        <Accordion sx={{backgroundColor: theme.palette.primary.contrastText, color: 'black', maxHeight: '500px', overflowY: 'auto' }}>
                           <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandMoreIcon sx={{fill: theme.palette.primary.main}}/>}
                             aria-controls="panel1-content"
                           >
-                            <CustomTypography component="span">Click for Transcriptions</CustomTypography>
+                            <CustomTypography color={theme.palette.primary.main} component="span">Click for Transcriptions</CustomTypography>
                           </AccordionSummary>
-                          <AccordionDetails>
-                            {item.stepsLabels[currentStep]}
+                          <AccordionDetails sx={{backgroundColor: theme.palette.secondary.light}}>
+                            <CustomTypography component="span">
+                              {item.stepsLabels[currentStep]}
+                            </CustomTypography>
                           </AccordionDetails>
                         </Accordion>
                       ) : (

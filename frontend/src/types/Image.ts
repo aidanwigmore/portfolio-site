@@ -1,8 +1,8 @@
 export interface PortfolioImage {
   id: number;
   name: string;
-  image: string;  // URL to image
-  date_taken: string;  // ISO date
+  image: string;
+  date_taken: string;
   coordinates: string;
   camera_used: string;
   description: string;

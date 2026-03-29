@@ -1,61 +1,90 @@
 import { createTheme } from '@mui/material';
 import { lighten, darken } from '@mui/material/styles';
 
+import '@fontsource/doto';
+import '@fontsource/cutive-mono';
+
 const colors = {
-    primary: '#FFFFFF',
-    secondary: '#00b4d7',
-    error: '#F23901',
-    warning: '#EBAD03',
-    info: '#F20386',
-    success: '#7AEB01',
+    white: '#FFFFFF',
+    black: '#121212',
+    accent: '#407690',
+    info: '#e6f51dc9',
+    warning: '#f4a317',
+    error: '#ea1111',
+    success: '#1cda29',
+}
+
+const fonts = {
+    normal: 'sans-serif',
+    button: '"Cutive Mono", monospace',
+    title: '"Doto", sans-serif',
 }
 
 const lightTheme = createTheme({
     palette: {
         primary: {
-            main: '#030503',
-            light: lighten(colors.primary, 0.4),
-            dark: darken(colors.primary, 0.4),
-            contrastText: '#030503',
+            main: colors.white,
+            light: lighten(colors.white, 0.4),
+            dark: darken(colors.white, 0.4),
+            contrastText: colors.black,
         },
         secondary: {
-            main: colors.secondary,
-            light: lighten(colors.secondary, 0.4),
-            dark: darken(colors.secondary, 0.4),
-            contrastText: '#000000',
+            main: colors.accent, 
+            light: lighten(colors.accent, 0.4),
+            dark: darken(colors.accent, 0.4),
+            contrastText: colors.white,
         },
-        error: {
-            main: colors.error,
-            light: lighten(colors.error, 0.4),
-            dark: darken(colors.error, 0.4),
-            contrastText: '#ffffff',
+        info: {
+            main: colors.info, 
+            light: lighten(colors.info, 0.4),
+            dark: darken(colors.info, 0.4),
+            contrastText: colors.black,
         },
         warning: {
             main: colors.warning,
             light: lighten(colors.warning, 0.4),
             dark: darken(colors.warning, 0.4),
-            contrastText: '#000000',
+            contrastText: colors.black,
         },
-        info: {
-            main: colors.info,
-            light: lighten(colors.info, 0.4),
-            dark: darken(colors.info, 0.4),
-            contrastText: '#ffffff',
+        error: {
+            main: colors.error,
+            light: lighten(colors.error, 0.4),
+            dark: darken(colors.error, 0.4),
+            contrastText: colors.black,
         },
         success: {
             main: colors.success,
             light: lighten(colors.success, 0.4),
             dark: darken(colors.success, 0.4),
-            contrastText: '#000000',
+            contrastText: colors.black,
         },
-        background: {
-            default: '#2a2a2a',
-            paper: '#2a2a2a',
+    },
+    typography: {
+        fontFamily: fonts.normal,
+        h1: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
         },
-        text: {
-            primary: '#ffffff',
-            secondary: '#cccccc',
+        h4: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
         },
+        h5: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
+        },
+        h6: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
+        },
+        button: {
+            fontFamily: fonts.button,
+             fontWeight: 400,
+        }
     },
     components: {
         MuiTypography: {
@@ -78,49 +107,68 @@ const lightTheme = createTheme({
 const darkTheme = createTheme({
     palette: {
         primary: {
-            main: '#030503',
-            light: lighten(colors.primary, 0.4),
-            dark: darken(colors.primary, 0.4),
-            contrastText: '#ffffff',
+            main: colors.black,
+            light: lighten(colors.black, 0.4),
+            dark: darken(colors.black, 0.4),
+            contrastText: colors.white,
         },
         secondary: {
-            main: colors.secondary,
-            light: lighten(colors.secondary, 0.4),
-            dark: darken(colors.secondary, 0.4),
-            contrastText: '#000000',
+            main: colors.accent, 
+            light: lighten(colors.accent, 0.4),
+            dark: darken(colors.accent, 0.4),
+            contrastText: colors.white,
         },
-        error: {
-            main: colors.error,
-            light: lighten(colors.error, 0.4),
-            dark: darken(colors.error, 0.4),
-            contrastText: '#ffffff',
+        info: {
+            main: colors.info, 
+            light: lighten(colors.info, 0.4),
+            dark: darken(colors.info, 0.4),
+            contrastText: colors.white,
         },
         warning: {
             main: colors.warning,
             light: lighten(colors.warning, 0.4),
             dark: darken(colors.warning, 0.4),
-            contrastText: '#000000',
+            contrastText: colors.white,
         },
-        info: {
-            main: colors.info,
-            light: lighten(colors.info, 0.4),
-            dark: darken(colors.info, 0.4),
-            contrastText: '#ffffff',
+        error: {
+            main: colors.error,
+            light: lighten(colors.error, 0.4),
+            dark: darken(colors.error, 0.4),
+            contrastText: colors.white,
         },
         success: {
             main: colors.success,
             light: lighten(colors.success, 0.4),
             dark: darken(colors.success, 0.4),
-            contrastText: '#000000',
+            contrastText: colors.white,
         },
-        background: {
-            default: '#2a2a2a',
-            paper: '#2a2a2a',
+    },
+    typography: {
+        fontFamily: fonts.normal,
+        h1: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
         },
-        text: {
-            primary: '#ffffff',
-            secondary: '#cccccc',
+        h4: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
         },
+        h5: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
+        },
+        h6: {
+            fontSize: '2rem',
+            fontFamily: fonts.title,
+            fontWeight: 600,
+        },
+        button: {
+            fontFamily: fonts.button,
+             fontWeight: 400,
+        }
     },
     components: {
         MuiTypography: {

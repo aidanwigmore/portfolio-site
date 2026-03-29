@@ -4,21 +4,17 @@ import Videos from '@/pages/Videos/Videos';
 import Projects from '@/pages/Projects/Projects';
 import { motion } from 'framer-motion';
 
-// import InstagramGallery from '@/pages/Gallery/InstagramGallery';
 import InstagramGalleries from '@/pages/Gallery/InstagramGalleries';
 
-// import MRKTRoutes from '@/data/MrktRoutes';
-// import FilmRoutes from '@/data/FilmRoutes';
-// import DigitalRoutes from '@/data/DigitalRoutes';
-
-// import { CustomTypography } from '@/materials/Typography';
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import { getImagesByCategory, getImageUrl } from '@/api/galleryService';
 import { PortfolioImage } from '@/types/Gallery';
 
 export default function Home() {
+  const theme = useTheme();
+  
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
@@ -79,27 +75,28 @@ export default function Home() {
   return (
       <Box
         sx={{
-          backgroundColor: Theme.palette.secondary.light,
+          backgroundColor: theme.palette.primary.contrastText,
           padding: '1rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center'
         }}
-      >     
+      >
       <motion.div
         initial="hidden"
         whileInView="visible"
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={sectionVariants}
-        style={{ margin: '100px 0' }}
+        style={{ 
+          borderRadius: '8px',
+          boxShadow: `0 8px 32px ${theme.palette.primary.main}`, }}
       >
         <Box sx={{ 
           display: 'flex', 
           flexDirection: 'column', 
           textAlign: 'center',
-          backgroundColor: Theme.palette.secondary.light,
           gap: 2,
         }}>
           <Box id={'image_slideshow'} sx={{
@@ -108,22 +105,21 @@ export default function Home() {
             alignItems: 'center',
           }}>
             <Box id={'image'} sx={{
-              backgroundColor: Theme.palette.primary.light,
+              backgroundColor: theme.palette.secondary.main,
               borderRadius: '8px',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
               p: 2,
             }}>
               {hasImages && currentImage ? (
                 <img src={getImageUrl(currentImage.image)} alt={currentImage.name || "Homepage Slideshow"} style={{ 
-                  height: '80vh', 
+                  width: '50vw', 
                   borderRadius: '8px', 
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)' 
+                  boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
                 }} />
               ) : (
                 <img src="/home_images/first_image.png" alt="Homepage Slideshow" style={{ 
-                height: '80vh',
-                borderRadius: '8px', 
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)' 
+                  width: '50vw',
+                  borderRadius: '8px',
+                  boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
               }} />
               )}
             </Box>
@@ -137,7 +133,11 @@ export default function Home() {
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={sectionVariants}
-        style={{ margin: '100px 0' }}
+        style={{ 
+          borderRadius: '8px',
+          boxShadow: `0 8px 32px ${theme.palette.primary.main}`,
+          marginTop: '10vh',
+        }}
       >
         <Projects home={true}/>
       </motion.div>
@@ -148,7 +148,11 @@ export default function Home() {
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={contentVariants}
-        style={{ margin: '100px 0' }}
+        style={{ 
+          borderRadius: '8px',
+          boxShadow: `0 8px 32px ${theme.palette.primary.main}`,
+          marginTop: '10vh',
+        }}
       >
         <Videos home={true}/>
       </motion.div>
@@ -159,9 +163,13 @@ export default function Home() {
         exit="exit"
         viewport={{ once: false, amount: 0.2 }}
         variants={contentVariants}
-        style={{ margin: '100px 0' }}
+        style={{ 
+          borderRadius: '8px',
+          boxShadow: `0 8px 32px ${theme.palette.primary.main}`,
+          marginTop: '10vh',
+        }}
       >
-        <InstagramGalleries/>
+        <InstagramGalleries home={true}/>
       </motion.div>
     </Box>
   );

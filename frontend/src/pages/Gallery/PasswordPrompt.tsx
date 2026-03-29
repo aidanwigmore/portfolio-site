@@ -9,16 +9,18 @@ import {
   CardContent,
 } from '@mui/material';
 
-import { CustomButton } from '@/materials/Button';
+import CustomButton from '@/materials/Button';
 import { verifyPassword } from '@/api/galleryService';
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface PasswordPromptProps {
   onSuccess: (category: 'friends' | 'employers' | 'visitors') => void;
 }
 
 export default function PasswordPrompt({ onSuccess }: PasswordPromptProps) {
+  const theme = useTheme();
+  
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -45,7 +47,7 @@ export default function PasswordPrompt({ onSuccess }: PasswordPromptProps) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: Theme.palette.primary.main,
+        background: theme.palette.primary.main,
       }}
     >
       <Card sx={{ width: '100%', maxWidth: 400, p: 2 }}>

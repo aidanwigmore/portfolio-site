@@ -16,7 +16,7 @@ import FilmRoutes from '@/data/FilmRoutes';
 import DigitalRoutes from '@/data/DigitalRoutes';
 import Box from "@mui/material/Box";
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface RouterProps {
   isDarkMode: boolean;
@@ -26,6 +26,8 @@ interface RouterProps {
 function Router({ isDarkMode, toggleTheme }: RouterProps) {
   
   const location = useLocation();
+    const theme = useTheme();
+  
 
   return (
     <>
@@ -56,18 +58,14 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
             <PageTransition>
               <Box 
                   sx={{ 
-                    width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
                     display: 'flex', 
                     flexDirection: 'column', 
-                    borderRadius: '8px',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                    backgroundColor: Theme.palette.secondary.light,
-                    p: 3,
+                    backgroundColor: theme.palette.secondary.main,
                   }}
               >
-                <InstagramGallery title={'MRKTBox Appearances'} routes={MRKTRoutes}/>
+                <InstagramGallery color={theme.palette.primary.main} title={'MRKTBox Memories'} routes={MRKTRoutes}/>
               </Box>
             </PageTransition>
           } />
@@ -80,9 +78,7 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
                     alignItems: 'center',
                     display: 'flex', 
                     flexDirection: 'column', 
-                    borderRadius: '8px',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                    backgroundColor: Theme.palette.secondary.light,
+                    backgroundColor: theme.palette.secondary.main,
                     p: 3,
                   }}
               >
@@ -99,9 +95,7 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
                     alignItems: 'center',
                     display: 'flex', 
                     flexDirection: 'column', 
-                    borderRadius: '8px',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                    backgroundColor: Theme.palette.secondary.light,
+                    backgroundColor: theme.palette.secondary.main,
                     p: 3,
                   }}
               >

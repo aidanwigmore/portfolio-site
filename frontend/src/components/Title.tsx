@@ -2,7 +2,8 @@ import React from 'react';
 
 import Box from '@mui/material/Box';
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
+
 import { CustomTypography } from '@/materials/Typography';
 
 interface TitleProps {
@@ -12,6 +13,8 @@ interface TitleProps {
 }
 
 function Title({ children, variant, color } : TitleProps) {
+    const theme = useTheme();
+
     return (
         <Box sx={{ 
             display: 'flex',
@@ -21,7 +24,7 @@ function Title({ children, variant, color } : TitleProps) {
         }}>
             <Box sx={{
             }}>
-            <CustomTypography variant={variant} color={Theme.palette.primary.contrastText} textAlign="center" gutterBottom>
+            <CustomTypography sx={{textDecoration: 'underline'}} variant={variant} color={color ? color : theme.palette.primary.main} textAlign="center" gutterBottom>
                 {children}
             </CustomTypography>
             </Box>

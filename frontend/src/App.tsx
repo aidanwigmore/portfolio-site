@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-
+import { useState, useEffect } from 'react';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -8,9 +7,6 @@ import '@fontsource/roboto/700.css';
 import { lightTheme, darkTheme } from '@/Theme';
 
 import Router from '@/Router';
-// import Theme from '@/Theme';
-
-import { useState, useEffect } from 'react';
 
 import { ThemeProvider } from '@mui/material';
 
@@ -24,20 +20,19 @@ function App() {
     }
   }, []);
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = () => {
     setIsDarkMode(prev => {
       const newMode = !prev;
       localStorage.setItem('theme', newMode ? 'dark' : 'light');
       return newMode;
     });
-  }, []);
+  };
 
-  
   return (
-    <ThemeProvider theme={isDarkMode ? lightTheme : darkTheme}>
-      <Router isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
-    </ThemeProvider>
-  )
+  <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+    <Router isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
+  </ThemeProvider>
+)
 }
 
 export default App;

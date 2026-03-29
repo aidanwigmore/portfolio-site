@@ -3,7 +3,7 @@ import React from 'react';
 
 import Box from '@mui/material/Box';
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface CustomDividerProps extends DividerProps {
     gutterBottom?: boolean;
@@ -20,11 +20,14 @@ export const CustomDivider: React.FC<CustomDividerProps> = ({
     sx = {},
     ...props
 }) => {
+    
+    const theme = useTheme();
+    
     return (
         <Box display='flex' flexDirection='row' justifyContent='center'>
             <Divider
                 sx={{
-                    borderColor: Theme.palette[color].main,
+                    borderColor: theme.palette[color].main,
                     borderWidth: thickness,
                     borderRadius: `8px`,
                     width: '50%',

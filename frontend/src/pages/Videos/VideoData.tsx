@@ -12,14 +12,14 @@ export default [
       ],
       steps: {
         titles: [
-          'Picking Up Catering Orders from Strathcona MRKT',
-          'Subscribing To MRKTBox',
-          'Signing Up To MRKTBox',
+          'Order Catering Items',
+          'Subscribe To MRKTBox',
+          'Sign up to MRKTBox',
         ],
         descriptions: [
-          '',
-          '',
-          '',
+          'During my time at Batched Inc. I made 40+ short-form tutorial videos for the Batched Support / MRKTBox Support Youtube channels.',
+          'You may notice my tag-line for much of my content starts with "Hi There". ',
+          'You may also notice my tag-line for the end of much of my content ends with "...and if this video didn\'t answer your question, there\'s plenty more to assist you"',
         ],
         ratingCodes: [
           'batched-support-1',
@@ -81,7 +81,7 @@ export default [
           'Assignment 5', 'Assignment 6','Assignment 7'
         ],
         descriptions: [
-          '',
+          'Laravel, Restful API access database 7 different routes, get, post, put, 3 route params with filters, patients database\n\nDemonstrating postman to confirm functionality of API routes',
           '',
           '',
         ],
@@ -112,7 +112,7 @@ export default [
           "Entrepreneurship in today's world - Video Pitch", "Tech Writing Presentation - Product Evaluation and Recommendation", "Tech Writing Presentation 3 (Job posting)"
         ],
         descriptions: [
-          'test',
+          '',
           '',
           '',
         ],

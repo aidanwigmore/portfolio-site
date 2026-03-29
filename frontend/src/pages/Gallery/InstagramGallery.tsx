@@ -3,19 +3,23 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { CustomTypography } from '@/materials/Typography';
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 import Title from '@/components/Title';
 
 interface InstagramGalleryProps {
     title: string;
+    home?: boolean;
+    color?: string;
     variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'button' | 'caption' | 'overline';
     routes: Array<{ [key: string]: { link: string; coord: string; developed: string; rating?: number, order?: number } }>;
 }
 
 type SortOrder = 'asc' | 'desc' | 'order';
 
-export default function InstagramGallery({ routes, title, variant }: InstagramGalleryProps) {
+export default function InstagramGallery({ routes, title, variant, color, home }: InstagramGalleryProps) {
+  const theme = useTheme();
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState<SortOrder>('order');
   const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -88,39 +92,44 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
 
   const handlePageChange = (__: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
   <>
-    <Title variant={variant}>
-      {title}
-    </Title>
     <motion.div
       initial="visible"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
+      style={{ 
+        backgroundColor: home ? theme.palette.primary.contrastText : theme.palette.secondary.main,  
+        boxShadow: home ? `0 8px 32px ${theme.palette.primary.contrastText}` : undefined,
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center',
+        borderRadius: '8px',
+      }}
     >
-      <Box display="flex" flexDirection="row" gap={2}>
+      <Title color={home ? theme.palette.primary.main : theme.palette.primary.contrastText} variant={home ? variant : 'h5'}>
+          {title}
+        </Title>
+        <Box display="flex" flexDirection="row" gap={2}>
+        
         <FormControl sx={{ mb: 3, minWidth: 200 }}>
           <Select
             value={itemsPerPage}
             onChange={handleItemsPerPageChange}
             sx={{
-              backgroundColor: Theme.palette.primary.main,
-              color: Theme.palette.secondary.dark,
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: Theme.palette.secondary.main,
-              },
+              backgroundColor: theme.palette.primary.contrastText,
+              color: color ||theme.palette.primary.main,
               '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: Theme.palette.secondary.main,
+                borderColor: color || theme.palette.primary.main,
               },
               '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: Theme.palette.secondary.main,
+                borderColor: color || theme.palette.primary.main,
               },
               '& .MuiSvgIcon-root': {
-                color: Theme.palette.secondary.dark,
+                color: color ||theme.palette.primary.main,
               }
             }}
           >
@@ -135,19 +144,16 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
             value={sortOrder}
             onChange={handleSortChange}
             sx={{
-              backgroundColor: Theme.palette.primary.main,
-              color: Theme.palette.secondary.dark,
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: Theme.palette.secondary.main,
-              },
+              backgroundColor: theme.palette.primary.contrastText,
+              color: theme.palette.primary.main,
               '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: Theme.palette.secondary.main,
+                borderColor: theme.palette.primary.main,
               },
               '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: Theme.palette.secondary.main,
+                borderColor: theme.palette.primary.main,
               },
               '& .MuiSvgIcon-root': {
-                color: Theme.palette.secondary.dark,
+                color: theme.palette.primary.main,
               }
             }}
           >
@@ -156,20 +162,12 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
             <MenuItem value="asc">Date: Old to New</MenuItem>
           </Select>
         </FormControl>
-      </Box>
-      <Box sx={{ 
-        p: 3, 
-        backgroundColor: Theme.palette.primary.light, 
-        borderRadius: '8px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}>
         {totalPages > 1 && (
           <Box sx={{
             display: 'flex',
             justifyContent: 'center',
-            mb: 2
+            alignItems: 'center',
+            flexGrow: 1,
           }}>
             <Pagination 
               count={totalPages}
@@ -179,24 +177,30 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
               size="large"
               sx={{
                 '& .MuiPaginationItem-root': {
-                  color: Theme.palette.primary.contrastText,
+                  color: theme.palette.primary.contrastText,
                   '&:hover': {
-                    backgroundColor: Theme.palette.secondary.light,
+                    backgroundColor: theme.palette.secondary.dark,
                   }
                 },
                 '& .Mui-selected': {
-                  backgroundColor: Theme.palette.secondary.main + ' !important',
-                  color: Theme.palette.primary.main,
+                  backgroundColor: theme.palette.primary.contrastText,
+                  color: theme.palette.primary.main,
                 }
               }}
             />
           </Box>
         )}
+      </Box>
+      <Box sx={{ 
+        p: 3, 
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
         <Box sx={{
           display: "grid",
           gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: '1fr 1fr 1fr' },
           gap: "2rem",
-          maxWidth: '1200px',
         }}>
           {posts.map((post, index) => (
             <motion.div
@@ -209,12 +213,12 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
             >
               <Box sx={{ textAlign: 'center' }}>
                 {post.name && (
-                  <CustomTypography variant="h6" sx={{ color: Theme.palette.secondary.dark, display: 'block',textDecoration: 'underline'}}>
+                  <CustomTypography variant="h6" sx={{ color: home? theme.palette.primary.main : theme.palette.primary.contrastText, display: 'block',textDecoration: 'underline'}}>
                     {post.name}
                   </CustomTypography>
                 )}
                 {post.developed && (
-                  <CustomTypography variant="h5" sx={{ color: Theme.palette.secondary.dark, display: 'block', fontSize: '0.75rem' }}>
+                  <CustomTypography variant="h5" sx={{ color: home? theme.palette.primary.main : theme.palette.primary.contrastText, display: 'block', fontSize: '0.75rem' }}>
                     {post.developed}
                   </CustomTypography>
                 )}
@@ -223,9 +227,8 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
                     variant="caption" 
                     sx={{ 
                       display: 'block', 
-                      color: 'gray', 
+                      color: home? theme.palette.primary.main : theme.palette.primary.contrastText,
                       fontSize: '0.75rem', 
-                      mb: 1,
                       '&::first-letter': {
                         fontSize: '2em',
                       }
@@ -238,16 +241,18 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
                 <Box
                   sx={{
                     display: 'inline-block',
-                    borderRadius: '8px',
                     overflow: 'hidden',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '8px',
+                    height: '45vh',
+                    boxShadow: `0 8px 32px ${theme.palette.primary.main}`,
                   }}
                 >
                   <iframe 
                     src={`https://www.instagram.com${post.link}/embed`}
                     width="100%"
-                    height="500"
-                    scrolling="no"
+                    height="100%"
+                    data-instgrm-ignore="true"
+                    scrolling="yes"
                     style={{
                       border: 'none',
                     }}
@@ -258,33 +263,6 @@ export default function InstagramGallery({ routes, title, variant }: InstagramGa
             </motion.div>
           ))}
         </Box>
-        {totalPages > 1 && (
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            mb: 2
-          }}>
-            <Pagination 
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              color="primary"
-              size="large"
-              sx={{
-                '& .MuiPaginationItem-root': {
-                  color: Theme.palette.primary.contrastText,
-                  '&:hover': {
-                    backgroundColor: Theme.palette.secondary.light,
-                  }
-                },
-                '& .Mui-selected': {
-                  backgroundColor: Theme.palette.secondary.main + ' !important',
-                  color: Theme.palette.primary.main,
-                }
-              }}
-            />
-          </Box>
-        )}
       </Box>
     </motion.div>
   </>

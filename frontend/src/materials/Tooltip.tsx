@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tooltip from '@mui/material/Tooltip';
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface CustomTooltipProps {
     text: string;
@@ -10,15 +10,17 @@ interface CustomTooltipProps {
     placement: any;
 }
 
-function CustomTooltip({ text, children, placement} : CustomTooltipProps) {
+function CustomTooltip({ text, children, placement} : CustomTooltipProps) {    
+    const theme = useTheme();
+
     return (
         <>
             <Tooltip slotProps={{
                 popper: {
                     sx: {
                         '& .MuiTooltip-tooltip': {
-                            backgroundColor: Theme.palette.secondary.light,
-                            color: Theme.palette.secondary.contrastText,
+                            backgroundColor: theme.palette.secondary.light,
+                            color: theme.palette.primary.contrastText,
                         },
                     }
                 }

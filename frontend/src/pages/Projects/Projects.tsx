@@ -17,9 +17,7 @@ import { CustomTypography } from "@/materials/Typography";
 import CustomIconButton from '@/materials/IconButton';
 import ThumbUp from '@/components/ThumbUp';
 import LanguageTwoToneIcon from '@mui/icons-material/LanguageTwoTone';
-import Theme from "@/Theme";
-
-import CustomTooltip from '@/materials/Tooltip';
+import { useTheme } from '@mui/material/styles';
 
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -29,6 +27,8 @@ interface ProjectProps {
 }
 
 export default function Projects( { home } : ProjectProps ) {
+  const theme = useTheme();
+  
   const { handleThumbsUp } = useThumbsUp('video');
     
   const [value, setValue] = useState<number>(1);
@@ -78,35 +78,40 @@ export default function Projects( { home } : ProjectProps ) {
       <TabContext value={value}>
         <Box sx={{
           display: 'flex',
-          minHeight: '78vh',
+          minHeight: home ? undefined : '85.2vh',
+          borderRadius: home ? '8px' : undefined,
           flexDirection: 'column',
-          justifyContent: 'center',
+          paddingTop: '2vh',
+          justifyContent: 'top',
           alignItems: 'center',
-          backgroundColor: Theme.palette.secondary.light, 
+          backgroundColor: theme.palette.secondary.main,
         }}>
-          <Title children={"Projects I've Worked On"} />
+          <Title color={theme.palette.primary.contrastText} variant="h5" children={"Projects I've Worked On"} />
           <List dense={false}>
-            <CustomTooltip 
-              text="Shift + scroll or click each button" 
-              placement="top"
-            >
               <TabList 
                 id={'projects-tabslist'}
                 onChange={handleChange}
                 aria-label="projects-tabslist" 
-                sx={{ 
+                sx={{
                   '& .MuiTabs-flexContainer': {
-                    gap: "0.5rem",
-                    justifyContent: 'center',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+                    justifyContent: 'space-evenly',
                   },
                 }}
               >
                 {items.map((item, index) => (
-                  <Tab key={index} label={`${item.title}`} value={index + 1} />
+                  <Tab 
+                    sx={{
+                      backgroundColor: theme.palette.primary.contrastText,
+                      color: theme.palette.primary.main,
+                      boxShadow: `0 2px 15px ${theme.palette.primary.contrastText}`,
+                      borderRadius: '8px',
+                    }}
+                    key={index} 
+                    label={`${item.title}`} 
+                    value={index + 1} 
+                  />
                 ))}
               </TabList>
-            </CustomTooltip>
             {items
               .filter((item) => items.indexOf(item) === currentPage - 1)
               .map((item, __index) => {
@@ -116,7 +121,6 @@ export default function Projects( { home } : ProjectProps ) {
                   <ListItem
                     key={itemIndex}
                     sx={{
-                      backgroundColor: Theme.palette.secondary.light,
                       borderRadius: "8px",
                       width: '100%',
                     }}
@@ -127,10 +131,10 @@ export default function Projects( { home } : ProjectProps ) {
                         justifyContent: 'center',
                         alignItems: 'center',
                         display: 'flex', 
-                        backgroundColor: Theme.palette.primary.light, 
-                        flexDirection: 'column', 
+                        backgroundColor: theme.palette.primary.contrastText, 
+                        flexDirection: 'column',
+                        boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
                         borderRadius: '8px',
-                        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                         p: 3,
                       }}
                     >
@@ -143,7 +147,7 @@ export default function Projects( { home } : ProjectProps ) {
                         />
                         <Box sx={{ flex: 1 }}>
                           <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
-                            <CustomTypography variant={home ? "h6" : "h4"}>
+                            <CustomTypography color={theme.palette.primary.main} variant={home ? "h6" : "h4"}>
                               {item.title}
                             </CustomTypography>
                             <CustomIconButton
@@ -157,6 +161,7 @@ export default function Projects( { home } : ProjectProps ) {
                           </Box>
                           {item.description.map((desc: any, descIndex: any) => (
                             <CustomTypography
+                              color={theme.palette.primary.main}
                               key={`${item.title}-desc-${descIndex}`}
                               variant={home ? "caption" : "body2"}
                             >

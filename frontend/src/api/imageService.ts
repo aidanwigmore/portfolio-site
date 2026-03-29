@@ -1,7 +1,6 @@
-import api from '@/api/axios';  // or wherever your axios config is
+import api from '@/api/axios';
 import { PortfolioImage, AccessPassword } from '@/types/Image';
 
-// Image endpoints
 export const uploadImage = (formData: FormData) => 
   api.post<PortfolioImage>('images/', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
@@ -18,7 +17,6 @@ export const getImagesByCategory = (category: string) =>
 export const deleteImage = (id: number) => 
   api.delete(`images/${id}/`);
 
-// Password endpoints
 export const createPassword = (data: Partial<AccessPassword>) => 
   api.post<AccessPassword>('passwords/', data);
 

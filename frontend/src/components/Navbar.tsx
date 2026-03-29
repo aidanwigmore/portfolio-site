@@ -1,37 +1,35 @@
 import React, { useState}  from 'react'; 
-
 import { Link } from 'react-router-dom';
 
-import { Box } from '@mui/material';
+import { 
+  Box,
+  MenuItem,
+  Menu,
+} from '@mui/material';
+
+import { 
+  Security as SecurityIcon,
+  ChevronLeft,
+  CameraRoll as CameraRollIcon,
+  Instagram as InstagramIcon,
+  YouTube as YouTubeIcon,
+  SdCard as SdCardIcon,
+  HomeTwoTone as HomeTwoToneIcon,
+  AccountTreeTwoTone as AccountTreeTwoToneIcon,
+  PermMediaTwoTone as PermMediaTwoToneIcon,
+  QuestionAnswerTwoTone as QuestionAnswerTwoToneIcon,
+  LightModeTwoTone as LightModeTwoToneIcon,
+  DarkModeTwoTone as DarkModeTwoToneIcon, 
+} from '@mui/icons-material';
 
 import CommentDialogButton from '@/components/CommentForm';
 
-import MenuItem from '@mui/material/MenuItem';
-
-import { CustomButton } from '@/materials/Button';
-import Menu from '@mui/material/Menu';
-import { ChevronLeft } from '@mui/icons-material';
-import SecurityIcon from '@mui/icons-material/Security';
+import CustomButton from '@/materials/Button';
 import CustomTooltip from '@/materials/Tooltip';
-import CameraRollIcon from '@mui/icons-material/CameraRoll';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import SdCardIcon from '@mui/icons-material/SdCard';
-
-import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import PermMediaTwoToneIcon from '@mui/icons-material/PermMediaTwoTone';
-import QuestionAnswerTwoToneIcon from '@mui/icons-material/QuestionAnswerTwoTone';
-
 import { CustomTypography } from '@/materials/Typography';
 
-import IconButton from '@mui/material/IconButton';
 
-import ContrastTwoToneIcon from '@mui/icons-material/ContrastTwoTone';
-
-// import Title from '@/components/Title';
-
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface NavBarProps {
   isDarkMode: boolean;
@@ -39,6 +37,8 @@ interface NavBarProps {
 }
 
 export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
+  const theme = useTheme();
+  
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,12 +52,10 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
   return (
     <>
       <Box sx={{ 
-        position: 'sticky',
         top: 0,
         display: 'flex', 
         flexDirection: 'row',
-        backgroundColor: Theme.palette.secondary.light,
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+        backgroundColor: theme.palette.secondary.main,
       }}>
         <Box
           sx={{
@@ -65,21 +63,30 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
             flexDirection: 'row',
             alignItems: 'center',
             whiteSpace: 'nowrap',
-            marginLeft: '2rem',
-            marginRight: '2rem',
+            paddingLeft: '1rem',
           }}
         >
-          <CustomTypography color={Theme.palette.primary.contrastText} variant="h6" children={'Aidan Wigmore'}/>
+          <CustomTypography sx={{
+              color: theme.palette.primary.contrastText, 
+              borderRadius: '8px',
+            }}
+            variant="h1" 
+            children={'Aidan Wigmore'}
+          />
         </Box>
         <Box
-          sx={{position: 'relative',
-          top: 0,
-          display: 'flex', 
-          flexDirection: 'row',
-          backgroundColor: Theme.palette.secondary.light,
-          padding: '0.5rem',
-          justifyContent: 'center',
-          alignItems: 'center',}}
+          sx={{
+            position: 'relative',
+            top: 0,
+            display: 'flex', 
+            flexDirection: 'row',
+            backgroundColor: theme.palette.secondary.main,
+            padding: '0.5rem',
+            flexGrow: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflowX: 'auto',
+        }}
         > 
           <Box
             sx={{
@@ -87,12 +94,10 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
               flexDirection: 'row',
               justifyContent: 'center',
               gap: '0.5rem',
+              flexWrap: 'wrap',
+              maxWidth: '100%',
             }}
           >
-            <CustomTooltip 
-              text="Navigate to the Home page?"
-              placement="top"
-            >
               <CustomButton component={Link} to="/">
                 <Box
                   sx={{
@@ -103,8 +108,6 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
                   Home
                 </Box>
               </CustomButton>
-            </CustomTooltip>
-            <CustomTooltip text="Navigate to the Project page?" placement='top'>
               <CustomButton component={Link} to="/projects">
                 <Box
                   sx={{
@@ -116,9 +119,7 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
                   Projects
                 </Box>
               </CustomButton>
-            </CustomTooltip>
             <Box>
-              <CustomTooltip text="Navigate to Media pages?" placement='top'>
                 <CustomButton
                   id="basic-button"
                   aria-controls={open ? 'basic-menu' : undefined}
@@ -130,7 +131,7 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
                     flexDirection: 'row', 
                     gap: '0.5rem',
                     '&: hover': {
-                      color: Theme.palette.primary.main,
+                      color: theme.palette.info.main,
                     },
                   }}
                 >
@@ -138,7 +139,6 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
                   Media
                   <ChevronLeft sx={{ transform: open ? 'rotate(90deg)' : 'rotate(270deg)', transition: 'transform 0.3s' }} />
                 </CustomButton>
-              </CustomTooltip>
               <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -151,84 +151,70 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
                 }}
               >
                 <MenuItem onClick={handleClose}>
-                  <CustomTooltip text="View My Youtube Videos?" placement="right">
                     <CustomButton component={Link} to="/videos">
                       <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
                         <YouTubeIcon/>
                         Youtube Videos
                       </Box>
                     </CustomButton>
-                  </CustomTooltip>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <CustomTooltip text="View MRKTBox Instagram Gallery?" placement="right">
                     <CustomButton component={Link} to="/mrkt-media">
                       <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
                         <InstagramIcon/>
                         MRKTBox
                       </Box>
                     </CustomButton>
-                  </CustomTooltip>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <CustomTooltip text="View Film Gallery?" placement="right">
                     <CustomButton component={Link} to="/film-media">
                       <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
                         <CameraRollIcon/>
                         Film Gallery
                       </Box>
                     </CustomButton>
-                  </CustomTooltip>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <CustomTooltip text="View Digital Gallery?" placement="right">
                     <CustomButton component={Link} to="/digi-media">
                       <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
                         <SdCardIcon/>
                         Digital Gallery
                       </Box>
                     </CustomButton>
-                  </CustomTooltip>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <CustomTooltip text="View Protected Photo Galleries?" placement="right">
                     <CustomButton component={Link} to="/gallery">
                       <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
                         <SecurityIcon/>
                         Protected Gallery
                       </Box>
                     </CustomButton>
-                  </CustomTooltip>
                 </MenuItem>
               </Menu>
             </Box>
             <CommentDialogButton icon={<QuestionAnswerTwoToneIcon/>}/>
-            <Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                whiteSpace: 'nowrap',
+                marginLeft: '2rem',
+                marginRight: '2rem',
+              }}
+            >
               <CustomTooltip 
-                text={isDarkMode ? "Switch to Light Mode?" : "Switch to Dark Mode?"}
-                placement="top"
+                text={isDarkMode ? "Switch to Dark Mode?" : "Switch to Light Mode?"}
+                placement="bottom"
               >
-                <IconButton onClick={toggleTheme}>
-                  <ContrastTwoToneIcon />
-                </IconButton>
-              </CustomTooltip>
-
-                {/* <CustomTooltip 
-                text="Change to dark mode?"
-                placement="top"
-              >
-                
-                <CustomButton to="/">
-                  <Box
-                    sx={{
-                      display: 'flex', 
-                      flexDirection: 'row', gap: '0.5rem',
-                  }}>
-                    <HomeTwoToneIcon/>
-                    Home
+                <CustomButton onClick={toggleTheme}>
+                  <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
+                    {
+                      isDarkMode ? <LightModeTwoToneIcon /> : <DarkModeTwoToneIcon />
+                    }
                   </Box>
                 </CustomButton>
-              </CustomTooltip> */}
+              </CustomTooltip>
             </Box>
           </Box>
         </Box>

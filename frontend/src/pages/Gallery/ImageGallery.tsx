@@ -15,13 +15,15 @@ import {
 
 import { getImagesByCategory, getImageUrl } from '@/api/galleryService';
 import Title from '@/components/Title';
-import { CustomButton } from '@/materials/Button';
+import CustomButton from '@/materials/Button';
 import PasswordPrompt from '@/pages/Gallery/PasswordPrompt';
 import { PortfolioImage } from '@/types/Gallery';
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 export default function ImageGallery() {
+  const theme = useTheme();
+  
   const [category, setCategory] = useState<'friends' | 'employers' | 'visitors' | null>(null);
   const [images, setImages] = useState<PortfolioImage[]>([]);
   const [loading, setLoading] = useState(false);
@@ -62,7 +64,7 @@ export default function ImageGallery() {
   }
 
   return (
-    <Box sx={{ p: 3, backgroundColor: Theme.palette.primary.main, borderRadius: '8px' }}>
+    <Box sx={{ p: 3, backgroundColor: theme.palette.primary.main, borderRadius: '8px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
         <Title children={`Welcome to my Gallery`}/>
         <CustomButton onClick={handleLogout}>
@@ -145,10 +147,10 @@ export default function ImageGallery() {
         onClose={() => setSelectedImage(null)}
         maxWidth="md"
         fullWidth
-        sx={{backgroundColour: Theme.palette.primary.dark}}
+        sx={{backgroundColour: theme.palette.primary.dark}}
       >
         {selectedImage && (
-          <Box sx={{backgroundColor: Theme.palette.primary.dark,}}>
+          <Box sx={{backgroundColor: theme.palette.primary.dark,}}>
             <DialogTitle>{selectedImage.name}</DialogTitle>
             <DialogContent>
               <Box

@@ -12,7 +12,6 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 
 import InstagramGallery from '@/pages/Gallery/InstagramGallery';
-import CustomTooltip from '@/materials/Tooltip';
 
 import MRKTRoutes from '@/data/MrktRoutes';
 import FilmRoutes from '@/data/FilmRoutes';
@@ -20,10 +19,11 @@ import DigitalRoutes from '@/data/DigitalRoutes';
 
 import Title from '@/components/Title';
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface InstagramGalleriesProps {
-    children? : React.ReactNode;
+  children? : React.ReactNode;
+  home?: boolean;
 }
 
 const galleries = [
@@ -32,14 +32,17 @@ const galleries = [
   { title: 'Digital', routes: DigitalRoutes },
 ];
 
-function InstagramGalleries({ children } : InstagramGalleriesProps) {
-    const [value, setValue] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
+function InstagramGalleries({ children, home } : InstagramGalleriesProps) {
+  const theme = useTheme();
+    
+  
+  const [value, setValue] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const handleChange = (__event: React.SyntheticEvent, newValue: number) => {
-      setCurrentPage(newValue);
-      setValue(newValue);
-    };
+  const handleChange = (__event: React.SyntheticEvent, newValue: number) => {
+    setCurrentPage(newValue);
+    setValue(newValue);
+  };
 
     React.useEffect(() => {
       const handleTabWheel = (event: Event) => {
@@ -73,31 +76,40 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
         <>
             <TabContext value={value}>
                 <Box sx={{
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    backgroundColor: Theme.palette.secondary.light, 
+                  display: 'flex',
+                  minHeight: home ? undefined : '85.2vh',
+                  borderRadius: home ? '8px' : undefined,
+                  flexDirection: 'column',
+                  paddingTop: '2vh',
+                  justifyContent: 'top',
+                  alignItems: 'center',
+                  backgroundColor: theme.palette.secondary.main,
                 }}>
-                    <Title children={"Instagram Media"}/>
+                    <Title color={theme.palette.primary.contrastText} variant="h5" children={"Instagram Media"}/>
                     <List dense={false}>
-                        <CustomTooltip 
-                            text="Shift + scroll or click each tab" 
-                            placement="top"
-                        >
                             <TabList 
                               onChange={handleChange}
                               aria-label="instagram-galleries-tabslist" 
                               sx={{ 
                                   '& .MuiTabs-flexContainer': {
-                                    gap: "0.5rem",
-                                    justifyContent: 'center',
+                                    justifyContent: 'space-evenly',
                                   },
                               }}
                             >
                               {galleries.map((gallery, index) => (
-                                <Tab key={index} label={`${gallery.title}`} value={index + 1} />
+                                <Tab 
+                                  sx={{
+                                    backgroundColor: theme.palette.primary.contrastText,
+                                    color: theme.palette.primary.main,
+                                    boxShadow: `0 2px 15px ${theme.palette.primary.contrastText}`,
+                                    borderRadius: '8px',
+                                  }} 
+                                  key={index} 
+                                  label={`${gallery.title}`} 
+                                  value={index + 1} 
+                                />
                               ))}
                             </TabList>
-                        </CustomTooltip>
 
                         {galleries
                             .filter((_, index) => index === currentPage - 1)
@@ -105,23 +117,19 @@ function InstagramGalleries({ children } : InstagramGalleriesProps) {
                               const itemIndex = currentPage - 1;
               
                               return (
-                                  <ListItem
-                                    key={itemIndex}
-                                    sx={{
-                                        borderRadius: "8px",
-                                        width: '100%',
-                                    }}
-                                  >
+                                  <ListItem key={itemIndex}>
                                     <Box 
                                         sx={{ 
-                                          width: '100%',
                                           justifyContent: 'center',
                                           alignItems: 'center',
-                                          display: 'flex', 
-                                          flexDirection: 'column', 
-                                        }}
+                                          display: 'flex',
+                                          borderRadius: "8px",
+                                          backgroundColor: theme.palette.secondary.main,
+                                          flexDirection: 'column',
+                                          padding: '1rem',
+                                          }}
                                     >
-                                      <InstagramGallery title={itemIndex>0 ? `${gallery.title} Media` : `${gallery.title} Appearances`} routes={gallery.routes}/>
+                                      <InstagramGallery home={home} variant={home ? "h6" : "h4"} title={itemIndex>0 ? `${gallery.title} Media` : `${gallery.title} Memories`} routes={gallery.routes}/>
                                     </Box>
                                   </ListItem>
                               );

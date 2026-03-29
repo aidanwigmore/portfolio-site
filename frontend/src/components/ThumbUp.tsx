@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
 import CustomTooltip from '@/materials/Tooltip'; 
 
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface ThumbUpProps {
     children?: React.ReactNode;
@@ -15,6 +15,8 @@ interface ThumbUpProps {
 }
 
 function ThumbUp({ index, name, ratingCode, onThumbsUp }: ThumbUpProps) {
+    const theme = useTheme();
+    
     return (
         <CustomTooltip text={name ? `Thumb Up ${name.slice(0, name.length - 1)}?` : 'Thumb Up?'} placement='left'>
             <IconButton
@@ -23,16 +25,16 @@ function ThumbUp({ index, name, ratingCode, onThumbsUp }: ThumbUpProps) {
                 size="large"
                 sx={{
                     transition: 'all 0.3s ease',
-                    backgroundColor: Theme.palette.secondary.light,
+                    backgroundColor: theme.palette.secondary.light,
                     '&:hover': {
-                        backgroundColor: Theme.palette.secondary.main,
+                        backgroundColor: theme.palette.secondary.main,
                     },
                     '&:hover svg path': {
-                        fill: Theme.palette.primary.main,
+                        fill: theme.palette.primary.main,
                         transition: 'fill 0.3s ease',
                     },
                     '&:hover svg path:nth-of-type(2)': {
-                        fill: Theme.palette.secondary.contrastText,
+                        fill: theme.palette.secondary.contrastText,
                         transition: 'fill 0.3s ease',
                     },
                 }}
@@ -40,19 +42,16 @@ function ThumbUp({ index, name, ratingCode, onThumbsUp }: ThumbUpProps) {
                 <ThumbUpTwoToneIcon 
                     sx={{
                         '& path': {
-                            fill: Theme.palette.primary.main,
+                            fill: theme.palette.primary.main,
                             transition: 'fill 0.3s ease',
                         },
                         '& path:nth-of-type(2)': {
-                            fill: Theme.palette.secondary.main,
+                            fill: theme.palette.secondary.main,
                             transition: 'fill 0.3s ease',
                         },  
                     }}
                 />
             </IconButton>
-            {/* <CustomTypography variant="subtitle1" sx={{textAlign: 'center'}}>
-                {count || 0}
-            </CustomTypography> */}
         </CustomTooltip>
     );
 }

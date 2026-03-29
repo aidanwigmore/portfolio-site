@@ -2,27 +2,27 @@
 export default [
     {
         Fresh_corn:{
-            coord: "",
+            coord: "The best corn from Welsh Brothers farm in Ontario.",
             link:"/p/DMF4LzvMNHO",
             developed:"",
         },
         MRKTBox:{
-            coord: "",
+            coord: "Loading a produce MRKTBox into an electric car.",
             link:"/p/C4vDvANurhc",
             developed:"",
         },
         Summit_Station:{
-            coord: "",
+            coord: "Incredible, cheese curds & people.",
             link:"/p/DL7ityFuhke",
             developed:"",
         },
         Cat:{
-            coord: "",
+            coord: "National Cat Day.",
             link:"/reel/DNGfH0Bu2BJ",
             developed:"",
         },
         Traffic:{
-            coord: "",
+            coord: "'Construction all around? Let us sit in traffic for you.'",
             link:"/reel/DBg-et9xCmK",
             developed:"",
         },
@@ -32,7 +32,7 @@ export default [
             developed:"",
         },
         Bread_day:{
-            coord: "",
+            coord: "Showing off the bread schedule",
             link:"/reel/Ctq7VBBu2c7",
             developed:"",
         },
@@ -41,7 +41,7 @@ export default [
             link:"/reel/CstKItVp0vw",
             developed:"",
         },
-        Coffee:{
+        Lunch_Break:{
             coord: "",
             link:"/p/CpAS1yluMuY",
             developed:"",

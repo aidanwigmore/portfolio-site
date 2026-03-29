@@ -1,8 +1,7 @@
 import { Button, ButtonProps } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
-
-import Theme from '@/Theme';
+import { useTheme } from '@mui/material/styles';
 
 interface CustomButtonProps extends ButtonProps {
     variant?: 'text' | 'outlined' | 'contained';
@@ -11,7 +10,7 @@ interface CustomButtonProps extends ButtonProps {
     to?: string;
 }
 
-export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
+const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
     (
         {
             variant = 'contained',
@@ -23,6 +22,8 @@ export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProp
         },
         ref
     ) => {
+        const theme = useTheme();
+
         return (
             <Button
                 ref={ref}
@@ -32,15 +33,17 @@ export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProp
                 sx={{
                     display: 'inline-block',
                     width: 'auto',
+                    maxWidth: '200px',
                     padding: '8px 16px',
-                    textWrap: 'noWrap',
-                    backgroundColor: Theme.palette.primary.light,
+                    textWrap: 'nowrap',
+                    backgroundColor: theme.palette.primary.contrastText,
+                    color: theme.palette.primary.main,
+                    boxShadow: `0 4px 16px ${theme.palette.primary.contrastText}`,
                     ...(gutterBottom && { marginBottom: '1rem' }),
                     ...sx,
                     '&:hover': {
-                        backgroundColor: Theme.palette.secondary.main,
-                        color: Theme.palette.secondary.contrastText,
-                        transition: 'fill 1s ease',
+                        backgroundColor: theme.palette.secondary.light,
+                        color: theme.palette.primary.contrastText,
                     },
                 }}
                 {...props}
@@ -52,3 +55,5 @@ export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProp
 );
 
 CustomButton.displayName = 'CustomButton';
+
+export default CustomButton;
