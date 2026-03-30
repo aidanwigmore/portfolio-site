@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -8,94 +8,41 @@ import {
   Tab,
 } from '@mui/material';
 
-import ProjectData from "@/pages/Projects/ProjectData";
-
-import { useThumbsUp } from '@/hooks/useThumbsUp';
-import Title from '@/components/Title';
 import { CustomTypography } from "@/materials/Typography";
 
 import CustomIconButton from '@/materials/IconButton';
 import ThumbUp from '@/components/ThumbUp';
 import LanguageTwoToneIcon from '@mui/icons-material/LanguageTwoTone';
+
+import TabList from '@mui/lab/TabList';
 import { useTheme } from '@mui/material/styles';
 
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-
-interface ProjectProps {
-  home?: boolean;
+interface ProjectTabListProps {
+    children? : React.ReactNode;
+    handleChange: (event: React.SyntheticEvent, newValue: number) => void;
+    items: any[];
+    currentPage: number;
+    home?: boolean;
+    handleNavigateNewTab: (url: string) => void;
+    handleThumbsUp: (ratingCode: string) => void;
 }
 
-export default function Projects( { home } : ProjectProps ) {
-  const theme = useTheme();
-  
-  const { handleThumbsUp } = useThumbsUp('video');
+function ProjectTabListProps({ handleChange, items, currentPage, home, handleNavigateNewTab, handleThumbsUp } : ProjectTabListProps) {
+    const theme = useTheme();
     
-  const [value, setValue] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  
-  const items = ProjectData;
-
-  const handleChange = (__event: React.SyntheticEvent, newValue: number) => {
-    setCurrentPage(newValue);
-    setValue(newValue);
-  };
-
-  const handleNavigateNewTab = (url: string) => {
-    window.open(url, '_blank');
-  };
-
-  React.useEffect(() => {
-    const handleTabWheel = (event: Event) => {
-      const wheelEvent = event as WheelEvent;
-      if (wheelEvent.shiftKey) {
-        event.preventDefault();
-        const nextValue = wheelEvent.deltaY > 0 
-          ? Math.min(value + 1, items.length)
-          : Math.max(value - 1, 1);
-        
-        if (nextValue !== value) {
-          setValue(nextValue);
-          setCurrentPage(nextValue);
-        }
-      }
-    };
-
-    const tabList = document.querySelector('[aria-label="projects-tabslist"]');
-    if (tabList) {
-      tabList.addEventListener('wheel', handleTabWheel as EventListener, { passive: false });
-    }
-
-    return () => {
-      if (tabList) {
-        tabList.removeEventListener('wheel', handleTabWheel as EventListener);
-      }
-    };
-  }, [value, items.length]);
-
-  return (
-    <>
-      <TabContext value={value}>
-        <Box sx={{
-          display: 'flex',
-          minHeight: home ? undefined : '85.2vh',
-          borderRadius: home ? '8px' : undefined,
-          flexDirection: 'column',
-          paddingTop: '2vh',
-          justifyContent: 'top',
-          alignItems: 'center',
-          backgroundColor: theme.palette.secondary.main,
-        }}>
-          <Title color={theme.palette.primary.contrastText} variant="h5" children={"Projects I've Worked On"} />
-          <List dense={false}>
-              <TabList 
+    return (
+        <>
+            <List dense={false}>
+              <TabList
                 id={'projects-tabslist'}
                 onChange={handleChange}
                 aria-label="projects-tabslist" 
-                sx={{
-                  '& .MuiTabs-flexContainer': {
+                sx={{'& .MuiTabs-flexContainer': {
                     justifyContent: 'space-evenly',
-                  },
+                    flexWrap: 'wrap',
+                    gap: '8px',
+                  }, 
+                  width: '100%',
                 }}
               >
                 {items.map((item, index) => (
@@ -103,8 +50,12 @@ export default function Projects( { home } : ProjectProps ) {
                     sx={{
                       backgroundColor: theme.palette.primary.contrastText,
                       color: theme.palette.primary.main,
-                      boxShadow: `0 2px 15px ${theme.palette.primary.contrastText}`,
                       borderRadius: '8px',
+                      '&:hover': {
+                        backgroundColor: theme.palette.secondary.main,
+                        color: theme.palette.primary.contrastText,
+                        boxShadow: `0 4px 16px ${theme.palette.primary.main}`,
+                      },
                     }}
                     key={index} 
                     label={`${item.title}`} 
@@ -201,8 +152,8 @@ export default function Projects( { home } : ProjectProps ) {
                 );
               })}
           </List>
-        </Box>
-      </TabContext>
-    </>
-  );
+        </>
+    );
 }
+
+export default ProjectTabListProps;

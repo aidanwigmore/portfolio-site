@@ -1,6 +1,8 @@
+import React from 'react';
+
 import { Button, ButtonProps } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import React from 'react';
+
 import { useTheme } from '@mui/material/styles';
 
 interface CustomButtonProps extends ButtonProps {
@@ -38,12 +40,12 @@ const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
                     textWrap: 'nowrap',
                     backgroundColor: theme.palette.primary.contrastText,
                     color: theme.palette.primary.main,
-                    boxShadow: `0 4px 16px ${theme.palette.primary.contrastText}`,
                     ...(gutterBottom && { marginBottom: '1rem' }),
                     ...sx,
                     '&:hover': {
-                        backgroundColor: theme.palette.secondary.light,
+                        backgroundColor: theme.palette.secondary.main,
                         color: theme.palette.primary.contrastText,
+                        boxShadow: `0 4px 16px ${theme.palette.primary.main}`,
                     },
                 }}
                 {...props}

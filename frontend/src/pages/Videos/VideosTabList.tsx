@@ -3,172 +3,96 @@ import React, { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-import { AccordionDetails, AccordionSummary, Box, Step, StepLabel, Stepper, Tab } from '@mui/material';
-import Accordion from '@mui/material/Accordion';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { 
+  Box, 
+  Tab,
+  Stepper,
+  Step,
+  StepLabel,
+} from '@mui/material';
 
 import { CustomTypography } from "@/materials/Typography";
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 
-import VideoData from "@/pages/Videos/VideoData";
+import { CustomAccordion } from '@/materials/Accordion';
 
 import ThumbUp from '@/components/ThumbUp';
-import CustomButton from "@/materials/Button";
-import Title from '@/components/Title';
-import { useThumbsUp } from '@/hooks/useThumbsUp';
-import { useTheme } from '@mui/material/styles';
 
-interface VideosProps {
-  home?: boolean;
+import TabList from '@mui/lab/TabList';
+import { useTheme } from '@mui/material/styles';
+import CustomButton from '@/materials/Button';
+
+interface VideosTabListProps {
+    children? : React.ReactNode;
+    handleChange: (event: React.SyntheticEvent, newValue: number) => void;
+
+    items: any[];
+    currentPage: number;
+    home?: boolean;
+    handleThumbsUp: (ratingCode: string) => void;
 }
 
-export default function Videos({ home }: VideosProps) {
-  const theme = useTheme();
-  
-  const { handleThumbsUp } = useThumbsUp('video');
+function VideosTabListProps({ handleChange, items, currentPage, home, handleThumbsUp } : VideosTabListProps) {
+    const theme = useTheme();
+    const [activeSteps, setActiveSteps] = useState<number[]>(items.map(() => 0));
+    const [skipped, setSkipped] = useState<Set<number>>(new Set());
 
-  const items = VideoData;
+    const isStepOptional = (step: number) => step === 1;
+    const isStepSkipped = (itemIndex: number, step: number) => skipped.has(itemIndex * 100 + step);
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
+    const handleNext = (itemIndex: number) => {
+      setActiveSteps((prevActiveStep) => {
+        const newSteps = [...prevActiveStep];
+        newSteps[itemIndex] += 1;
+        return newSteps;
+      });
+    };
 
-  const [__waelapsedTimes, setElapsedTimes] = useState<number[]>(items.map(() => 0));
+    const handleBack = (itemIndex: number) => {
+      setActiveSteps((prevActiveStep) => {
+        const newSteps = [...prevActiveStep];
+        newSteps[itemIndex] -= 1;
+        return newSteps;
+      });
+    };
 
-  const [activeSteps, setActiveSteps] = useState<number[]>(items.map(() => 0));
-  const [skippedSteps, setSkippedSteps] = useState<Set<number>[]>(items.map(() => new Set()));
-  
-  const [value, setValue] = useState<number>(1);
-  const handleChange = (__event: React.SyntheticEvent, newValue: number) => {
-    setCurrentPage(newValue);
-    setValue(newValue);
-  };
-
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
-
-  const isStepSkipped = (itemIndex: number, step: number) => {
-    return skippedSteps[itemIndex]?.has(step);
-  };
-
-  const handleNext = (itemIndex: number) => {
-    setActiveSteps((prev) => {
-      const newSteps = [...prev];
-      newSteps[itemIndex]++;
-      return newSteps;
-    });
-
-    setElapsedTimes((prev) => {
-    const newTimes = [...prev];
-    newTimes[itemIndex] = 0;
-    return newTimes;
-  });
-  };
-
-  const handleBack = (itemIndex: number) => {
-    setActiveSteps((prev) => {
-      const newSteps = [...prev];
-      newSteps[itemIndex]--;
-      return newSteps;
-    });
-
-    setElapsedTimes((prev) => {
-      const newTimes = [...prev];
-      newTimes[itemIndex] = 0;
-      return newTimes;
-  });
-  };
-
-  const handleSkip = (itemIndex: number) => {
-    if (!isStepOptional(activeSteps[itemIndex])) {
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveSteps((prev) => {
-      const newSteps = [...prev];
-      newSteps[itemIndex]++;
-      return newSteps;
-    });
-
-    setElapsedTimes((prev) => {
-      const newTimes = [...prev];
-      newTimes[itemIndex] = 0;
-      return newTimes;
-    });
-
-    setSkippedSteps((prev) => {
-      const newSkipped = [...prev];
-      const newSet = new Set(newSkipped[itemIndex]);
-      newSet.add(activeSteps[itemIndex]);
-      newSkipped[itemIndex] = newSet;
-      return newSkipped;
-    });
-  };
-
-  const handleReset = (itemIndex: number) => {
-    setActiveSteps((prev) => {
-      const newSteps = [...prev];
-      newSteps[itemIndex] = 0;
-      return newSteps;
-    });
-
-    setElapsedTimes((prev) => {
-      const newTimes = [...prev];
-      newTimes[itemIndex] = 0;
-      return newTimes;
-    });
-  };
-
-  React.useEffect(() => {
-      const handleTabWheel = (event: Event) => {
-        const wheelEvent = event as WheelEvent;
-        if (wheelEvent.shiftKey) {
-          event.preventDefault();
-          const nextValue = wheelEvent.deltaY > 0 
-            ? Math.min(value + 1, items.length)
-            : Math.max(value - 1, 1);
-          
-          if (nextValue !== value) {
-            setValue(nextValue);
-            setCurrentPage(nextValue);
-          }
-        }
-      };
-  
-      const tabList = document.querySelector('[aria-label="tabslist"]');
-      if (tabList) {
-        tabList.addEventListener('wheel', handleTabWheel as EventListener, { passive: false });
+    const handleSkip = (itemIndex: number) => {
+      if (!isStepOptional(activeSteps[itemIndex])) {
+        return;
       }
-  
-      return () => {
-        if (tabList) {
-          tabList.removeEventListener('wheel', handleTabWheel as EventListener);
-        }
-      };
-    }, [value, items.length]);
 
-  return (
-      <>
-      <TabContext value={value}>
-        <Box sx={{
-          display: 'flex',
-          minHeight: home ? undefined : '85.2vh',
-          borderRadius: home ? '8px' : undefined,
-          flexDirection: 'column',
-          paddingTop: '2vh',
-          justifyContent: 'top',
-          alignItems: 'center',
-          backgroundColor: theme.palette.secondary.main,
-        }}>
-          <Title color={theme.palette.primary.contrastText} variant="h5" children={"My Youtube Videos"} />
-          <List dense={false}>
+      setActiveSteps((prevActiveStep) => {
+        const newSteps = [...prevActiveStep];
+        newSteps[itemIndex] += 1;
+        return newSteps;
+      });
+      setSkipped((prevSkipped) => {
+        const newSkipped = new Set(prevSkipped.values());
+        newSkipped.add(itemIndex * 100 + activeSteps[itemIndex]);
+        return newSkipped;
+      });
+    };
+
+    const handleReset = (itemIndex: number) => {
+      setActiveSteps((prevActiveStep) => {
+        const newSteps = [...prevActiveStep];
+        newSteps[itemIndex] = 0;
+        return newSteps;
+      });
+    };
+    
+    return (
+        <>
+            <List dense={false}>
               <TabList 
                 id={'video-tabslist'}
                 onChange={handleChange} 
                 aria-label="video-tabslist"
                 sx={{'& .MuiTabs-flexContainer': {
                     justifyContent: 'space-evenly',
+                    flexWrap: 'wrap',
+                    gap: '8px',
                   }, 
+                  width: '100%',
                 }}
               >
               {items.map((item, index) => (
@@ -176,8 +100,12 @@ export default function Videos({ home }: VideosProps) {
                   sx={{
                     backgroundColor: theme.palette.primary.contrastText,
                     color: theme.palette.primary.main,
-                    boxShadow: `0 2px 15px ${theme.palette.primary.contrastText}`,
                     borderRadius: '8px',
+                    '&:hover': {
+                      backgroundColor: theme.palette.secondary.main,
+                      color: theme.palette.primary.contrastText,
+                      boxShadow: `0 4px 16px ${theme.palette.primary.main}`,
+                    },
                   }} 
                   key={index} 
                   label={`${item.title}`} 
@@ -218,8 +146,11 @@ export default function Videos({ home }: VideosProps) {
                   <CustomTypography color={theme.palette.primary.main} variant={home ? "h6" : "h4"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
                     {items[currentPage - 1].title}
                   </CustomTypography>
+                  <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
+                    {item.description}
+                  </CustomTypography>
                   <Stepper activeStep={currentStep}>
-                    {item.steps.titles.map((label, stepIndex) => {
+                    {item.steps.titles.map((label: string, stepIndex: number) => {
                       const stepProps: { completed?: boolean } = {};
 
                       if (isStepSkipped(itemIndex, stepIndex)) {
@@ -244,9 +175,6 @@ export default function Videos({ home }: VideosProps) {
                             <Box sx={{display: 'flex', flexDirection: 'column'}}>
                               <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center', textDecoration: currentStep === stepIndex ? 'underline' : 'none' }}>
                                 {label}
-                              </CustomTypography>
-                              <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
-                                {item.description}
                               </CustomTypography>
                               <CustomTypography color={theme.palette.primary.main} variant={home ? "caption" : "caption"} gutterBottom component="span" sx={{ flexWrap: 'wrap', textAlign: 'center' }}>
                                 Uploaded: {item.steps.uploadDates[stepIndex]}
@@ -337,20 +265,10 @@ export default function Videos({ home }: VideosProps) {
                       ></iframe>
                   
                       </Box>                    
-                        {item.stepsLabels ? (
-                        <Accordion sx={{backgroundColor: theme.palette.primary.contrastText, color: 'black', maxHeight: '500px', overflowY: 'auto' }}>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon sx={{fill: theme.palette.primary.main}}/>}
-                            aria-controls="panel1-content"
-                          >
-                            <CustomTypography color={theme.palette.primary.main} component="span">Click for Transcriptions</CustomTypography>
-                          </AccordionSummary>
-                          <AccordionDetails sx={{backgroundColor: theme.palette.secondary.light}}>
-                            <CustomTypography component="span">
-                              {item.stepsLabels[currentStep]}
-                            </CustomTypography>
-                          </AccordionDetails>
-                        </Accordion>
+
+                      {/* transcriptions */}
+                      {item.stepsLabels ? (
+                        <CustomAccordion item={item} currentStep={currentStep} />
                       ) : (
                         ''
                       )}
@@ -359,8 +277,8 @@ export default function Videos({ home }: VideosProps) {
                   </ListItem>
             );     })}
           </List>
-        </Box>
-      </TabContext>
-      </>
-  );
+        </>
+    );
 }
+
+export default VideosTabListProps;

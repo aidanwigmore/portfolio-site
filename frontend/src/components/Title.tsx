@@ -16,16 +16,25 @@ function Title({ children, variant, color } : TitleProps) {
     const theme = useTheme();
 
     return (
-        <Box sx={{ 
-            display: 'flex',
-            justifyContent: 'center',
-            alignSelf: 'center',
-            backgroundColor: {color},
-        }}>
-            <Box sx={{
-            }}>
-            <CustomTypography sx={{textDecoration: 'underline'}} variant={variant} color={color ? color : theme.palette.primary.main} textAlign="center" gutterBottom>
-                {children}
+        <Box 
+            sx={{ 
+                display: 'flex',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                backgroundColor: {color},
+            }}
+        >
+            <Box>
+            <CustomTypography 
+                variant={ variant } 
+                color={ color ? color : theme.palette.primary.main } 
+                textAlign="center"
+                gutterBottom
+                sx={{
+                    textDecoration: 'underline'
+                }}
+            >
+                { children }
             </CustomTypography>
             </Box>
         </Box>

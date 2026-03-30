@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import Home from '@/pages/Home';
-import Videos from '@/pages/Videos/Videos';
-import Projects from '@/pages/Projects/Projects';
+import Videos from '@/pages/Videos/VideosIndex';
+import Projects from '@/pages/Projects/ProjectsIndex';
 import ImageGallery from '@/pages/Gallery/ImageGallery';
 
 import Navbar from '@/components/Navbar';
@@ -36,7 +36,17 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={
             <PageTransition>
-              <Home />
+              <Box
+                sx={{
+                  backgroundColor: theme.palette.primary.contrastText,
+                  padding: '1rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Home />
+              </Box>
             </PageTransition>
           } />
           <Route path="/videos" element={

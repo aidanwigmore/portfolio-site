@@ -111,10 +111,9 @@ export default function InstagramGallery({ routes, title, variant, color, home }
       }}
     >
       <Title color={home ? theme.palette.primary.main : theme.palette.primary.contrastText} variant={home ? variant : 'h5'}>
-          {title}
-        </Title>
+        {title} 
+      </Title>
         <Box display="flex" flexDirection="row" gap={2}>
-        
         <FormControl sx={{ mb: 3, minWidth: 200 }}>
           <Select
             value={itemsPerPage}
@@ -241,20 +240,21 @@ export default function InstagramGallery({ routes, title, variant, color, home }
                 <Box
                   sx={{
                     display: 'inline-block',
-                    overflow: 'hidden',
                     borderRadius: '8px',
-                    height: '45vh',
+                    height: '100%',
+                    width: '100%',
                     boxShadow: `0 8px 32px ${theme.palette.primary.main}`,
                   }}
                 >
                   <iframe 
                     src={`https://www.instagram.com${post.link}/embed`}
-                    width="100%"
-                    height="100%"
                     data-instgrm-ignore="true"
                     scrolling="yes"
                     style={{
+                      height: '15rem',
+                      width: '100%',
                       border: 'none',
+                      borderRadius: '8px',
                     }}
                     title={post.name}
                   />

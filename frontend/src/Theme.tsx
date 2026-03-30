@@ -14,6 +14,21 @@ const colors = {
     success: '#1cda29',
 }
 
+const sizes = {
+    h1: '1rem',
+    h2: '1.5rem',
+    h3: '1.25rem',
+    h4: '1rem',
+    h5: '0.875rem',
+    h6: '0.75rem',
+    body1: '1rem',
+    body2: '0.875rem',
+    button: '0.75rem',
+    caption: '0.75rem',
+    overline: '0.625rem',
+    icon: '1.5rem',
+}
+
 const fonts = {
     normal: 'sans-serif',
     button: '"Cutive Mono", monospace',
@@ -62,28 +77,28 @@ const lightTheme = createTheme({
     typography: {
         fontFamily: fonts.normal,
         h1: {
-            fontSize: '2rem',
+            fontSize: sizes.h1,
             fontFamily: fonts.title,
-            fontWeight: 600,
         },
         h4: {
-            fontSize: '2rem',
+            fontSize: sizes.h4,
             fontFamily: fonts.title,
             fontWeight: 600,
         },
         h5: {
-            fontSize: '2rem',
+            fontSize: sizes.h5,
             fontFamily: fonts.title,
             fontWeight: 600,
         },
         h6: {
-            fontSize: '2rem',
+            fontSize: sizes.h6,
             fontFamily: fonts.title,
             fontWeight: 600,
         },
         button: {
+            fontSize: sizes.button,
             fontFamily: fonts.button,
-             fontWeight: 400,
+            fontWeight: 400,
         }
     },
     components: {
@@ -146,28 +161,29 @@ const darkTheme = createTheme({
     typography: {
         fontFamily: fonts.normal,
         h1: {
-            fontSize: '2rem',
+            fontSize: sizes.h1,
             fontFamily: fonts.title,
             fontWeight: 600,
         },
         h4: {
-            fontSize: '2rem',
+            fontSize: sizes.h4,
             fontFamily: fonts.title,
             fontWeight: 600,
         },
         h5: {
-            fontSize: '2rem',
+            fontSize: sizes.h5,
             fontFamily: fonts.title,
             fontWeight: 600,
         },
         h6: {
-            fontSize: '2rem',
+            fontSize: sizes.h6,
             fontFamily: fonts.title,
             fontWeight: 600,
         },
         button: {
+            fontSize: sizes.button,
             fontFamily: fonts.button,
-             fontWeight: 400,
+            fontWeight: 400,
         }
     },
     components: {

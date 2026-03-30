@@ -3,7 +3,7 @@ import Transcriptions from "./Transcriptions";
 export default [
     {
       title: "Batched Support",
-      description: "Youtube Demonstrations",
+      description: "At MRKTBox I was tasked with publishing short videos demonstrating how to use the MRKTBox platform to complete common tasks. These videos were used as part of a larger initiative to provide more self-service support options for our customers, and to reduce the number of support tickets we received for common issues.",
       channel: "Batched Support",
       src: [
         "https://www.youtube.com/embed/IJFOHNK-sBY?si=PXlTKlbJS7qaHsPR",
@@ -17,9 +17,6 @@ export default [
           'Sign up to MRKTBox',
         ],
         descriptions: [
-          'During my time at Batched Inc. I made 40+ short-form tutorial videos for the Batched Support / MRKTBox Support Youtube channels.',
-          'You may notice my tag-line for much of my content starts with "Hi There". ',
-          'You may also notice my tag-line for the end of much of my content ends with "...and if this video didn\'t answer your question, there\'s plenty more to assist you"',
         ],
         ratingCodes: [
           'batched-support-1',

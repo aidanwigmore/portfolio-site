@@ -18,7 +18,14 @@ function ThumbUp({ index, name, ratingCode, onThumbsUp }: ThumbUpProps) {
     const theme = useTheme();
     
     return (
-        <CustomTooltip text={name ? `Thumb Up ${name.slice(0, name.length - 1)}?` : 'Thumb Up?'} placement='left'>
+        <CustomTooltip 
+            placement='left'
+            text={
+                name ? 
+                    `Thumb Up ${name.slice(0, name.length - 1)}?`
+                : 'Thumb Up?'
+            }
+        >
             <IconButton
                 key={`thumb-up-box-${index}`}
                 onClick={() => onThumbsUp(ratingCode)}
