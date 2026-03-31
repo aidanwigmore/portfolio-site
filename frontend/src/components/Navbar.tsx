@@ -1,13 +1,9 @@
-import React, { useState}  from 'react'; 
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import { 
-  Box,
-  MenuItem,
-  Menu,
-} from '@mui/material';
+import { Box, MenuItem, Menu } from '@mui/material';
 
-import { 
+import {
   Security as SecurityIcon,
   ChevronLeft,
   CameraRoll as CameraRollIcon,
@@ -18,7 +14,7 @@ import {
   PermMediaTwoTone as PermMediaTwoToneIcon,
   QuestionAnswerTwoTone as QuestionAnswerTwoToneIcon,
   LightModeTwoTone as LightModeTwoToneIcon,
-  DarkModeTwoTone as DarkModeTwoToneIcon, 
+  DarkModeTwoTone as DarkModeTwoToneIcon,
 } from '@mui/icons-material';
 
 import CommentDialogButton from '@/components/CommentForm';
@@ -34,35 +30,41 @@ interface NavBarProps {
   toggleTheme: () => void;
 }
 
-export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
+const pageNames: Record<string, string> = {
+  '/': 'Home',
+  '/projects': 'Projects',
+  '/videos': 'Videos',
+  '/mrkt-media': 'MRKTBox',
+  '/film-media': 'Film',
+  '/digi-media': 'Digital',
+  '/gallery': 'Protected',
+};
+
+export default function NavBar({ isDarkMode, toggleTheme }: NavBarProps) {
   const theme = useTheme();
-  
+  const location = useLocation();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
+  const currentPageName = pageNames[location.pathname] || 'Portfolio';
+
   return (
     <>
       <Box
-        id="navbar-outer-box"
-        key="navbar-outer-box"
-        sx={{ 
+        sx={{
           top: 0,
-          display: 'flex', 
+          display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: theme.palette.secondary.main,
         }}
       >
         <CustomButton
-          id="navbar-home-aidan-custom-button"
-          key="navbar-home-aidan-custom-button"
           to="/"
           component={Link}
           sx={{
@@ -76,9 +78,7 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
             },
           }}
         >
-          <CustomTypography 
-            id="navbar-home-custom-typography"
-            key="navbar-home-custom-typography"
+          <CustomTypography
             variant="h1"
             children="Aidan"
             sx={{
@@ -86,14 +86,11 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
             }}
           />
         </CustomButton>
-        
         <Box
-          id="navbar-pages-outer-box"
-          key="navbar-pages-outer-box"
           sx={{
             position: 'relative',
             top: 0,
-            display: 'flex', 
+            display: 'flex',
             flexDirection: 'row',
             backgroundColor: theme.palette.secondary.main,
             padding: '0.5rem',
@@ -102,55 +99,54 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
             alignItems: 'center',
             overflow: 'auto',
           }}
-        > 
+        >
           <Box
-            id="navbar-pages-outer-box"
-            key="navbar-pages-outer-box"
             sx={{
               display: 'flex',
               flexDirection: 'row',
+              alignItems: 'center',
               justifyContent: 'center',
               gap: '0.5rem',
               flexWrap: 'wrap',
               maxWidth: '90%',
             }}
           >
-            <CustomButton 
-              id="navbar-projects-custom-button"
-              key="navbar-projects-custom-button"
-              component={Link} 
+            <CustomTypography
+              variant="h6"
+              children={currentPageName}
+              sx={{
+                color: theme.palette.primary.contrastText,
+                marginLeft: '0.5rem',
+              }}
+            />
+            <CustomButton
+              component={Link}
               to="/projects"
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
             >
-              <Box
+              <AccountTreeTwoToneIcon
                 sx={{
-                  display: 'flex', 
-                  flexDirection: 'row',
-                  alignItems: 'center',
-              }}>
-                <AccountTreeTwoToneIcon
-                  sx={{
-                    height: '1.25rem',
-                  }}
-                />
-                Projects
-              </Box>
-            </CustomButton>
-            
-            <Box>
-              <CustomButton
-                id="navbar-media-custom-button"
-                key="navbar-media-custom-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-                sx={{
-                  display: 'flex', 
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  height: '1.25rem',
                 }}
-              >
-            
+              />
+              Projects
+            </CustomButton>
+
+            <CustomButton
+              component={Link}
+              onClick={(e) => setAnchorEl(e.currentTarget)}
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
               <PermMediaTwoToneIcon
                 sx={{
                   height: '1.25rem',
@@ -159,15 +155,14 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
               Media
               <ChevronLeft
                 sx={{
-                  height: '1.25rem', 
-                  transform: open ? 'rotate(90deg)' : 'rotate(270deg)', 
-                  transition: 'transform 0.3s' 
-                }} 
+                  height: '1.25rem',
+                  transform: open ? 'rotate(90deg)' : 'rotate(270deg)',
+                  transition: 'transform 0.3s',
+                }}
               />
             </CustomButton>
-            
+
             <Menu
-              id="basic-menu"
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
@@ -177,150 +172,113 @@ export default function NavBar({isDarkMode, toggleTheme} : NavBarProps) {
                 },
               }}
             >
-              
-              <MenuItem 
-                onClick={handleClose}
-              >
-                <CustomButton 
-                  id="navbar-videos-custom-button"
+              <MenuItem onClick={handleClose}>
+                <CustomButton
                   key="navbar-videos-custom-button"
-                  component={Link} 
+                  component={Link}
                   to="/videos"
                 >
                   <Box
                     sx={{
                       display: 'flex',
                       flexDirection: 'row',
-                      gap: '0.5rem'
+                      gap: '0.5rem',
                     }}
                   >
                     <YouTubeIcon
                       sx={{
-                        height: '1.25rem'
+                        height: '1.25rem',
                       }}
                     />
                     Videos
                   </Box>
                 </CustomButton>
               </MenuItem>
-              
+
               <MenuItem onClick={handleClose}>
-                  <CustomButton 
-                    id="navbar-mrkt-media-custom-button"
-                    key="navbar-mrkt-media-custom-button"
-                    component={Link} 
-                    to="/mrkt-media"
-                  >
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <InstagramIcon sx={{ height: '1.25rem' }}/>
-                      MRKTBox
-                    </Box>
-                  </CustomButton>
+                <CustomButton component={Link} to="/mrkt-media">
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
+                    <InstagramIcon sx={{ height: '1.25rem' }} />
+                    MRKTBox
+                  </Box>
+                </CustomButton>
               </MenuItem>
-              <MenuItem 
-                onClick={handleClose}
-              >
-                <CustomButton 
-                  id="navbar-film-media-custom-button"
-                  key="navbar-film-media-custom-button"
-                  component={Link}
-                  to="/film-media"
-                >
-                  <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                    <CameraRollIcon sx={{ height: '1.25rem' }}/>
+              <MenuItem onClick={handleClose}>
+                <CustomButton component={Link} to="/film-media">
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
+                    <CameraRollIcon sx={{ height: '1.25rem' }} />
                     Film
                   </Box>
-                  </CustomButton>
+                </CustomButton>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                  <CustomButton 
-                    id="navbar-digi-media-custom-button"
-                    key="navbar-digi-media-custom-button"
-                    component={Link} 
-                    to="/digi-media"
-                  >
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <SdCardIcon sx={{ height: '1.25rem' }}/>
-                      Digital
-                    </Box>
-                  </CustomButton>
+                <CustomButton component={Link} to="/digi-media">
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
+                    <SdCardIcon sx={{ height: '1.25rem' }} />
+                    Digital
+                  </Box>
+                </CustomButton>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                  <CustomButton 
-                    id="navbar-protected-media-custom-button"
-                    key="navbar-protected-media-custom-button"
-                    component={Link} 
-                    to="/gallery"
-                  >
-                    <Box sx={{display: 'flex', flexDirection: 'row', gap: '0.5rem'}}>
-                      <SecurityIcon sx={{ height: '1.25rem' }}/>
-                      Protected
-                    </Box>
-                  </CustomButton>
+                <CustomButton component={Link} to="/gallery">
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
+                    <SecurityIcon sx={{ height: '1.25rem' }} />
+                    Protected
+                  </Box>
+                </CustomButton>
               </MenuItem>
             </Menu>
             <CommentDialogButton
-              id="navbar-message-custom-button"
-              key="navbar-message-custom-button"
               icon={
                 <QuestionAnswerTwoToneIcon
-                  sx={{ 
-                    height: '1.25rem' 
+                  sx={{
+                    height: '1.25rem',
                   }}
                 />
               }
             />
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            whiteSpace: 'nowrap',
-            marginLeft: '2rem',
-            marginRight: '2rem',
-          }}
-        >
-          <CustomTooltip 
-            text={
-              isDarkMode ? "Switch to Dark Mode?" 
-              : "Switch to Light Mode?"
-            }
-            placement="bottom"
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              whiteSpace: 'nowrap',
+              marginLeft: '2rem',
+              marginRight: '2rem',
+            }}
           >
-            <CustomButton 
-              id="navbar-contrast-mode-custom-button"
-              key="navbar-contrast-mode-custom-button"
-              onClick={toggleTheme}
+            <CustomTooltip
+              text={isDarkMode ? 'Switch to Dark Mode?' : 'Switch to Light Mode?'}
+              placement="bottom"
             >
-              <Box 
-                sx={{
-                  display: 'flex', 
-                  flexDirection: 'row', 
-                  gap: '0.5rem',
-                }}
-              >
-                { 
-                  isDarkMode ? 
-                    <LightModeTwoToneIcon 
-                      sx={{ 
+              <CustomButton onClick={toggleTheme}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '0.5rem',
+                  }}
+                >
+                  {isDarkMode ? (
+                    <LightModeTwoToneIcon
+                      sx={{
                         height: '1.25rem',
                       }}
-                    /> 
-                  : 
-                    <DarkModeTwoToneIcon 
-                      sx={{ 
-                        height: '1.25rem',
-                      }} 
                     />
-                }
-              </Box>
-            </CustomButton>
-          </CustomTooltip>
-        </Box>
+                  ) : (
+                    <DarkModeTwoToneIcon
+                      sx={{
+                        height: '1.25rem',
+                      }}
+                    />
+                  )}
+                </Box>
+              </CustomButton>
+            </CustomTooltip>
+          </Box>
         </Box>
       </Box>
     </>
-  )
+  );
 }

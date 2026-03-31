@@ -9,7 +9,7 @@
       "@/data": ["src/data"],
       "@/hooks": ["src/hooks"],
       "@/pages": ["src/pages"],
-      "@/types": ["src/types"],
+      "@/types": ["src/types"]
     },
     "target": "es2020",
     "useDefineForClassFields": true,

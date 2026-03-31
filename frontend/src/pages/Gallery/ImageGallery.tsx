@@ -23,8 +23,10 @@ import { useTheme } from '@mui/material/styles';
 
 export default function ImageGallery() {
   const theme = useTheme();
-  
-  const [category, setCategory] = useState<'friends' | 'employers' | 'visitors' | null>(null);
+
+  const [category, setCategory] = useState<'friends' | 'employers' | 'visitors' | null>(
+    null
+  );
   const [images, setImages] = useState<PortfolioImage[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,12 +66,16 @@ export default function ImageGallery() {
   }
 
   return (
-    <Box sx={{ p: 3, backgroundColor: theme.palette.primary.main, borderRadius: '8px' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-        <Title children={`Welcome to my Gallery`}/>
-        <CustomButton onClick={handleLogout}>
-          Go Back
-        </CustomButton>
+    <Box
+      sx={{
+        p: 3,
+        backgroundColor: theme.palette.primary.main,
+        borderRadius: '8px',
+      }}
+    >
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Title children={`Welcome to my Gallery`} />
+        <CustomButton onClick={handleLogout}>Go Back</CustomButton>
       </Box>
 
       {loading && (
@@ -85,7 +91,9 @@ export default function ImageGallery() {
       )}
 
       {!loading && !error && images.length === 0 && (
-        <Typography color="text.secondary">No images available for this category.</Typography>
+        <Typography color="text.secondary">
+          No images available for this category.
+        </Typography>
       )}
 
       <Grid container spacing={2}>
@@ -95,16 +103,16 @@ export default function ImageGallery() {
               onClick={() => setSelectedImage(img)}
               sx={{
                 cursor: 'pointer',
-                height: '100%', 
+                height: '100%',
                 animation: 'none',
                 '&:hover': {
                   animation: 'pulse 2s infinite',
-                    '@keyframes pulse': {
+                  '@keyframes pulse': {
                     '100%': { opacity: 1 },
                     '50%': { opacity: 0.6 },
                     '0%': { opacity: 1 },
-                  }
-              },    
+                  },
+                },
               }}
             >
               <CardMedia
@@ -117,15 +125,17 @@ export default function ImageGallery() {
                   '&:hover': {
                     animation: 'pulse 2s infinite',
                     '@keyframes pulse': {
-                    '100%': { opacity: 1 },
-                    '50%': { opacity: 0.8 },
-                    '0%': { opacity: 1 },
-                  }
-                },                
-              }}
+                      '100%': { opacity: 1 },
+                      '50%': { opacity: 0.8 },
+                      '0%': { opacity: 1 },
+                    },
+                  },
+                }}
               />
               <CardContent>
-                <Typography variant="subtitle1" noWrap>{img.name}</Typography>
+                <Typography variant="subtitle1" noWrap>
+                  {img.name}
+                </Typography>
                 {img.date_taken && (
                   <Typography variant="body2" color="text.secondary">
                     {new Date(img.date_taken).toLocaleDateString()}
@@ -147,10 +157,10 @@ export default function ImageGallery() {
         onClose={() => setSelectedImage(null)}
         maxWidth="md"
         fullWidth
-        sx={{backgroundColour: theme.palette.primary.dark}}
+        sx={{ backgroundColour: theme.palette.primary.dark }}
       >
         {selectedImage && (
-          <Box sx={{backgroundColor: theme.palette.primary.dark,}}>
+          <Box sx={{ backgroundColor: theme.palette.primary.dark }}>
             <DialogTitle>{selectedImage.name}</DialogTitle>
             <DialogContent>
               <Box
@@ -166,7 +176,8 @@ export default function ImageGallery() {
               )}
               {selectedImage.date_taken && (
                 <Typography variant="body2" color="text.secondary">
-                  <strong>Date Taken:</strong> {new Date(selectedImage.date_taken).toLocaleDateString()}
+                  <strong>Date Taken:</strong>{' '}
+                  {new Date(selectedImage.date_taken).toLocaleDateString()}
                 </Typography>
               )}
               {selectedImage.camera_used && (

@@ -12,7 +12,7 @@ import { ThemeProvider } from '@mui/material';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   const toggleTheme = () => {
-    setIsDarkMode(prev => {
+    setIsDarkMode((prev) => {
       const newMode = !prev;
       localStorage.setItem('theme', newMode ? 'dark' : 'light');
       return newMode;
@@ -29,10 +29,10 @@ function App() {
   };
 
   return (
-  <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-    <Router isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
-  </ThemeProvider>
-)
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <Router isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+    </ThemeProvider>
+  );
 }
 
 export default App;

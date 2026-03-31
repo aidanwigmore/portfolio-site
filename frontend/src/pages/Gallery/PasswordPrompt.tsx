@@ -20,7 +20,7 @@ interface PasswordPromptProps {
 
 export default function PasswordPrompt({ onSuccess }: PasswordPromptProps) {
   const theme = useTheme();
-  
+
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -55,7 +55,12 @@ export default function PasswordPrompt({ onSuccess }: PasswordPromptProps) {
           <Typography variant="h5" gutterBottom align="center">
             Gallery Access
           </Typography>
-          <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            align="center"
+            sx={{ mb: 3 }}
+          >
             Enter your access password to view the gallery.
           </Typography>
 
@@ -83,7 +88,11 @@ export default function PasswordPrompt({ onSuccess }: PasswordPromptProps) {
               fullWidth
               disabled={loading || !password}
             >
-              {loading ? <CircularProgress size={20} color="inherit" /> : 'Enter Gallery'}
+              {loading ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                'Enter Gallery'
+              )}
             </CustomButton>
           </Box>
         </CardContent>

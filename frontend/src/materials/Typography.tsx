@@ -4,7 +4,20 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
 interface CustomTypographyProps extends TypographyProps {
-    variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'button' | 'caption' | 'overline';
+    variant?:
+        | 'h1'
+        | 'h2'
+        | 'h3'
+        | 'h4'
+        | 'h5'
+        | 'h6'
+        | 'subtitle1'
+        | 'subtitle2'
+        | 'body1'
+        | 'body2'
+        | 'button'
+        | 'caption'
+        | 'overline';
     children: React.ReactNode;
     gutterBottom?: boolean;
     color?: string;
@@ -18,10 +31,10 @@ export const CustomTypography: React.FC<CustomTypographyProps> = ({
     color,
     ...props
 }) => {
-    
     const theme = useTheme();
-    
-    const isInlineVariant = variant === 'button' || variant === 'caption' || variant === 'overline';
+
+    const isInlineVariant =
+        variant === 'button' || variant === 'caption' || variant === 'overline';
 
     return (
         <Typography

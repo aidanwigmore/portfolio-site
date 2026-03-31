@@ -16,7 +16,7 @@ import { useTheme } from '@mui/material/styles';
 
 export default function Home() {
   const theme = useTheme();
-  
+
   const [homeImages, setHomeImages] = useState<PortfolioImage[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
@@ -56,46 +56,56 @@ export default function Home() {
 
   return (
     <>
-      <MotionBox id={'image_slideshow'}
+      <MotionBox
         sx={{
-          display: 'flex', 
+          display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-        <Box id={'image-accent-padding'} sx={{
-          p: 2,
-          backgroundColor: theme.palette.secondary.main,
-          borderRadius: '8px',
-        }}>
+        <Box
+          sx={{
+            p: 2,
+            backgroundColor: theme.palette.secondary.main,
+            borderRadius: '8px',
+          }}
+        >
           {hasImages && currentImage ? (
-            <img src={getImageUrl(currentImage.image)} alt={currentImage.name || "Homepage Slideshow"} style={{ 
-              width: '50vw',
-              borderRadius: '8px',
-              boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
-              backgroundColor: theme.palette.primary.main,
-            }} />
+            <img
+              src={getImageUrl(currentImage.image)}
+              alt={currentImage.name || 'Homepage Slideshow'}
+              style={{
+                width: '50vw',
+                borderRadius: '8px',
+                boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
+                backgroundColor: theme.palette.primary.main,
+              }}
+            />
           ) : (
-            <img src="/home_images/first_image.png" alt="Homepage Slideshow" style={{ 
-              width: '50vw',
-              borderRadius: '8px',
-              boxShadow: `0 8px 32px ${theme.palette.secondary.contrastText}`,
-              backgroundColor: theme.palette.secondary.main,
-          }} />
+            <img
+              src="/home_images/first_image.png"
+              alt="Homepage Slideshow"
+              style={{
+                width: '50vw',
+                borderRadius: '8px',
+                boxShadow: `0 8px 32px ${theme.palette.secondary.contrastText}`,
+                backgroundColor: theme.palette.secondary.main,
+              }}
+            />
           )}
         </Box>
       </MotionBox>
-              
+
       <MotionBox>
-        <Projects home={true}/>
+        <Projects home={true} />
       </MotionBox>
 
       <MotionBox>
-        <Videos home={true}/>
+        <Videos home={true} />
       </MotionBox>
 
       <MotionBox>
-        <InstagramGalleries home={true}/>
+        <InstagramGalleries home={true} />
       </MotionBox>
     </>
   );

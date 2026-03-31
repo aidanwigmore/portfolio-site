@@ -8,6 +8,7 @@ export interface PortfolioImage {
   description: string | null;
   category: 'friends' | 'employers' | 'visitors';
   created_at: string;
+  tags: string[];
 }
 
 export interface AccessPassword {
