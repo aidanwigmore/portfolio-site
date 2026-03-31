@@ -1,3 +1,5 @@
+import { Tag } from '@/types/Tag';
+
 export interface PortfolioImage {
   id: number;
   name: string;
@@ -8,7 +10,7 @@ export interface PortfolioImage {
   description: string | null;
   category: 'friends' | 'employers' | 'visitors';
   created_at: string;
-  tags: string[];
+  tags: Tag[];
 }
 
 export interface AccessPassword {

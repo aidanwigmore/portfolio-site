@@ -76,11 +76,13 @@ export default function Videos({ home }: VideosProps) {
             backgroundColor: theme.palette.secondary.main,
           }}
         >
-          <Title
-            color={theme.palette.primary.contrastText}
-            variant="h5"
-            children={'My Youtube Videos'}
-          />
+          {home ? (
+            <Title
+              color={theme.palette.primary.contrastText}
+              variant="h6"
+              children={"Videos I've Worked On"}
+            />
+          ) : undefined}
           <VideosTabList
             handleChange={handleChange}
             items={items}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
 
 import { getImagesByCategory, getImageUrl } from '@/api/galleryService';
 
@@ -9,6 +10,8 @@ import Projects from '@/pages/Projects/ProjectsIndex';
 import InstagramGalleries from '@/pages/Gallery/InstagramGalleryIndex';
 
 import { PortfolioImage } from '@/types/Gallery';
+
+import { CustomTypography } from '@/materials/Typography';
 
 import MotionBox from '@/materials/MotionBox';
 
@@ -68,19 +71,58 @@ export default function Home() {
             p: 2,
             backgroundColor: theme.palette.secondary.main,
             borderRadius: '8px',
+            position: 'relative',
           }}
         >
           {hasImages && currentImage ? (
-            <img
-              src={getImageUrl(currentImage.image)}
-              alt={currentImage.name || 'Homepage Slideshow'}
-              style={{
-                width: '50vw',
-                borderRadius: '8px',
-                boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
-                backgroundColor: theme.palette.primary.main,
-              }}
-            />
+            <>
+              <img
+                src={getImageUrl(currentImage.image)}
+                alt={currentImage.name || 'Homepage Slideshow'}
+                style={{
+                  width: '50vw',
+                  borderRadius: '8px',
+                  boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
+                  backgroundColor: theme.palette.primary.main,
+                  display: 'block',
+                }}
+              />
+              {/* Tags overlay */}
+              {currentImage.tags && currentImage.tags.length > 0 && (
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: '1rem',
+                    left: '1rem',
+                    right: '1rem',
+                    display: 'flex',
+                    gap: '0.5rem',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {currentImage.tags
+                    .sort((a, b) => a.name.length - b.name.length)
+                    .map((tag, index) => (
+                      <Chip
+                        key={`${tag.name}-${index}`}
+                        label={
+                          <CustomTypography
+                            variant="button"
+                            color={theme.palette.primary.main}
+                          >
+                            {tag.name}
+                          </CustomTypography>
+                        }
+                        size="small"
+                        sx={{
+                          backgroundColor: theme.palette.primary.contrastText,
+                          color: theme.palette.primary.main,
+                        }}
+                      />
+                    ))}
+                </Box>
+              )}
+            </>
           ) : (
             <img
               src="/home_images/first_image.png"

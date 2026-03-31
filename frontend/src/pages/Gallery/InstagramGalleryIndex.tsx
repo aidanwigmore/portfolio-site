@@ -84,11 +84,13 @@ function InstagramGalleries({ home }: InstagramGalleriesProps) {
             backgroundColor: theme.palette.secondary.main,
           }}
         >
-          <Title
-            color={theme.palette.primary.contrastText}
-            variant="h5"
-            children={'Instagram Media'}
-          />
+          {home ? (
+            <Title
+              color={theme.palette.primary.contrastText}
+              variant="h6"
+              children={'My Instagram Media'}
+            />
+          ) : undefined}
           <GalleryTabList
             galleries={galleries}
             handleChange={handleChange}

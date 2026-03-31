@@ -81,11 +81,14 @@ export default function Projects({ home }: ProjectProps) {
             backgroundColor: theme.palette.secondary.main,
           }}
         >
-          <Title
-            color={theme.palette.primary.contrastText}
-            variant="h5"
-            children={"Projects I've Worked On"}
-          />
+          {home ? (
+            <Title
+              color={theme.palette.primary.contrastText}
+              variant="h6"
+              children={"Projects I've Worked On"}
+            />
+          ) : undefined}
+
           <ProjectTabList
             handleChange={handleChange}
             items={items}

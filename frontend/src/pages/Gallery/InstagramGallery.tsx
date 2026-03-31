@@ -145,12 +145,17 @@ export default function InstagramGallery({
           borderRadius: '8px',
         }}
       >
-        <Title
-          color={home ? theme.palette.primary.main : theme.palette.primary.contrastText}
-          variant={home ? variant : 'h5'}
-        >
-          {title}
-        </Title>
+        {home ? (
+          <Title
+            color={
+              home ? theme.palette.primary.main : theme.palette.primary.contrastText
+            }
+            variant={home ? variant : 'h5'}
+          >
+            {title}
+          </Title>
+        ) : undefined}
+
         <Box display="flex" flexDirection="row" gap={2}>
           <FormControl sx={{ mb: 3, minWidth: 200 }}>
             <Select

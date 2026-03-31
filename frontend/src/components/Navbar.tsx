@@ -31,13 +31,13 @@ interface NavBarProps {
 }
 
 const pageNames: Record<string, string> = {
-  '/': 'Home',
-  '/projects': 'Projects',
-  '/videos': 'Videos',
-  '/mrkt-media': 'MRKTBox',
-  '/film-media': 'Film',
-  '/digi-media': 'Digital',
-  '/gallery': 'Protected',
+  '/': 'Home Page',
+  '/projects': 'My Project Page',
+  '/videos': 'My Videos Page',
+  '/mrkt-media': 'My MRKTBox Memories',
+  '/film-media': 'My Film Media',
+  '/digi-media': 'My Digital Media',
+  '/gallery': 'My Protected Galleries',
 };
 
 export default function NavBar({ isDarkMode, toggleTheme }: NavBarProps) {

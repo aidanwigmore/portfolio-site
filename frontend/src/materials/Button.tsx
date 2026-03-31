@@ -35,12 +35,12 @@ const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
           backgroundColor: theme.palette.primary.contrastText,
           color: theme.palette.primary.main,
           ...(gutterBottom && { marginBottom: '1rem' }),
-          ...sx,
           '&:hover': {
             backgroundColor: theme.palette.secondary.main,
             color: theme.palette.primary.contrastText,
             boxShadow: `0 4px 16px ${theme.palette.primary.main}`,
           },
+          ...sx,
         }}
         {...props}
       >
