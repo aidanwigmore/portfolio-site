@@ -54,7 +54,17 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
             path="/videos"
             element={
               <PageTransition>
-                <Videos />
+                <Box
+                  sx={{
+                    backgroundColor: theme.palette.primary.contrastText,
+                    padding: '1rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Videos />
+                </Box>
               </PageTransition>
             }
           />
@@ -62,7 +72,17 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
             path="/projects"
             element={
               <PageTransition>
-                <Projects />
+                <Box
+                  sx={{
+                    backgroundColor: theme.palette.primary.contrastText,
+                    padding: '1rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Projects />
+                </Box>
               </PageTransition>
             }
           />
@@ -70,7 +90,17 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
             path="/gallery"
             element={
               <PageTransition>
-                <ImageGallery />
+                <Box
+                  sx={{
+                    backgroundColor: theme.palette.primary.contrastText,
+                    padding: '1rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <ImageGallery />
+                </Box>
               </PageTransition>
             }
           />
@@ -102,13 +132,11 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
               <PageTransition>
                 <Box
                   sx={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    backgroundColor: theme.palette.primary.contrastText,
+                    padding: '1rem',
                     display: 'flex',
                     flexDirection: 'column',
-                    backgroundColor: theme.palette.secondary.main,
-                    p: 3,
+                    alignItems: 'center',
                   }}
                 >
                   <InstagramGallery title={'Film Media'} routes={FilmRoutes} />
@@ -122,13 +150,11 @@ function Router({ isDarkMode, toggleTheme }: RouterProps) {
               <PageTransition>
                 <Box
                   sx={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    backgroundColor: theme.palette.primary.contrastText,
+                    padding: '1rem',
                     display: 'flex',
                     flexDirection: 'column',
-                    backgroundColor: theme.palette.secondary.main,
-                    p: 3,
+                    alignItems: 'center',
                   }}
                 >
                   <InstagramGallery title={'Digital Media'} routes={DigitalRoutes} />

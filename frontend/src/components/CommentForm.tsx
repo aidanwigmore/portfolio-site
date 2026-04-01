@@ -4,10 +4,10 @@ import * as React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 
 import api from '@/api/axios';
 
+import TextField from '@/materials/TextField';
 import CustomSnackbar from '@/materials/Snackbar';
 import CustomTooltip from '@/materials/Tooltip';
 import { CustomTypography } from '@/materials/Typography';
@@ -81,6 +81,7 @@ function CommentDialog(props: CommentDialogProps) {
             paddingBottom: '2rem',
             maxWidth: 'none',
             backgroundColor: theme.palette.secondary.main,
+            boxShadow: `0 4px 16px ${theme.palette.secondary.light}`,
           },
         }}
       >
@@ -97,65 +98,23 @@ function CommentDialog(props: CommentDialogProps) {
           <DialogTitle>
             <CustomTypography
               color={theme.palette.primary.main}
-              style={{ textAlign: 'center' }}
-              gutterBottom
+              variant="h6"
+              sx={{ marginBottom: '1.5rem' }}
             >
-              Send a message
+              Send A Message
             </CustomTypography>
           </DialogTitle>
 
-          <TextField
-            name="name"
-            id="filled-basic"
-            value={comment.name}
-            label="Name"
-            variant="filled"
-            onChange={handleChange}
-            sx={{
-              backgroundColor: theme.palette.secondary.light,
-              borderRadius: '8px',
-            }}
-          />
-          <TextField
-            name="email"
-            id="filled-basic"
-            label="Email"
-            variant="filled"
-            value={comment.email}
-            onChange={handleChange}
-            sx={{
-              backgroundColor: theme.palette.secondary.light,
-              borderRadius: '8px',
-            }}
-          />
+          <TextField name="name" value={comment.name} onChange={handleChange} />
+          <TextField name="email" value={comment.email} onChange={handleChange} />
           <TextField
             name="message"
-            id="filled-basic"
-            label="Message"
-            variant="filled"
             value={comment.message}
-            onChange={handleChange}
-            multiline
-            maxRows={4}
-            sx={{
-              backgroundColor: theme.palette.secondary.light,
-              borderRadius: '8px',
-            }}
+            onChange={() => handleChange}
+            multiline={true}
+            maxRows={true}
           />
-          <CustomButton
-            variant="contained"
-            type="submit"
-            onClick={submit}
-            sx={{
-              color: theme.palette.primary.contrastText,
-              backgroundColor: theme.palette.secondary.main,
-              borderRadius: '8px',
-              '&:hover': {
-                backgroundColor: theme.palette.secondary.light,
-                boxShadow: `0 4px 16px ${theme.palette.primary.main}`,
-              },
-            }}
-          >
+          <CustomButton variant="contained" type="submit" onClick={submit}>
             Send
           </CustomButton>
         </Box>

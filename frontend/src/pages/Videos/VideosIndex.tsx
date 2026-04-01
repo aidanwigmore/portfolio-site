@@ -67,22 +67,21 @@ export default function Videos({ home }: VideosProps) {
         <Box
           sx={{
             display: 'flex',
-            minHeight: home ? undefined : '85.2vh',
-            borderRadius: home ? '8px' : undefined,
+            minHeight: home ? undefined : 'auto',
+            borderRadius: '8px',
+            padding: home ? undefined : '1rem',
             flexDirection: 'column',
-            paddingTop: '2vh',
+            paddingTop: '1rem',
             justifyContent: 'top',
             alignItems: 'center',
             backgroundColor: theme.palette.secondary.main,
           }}
         >
-          {home ? (
-            <Title
-              color={theme.palette.primary.contrastText}
-              variant="h6"
-              children={"Videos I've Worked On"}
-            />
-          ) : undefined}
+          <Title
+            color={theme.palette.primary.contrastText}
+            variant="h6"
+            children={"Videos I've Worked On"}
+          />
           <VideosTabList
             handleChange={handleChange}
             items={items}

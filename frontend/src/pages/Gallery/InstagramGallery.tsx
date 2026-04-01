@@ -42,7 +42,6 @@ export default function InstagramGallery({
   routes,
   title,
   variant,
-  color,
   home,
 }: InstagramGalleryProps) {
   const theme = useTheme();
@@ -133,28 +132,17 @@ export default function InstagramGallery({
         viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
         style={{
-          backgroundColor: home
-            ? theme.palette.primary.contrastText
-            : theme.palette.secondary.main,
-          boxShadow: home
-            ? `0 8px 32px ${theme.palette.primary.contrastText}`
-            : undefined,
+          backgroundColor: theme.palette.secondary.main,
+          boxShadow: `0 8px 32px ${theme.palette.primary.dark}`,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           borderRadius: '8px',
         }}
       >
-        {home ? (
-          <Title
-            color={
-              home ? theme.palette.primary.main : theme.palette.primary.contrastText
-            }
-            variant={home ? variant : 'h5'}
-          >
-            {title}
-          </Title>
-        ) : undefined}
+        <Title color={theme.palette.primary.main} variant={home ? variant : 'h5'}>
+          {title}
+        </Title>
 
         <Box display="flex" flexDirection="row" gap={2}>
           <FormControl sx={{ mb: 3, minWidth: 200 }}>
@@ -163,15 +151,15 @@ export default function InstagramGallery({
               onChange={handleItemsPerPageChange}
               sx={{
                 backgroundColor: theme.palette.primary.contrastText,
-                color: color || theme.palette.primary.main,
+                color: theme.palette.primary.main,
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: color || theme.palette.primary.main,
+                  borderColor: theme.palette.primary.main,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: color || theme.palette.primary.main,
+                  borderColor: theme.palette.primary.main,
                 },
                 '& .MuiSvgIcon-root': {
-                  color: color || theme.palette.primary.main,
+                  color: theme.palette.primary.main,
                 },
               }}
             >
@@ -221,14 +209,14 @@ export default function InstagramGallery({
                 size="large"
                 sx={{
                   '& .MuiPaginationItem-root': {
-                    color: theme.palette.primary.contrastText,
+                    color: theme.palette.primary.main,
                     '&:hover': {
-                      backgroundColor: theme.palette.secondary.dark,
+                      backgroundColor: theme.palette.secondary.light,
                     },
                   },
                   '& .Mui-selected': {
-                    backgroundColor: theme.palette.primary.contrastText,
-                    color: theme.palette.primary.main,
+                    backgroundColor: theme.palette.secondary.main,
+                    color: theme.palette.primary.contrastText,
                   },
                 }}
               />
@@ -259,7 +247,14 @@ export default function InstagramGallery({
                 viewport={{ once: true, amount: 0.2 }}
                 variants={itemVariants}
               >
-                <Box sx={{ textAlign: 'center' }}>
+                <Box
+                  sx={{
+                    textAlign: 'center',
+                    boxShadow: `0 4px 16px ${theme.palette.secondary.light}`,
+                    borderRadius: `8px`,
+                    height: `20rem`,
+                  }}
+                >
                   {post.name && (
                     <CustomTypography
                       variant="h6"
@@ -297,37 +292,28 @@ export default function InstagramGallery({
                           ? theme.palette.primary.main
                           : theme.palette.primary.contrastText,
                         fontSize: '0.75rem',
-                        '&::first-letter': {
-                          fontSize: '2em',
-                        },
+                        // '&::first-letter': {
+                        //   fontSize: '2em',
+                        // },
                       }}
                     >
                       {post.coord}
                     </CustomTypography>
                   )}
 
-                  <Box
-                    sx={{
+                  <iframe
+                    src={`https://www.instagram.com${post.link}/embed`}
+                    data-instgrm-ignore="true"
+                    scrolling="no"
+                    style={{
                       display: 'inline-block',
                       borderRadius: '8px',
-                      height: '100%',
-                      width: '100%',
-                      boxShadow: `0 8px 32px ${theme.palette.primary.main}`,
+                      height: '15rem',
+                      clipPath: 'inset(50px 0 4rem 0)',
+                      border: 'none',
                     }}
-                  >
-                    <iframe
-                      src={`https://www.instagram.com${post.link}/embed`}
-                      data-instgrm-ignore="true"
-                      scrolling="yes"
-                      style={{
-                        height: '15rem',
-                        width: '100%',
-                        border: 'none',
-                        borderRadius: '8px',
-                      }}
-                      title={post.name}
-                    />
-                  </Box>
+                    title={post.name}
+                  />
                 </Box>
               </motion.div>
             ))}

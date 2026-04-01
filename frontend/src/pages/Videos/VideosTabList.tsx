@@ -103,9 +103,9 @@ function VideosTabListProps({
                 color: theme.palette.primary.main,
                 borderRadius: '8px',
                 '&:hover': {
-                  backgroundColor: theme.palette.secondary.main,
+                  backgroundColor: theme.palette.secondary.light,
                   color: theme.palette.primary.contrastText,
-                  boxShadow: `0 4px 16px ${theme.palette.primary.main}`,
+                  boxShadow: `0 4px 16px ${theme.palette.primary.light}`,
                 },
               }}
               key={index}
@@ -142,7 +142,7 @@ function VideosTabListProps({
                     flexDirection: 'column',
                     borderRadius: '8px',
                     padding: '1rem',
-                    boxShadow: `0 8px 32px ${theme.palette.primary.contrastText}`,
+                    boxShadow: `0 8px 32px ${theme.palette.primary.dark}`,
                   }}
                 >
                   <CustomTypography

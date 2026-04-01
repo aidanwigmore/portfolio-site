@@ -7,9 +7,9 @@ import {
   Security as SecurityIcon,
   ChevronLeft,
   CameraRoll as CameraRollIcon,
-  Instagram as InstagramIcon,
   YouTube as YouTubeIcon,
   SdCard as SdCardIcon,
+  Home as HomeIcon,
   AccountTreeTwoTone as AccountTreeTwoToneIcon,
   PermMediaTwoTone as PermMediaTwoToneIcon,
   QuestionAnswerTwoTone as QuestionAnswerTwoToneIcon,
@@ -34,7 +34,6 @@ const pageNames: Record<string, string> = {
   '/': 'Home Page',
   '/projects': 'My Project Page',
   '/videos': 'My Videos Page',
-  '/mrkt-media': 'My MRKTBox Memories',
   '/film-media': 'My Film Media',
   '/digi-media': 'My Digital Media',
   '/gallery': 'My Protected Galleries',
@@ -79,13 +78,43 @@ export default function NavBar({ isDarkMode, toggleTheme }: NavBarProps) {
           }}
         >
           <CustomTypography
-            variant="h1"
-            children="Aidan"
+            variant="h6"
+            children={
+              <>
+                <HomeIcon />
+              </>
+            }
             sx={{
               color: theme.palette.primary.contrastText,
             }}
           />
         </CustomButton>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+            gap: 0,
+            justifyContent: 'flex-start',
+          }}
+        >
+          <CustomTypography
+            variant="button"
+            children={'Current Page:'}
+            sx={{
+              color: theme.palette.primary.contrastText,
+              fontSize: '0.5rem',
+              marginBottom: '-0.5rem',
+            }}
+          />
+          <CustomTypography
+            variant="h6"
+            children={currentPageName}
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
+          />
+        </Box>
         <Box
           sx={{
             position: 'relative',
@@ -111,14 +140,6 @@ export default function NavBar({ isDarkMode, toggleTheme }: NavBarProps) {
               maxWidth: '90%',
             }}
           >
-            <CustomTypography
-              variant="h6"
-              children={currentPageName}
-              sx={{
-                color: theme.palette.primary.contrastText,
-                marginLeft: '0.5rem',
-              }}
-            />
             <CustomButton
               component={Link}
               to="/projects"
@@ -196,14 +217,6 @@ export default function NavBar({ isDarkMode, toggleTheme }: NavBarProps) {
               </MenuItem>
 
               <MenuItem onClick={handleClose}>
-                <CustomButton component={Link} to="/mrkt-media">
-                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
-                    <InstagramIcon sx={{ height: '1.25rem' }} />
-                    MRKTBox
-                  </Box>
-                </CustomButton>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
                 <CustomButton component={Link} to="/film-media">
                   <Box sx={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
                     <CameraRollIcon sx={{ height: '1.25rem' }} />
@@ -238,45 +251,44 @@ export default function NavBar({ isDarkMode, toggleTheme }: NavBarProps) {
               }
             />
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              whiteSpace: 'nowrap',
-              marginLeft: '2rem',
-              marginRight: '2rem',
-            }}
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            marginRight: '1rem',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <CustomTooltip
+            text={isDarkMode ? 'Switch to Dark Mode?' : 'Switch to Light Mode?'}
+            placement="bottom"
           >
-            <CustomTooltip
-              text={isDarkMode ? 'Switch to Dark Mode?' : 'Switch to Light Mode?'}
-              placement="bottom"
-            >
-              <CustomButton onClick={toggleTheme}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '0.5rem',
-                  }}
-                >
-                  {isDarkMode ? (
-                    <LightModeTwoToneIcon
-                      sx={{
-                        height: '1.25rem',
-                      }}
-                    />
-                  ) : (
-                    <DarkModeTwoToneIcon
-                      sx={{
-                        height: '1.25rem',
-                      }}
-                    />
-                  )}
-                </Box>
-              </CustomButton>
-            </CustomTooltip>
-          </Box>
+            <CustomButton onClick={toggleTheme}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: '0.5rem',
+                }}
+              >
+                {isDarkMode ? (
+                  <LightModeTwoToneIcon
+                    sx={{
+                      height: '1.25rem',
+                    }}
+                  />
+                ) : (
+                  <DarkModeTwoToneIcon
+                    sx={{
+                      height: '1.25rem',
+                    }}
+                  />
+                )}
+              </Box>
+            </CustomButton>
+          </CustomTooltip>
         </Box>
       </Box>
     </>

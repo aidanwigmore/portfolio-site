@@ -45,7 +45,6 @@ function ProjectTabListProps({
             '& .MuiTabs-flexContainer': {
               justifyContent: 'space-evenly',
               flexWrap: 'wrap',
-              gap: '8px',
             },
             width: '100%',
           }}
@@ -57,11 +56,11 @@ function ProjectTabListProps({
                 color: theme.palette.primary.main,
                 borderRadius: '8px',
                 '&:hover': {
-                  backgroundColor: theme.palette.secondary.main,
+                  backgroundColor: theme.palette.secondary.light,
                   color: theme.palette.primary.contrastText,
                   boxShadow: `
-                                        0 4px 16px ${theme.palette.primary.main}
-                                    `,
+                    0 4px 16px ${theme.palette.primary.main}
+                  `,
                 },
               }}
               key={index}
@@ -80,22 +79,17 @@ function ProjectTabListProps({
                 key={itemIndex}
                 sx={{
                   borderRadius: '8px',
-                  width: '100%',
                 }}
               >
                 <Box
                   sx={{
-                    width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
                     display: 'flex',
                     backgroundColor: theme.palette.primary.contrastText,
                     flexDirection: 'column',
-                    boxShadow: `0 8px 32px
-                                            ${theme.palette.primary.contrastText}
-                                        `,
+                    boxShadow: `0 4px 16px ${theme.palette.secondary.light}`,
                     borderRadius: '8px',
-                    p: 3,
                   }}
                 >
                   <Box
@@ -103,9 +97,7 @@ function ProjectTabListProps({
                       display: 'flex',
                       flexDirection: 'row',
                       alignItems: 'center',
-                      gap: '1rem',
-                      mb: 2,
-                      width: '100%',
+                      p: 4,
                     }}
                   >
                     <ThumbUp

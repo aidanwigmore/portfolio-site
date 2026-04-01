@@ -4,7 +4,6 @@ import { Box } from '@mui/material';
 
 import TabContext from '@mui/lab/TabContext';
 
-import MRKTRoutes from '@/data/MrktRoutes';
 import FilmRoutes from '@/data/FilmRoutes';
 import DigitalRoutes from '@/data/DigitalRoutes';
 
@@ -20,7 +19,6 @@ interface InstagramGalleriesProps {
 }
 
 const galleries = [
-  { title: 'MRKTBox', routes: MRKTRoutes },
   { title: 'Film', routes: FilmRoutes },
   { title: 'Digital', routes: DigitalRoutes },
 ];

@@ -72,22 +72,20 @@ export default function Projects({ home }: ProjectProps) {
         <Box
           sx={{
             display: 'flex',
-            minHeight: home ? undefined : '85.2vh',
-            borderRadius: home ? '8px' : undefined,
+            minHeight: home ? undefined : 'auto',
+            padding: home ? undefined : '1rem',
+            borderRadius: '8px',
             flexDirection: 'column',
-            paddingTop: '2vh',
             justifyContent: 'top',
             alignItems: 'center',
             backgroundColor: theme.palette.secondary.main,
           }}
         >
-          {home ? (
-            <Title
-              color={theme.palette.primary.contrastText}
-              variant="h6"
-              children={"Projects I've Worked On"}
-            />
-          ) : undefined}
+          <Title
+            color={theme.palette.primary.contrastText}
+            variant="h6"
+            children={"Projects I've Worked On"}
+          />
 
           <ProjectTabList
             handleChange={handleChange}
