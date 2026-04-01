@@ -7,7 +7,7 @@ export function useThumbsUp(type: 'video' | 'project') {
 
   const fetchThumbsUpCounts = useCallback(async () => {
     try {
-      const response = await api.get(`ratable-items/?type=${type}`);
+      const response = await api.get(`ratable-items/by_type/?type=${type}`);
       const counts: { [key: string]: number } = {};
       response.data.forEach((item: any) => {
         counts[item.external_id] = item.thumbs_up_count;
@@ -26,7 +26,7 @@ export function useThumbsUp(type: 'video' | 'project') {
 
   const handleThumbsUp = useCallback(async (externalId: string) => {
     try {
-      const response = await api.get(`ratable-items/?type=${type}`);
+      const response = await api.get(`ratable-items/by_type/?type=${type}`);
       const item = response.data.find((i: any) => i.external_id === externalId);
       
       if (item) {
