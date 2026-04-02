@@ -10,27 +10,42 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+import dj_database_url
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load .env file when present (development). In production, environment
+# variables are supplied directly by Azure App Service Application Settings.
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!wq2_5wb9+bmjvm#4w09n)l*@8a*35w3t6f-jzcq_04o1clv)='
+# Set the SECRET_KEY environment variable in Azure App Service Application Settings.
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+# Comma-separated list of allowed hostnames, e.g.
+# ALLOWED_HOSTS=your-app.azurewebsites.net,www.example.com
+_allowed_hosts = os.environ.get('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = [h.strip() for h in _allowed_hosts.split(',') if h.strip()]
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    ALLOWED_HOSTS += ['localhost', '127.0.0.1']
+
+# Comma-separated list of frontend origins allowed for CORS, e.g.
+# CORS_ALLOWED_ORIGINS=https://your-frontend.azurestaticapps.net,http://localhost:3000
+_cors_origins = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000')
+CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_origins.split(',') if o.strip()]
 
 
 # Application definition
@@ -44,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'storages',
     'comments',
     'images',
     'ratings',
@@ -51,6 +67,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,13 +98,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
+# In production, set DATABASE_URL to a PostgreSQL connection string, e.g.:
+# DATABASE_URL=postgres://user:password@host:5432/dbname
+# Falls back to local SQLite for development when DATABASE_URL is not set.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
 }
 
 
@@ -109,9 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
@@ -123,8 +138,51 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# HTTPS / security settings
+# These are automatically enabled when not in DEBUG mode so that production
+# deployments (behind Azure's HTTPS termination proxy) behave securely.
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000          # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
 
 # Static files (CSS, JavaScript, Images)
+# WhiteNoise serves Django's own static files (admin, DRF) efficiently in production.
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# Media / user-uploaded files
+# In production, files are stored in Azure Blob Storage.
+# Set AZURE_ACCOUNT_NAME and AZURE_ACCOUNT_KEY (or use a Managed Identity connection
+# string via AZURE_CONNECTION_STRING) in Azure App Service Application Settings.
+# Set AZURE_MEDIA_CONTAINER to the name of your blob container (e.g. 'media').
+_azure_account_name = os.environ.get('AZURE_ACCOUNT_NAME', '')
+_azure_account_key = os.environ.get('AZURE_ACCOUNT_KEY', '')
+_azure_connection_string = os.environ.get('AZURE_CONNECTION_STRING', '')
+_azure_media_container = os.environ.get('AZURE_MEDIA_CONTAINER', 'media')
+
+if _azure_account_name or _azure_connection_string:
+    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+    AZURE_ACCOUNT_NAME = _azure_account_name
+    AZURE_ACCOUNT_KEY = _azure_account_key
+    AZURE_CONNECTION_STRING = _azure_connection_string
+    AZURE_CONTAINER = _azure_media_container
+    MEDIA_URL = f'https://{_azure_account_name}.blob.core.windows.net/{_azure_media_container}/'
+else:
+    # Development fallback: store media files locally
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
