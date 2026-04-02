@@ -1,0 +1,22 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/*",
+      "rewrite": "/index.html"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/static/*", "/media/*", "/*.{css,js,png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf,eot}"]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 200
+    }
+  }
+}

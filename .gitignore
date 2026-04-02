@@ -46,3 +46,14 @@ venv/
 env/
 ENV/
 .venv
+
+# Django generated
+backend/staticfiles/
+backend/db.sqlite3
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Frontend build output
+frontend/build/
