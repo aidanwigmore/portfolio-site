@@ -1,0 +1,322 @@
+import { Box, Pagination, MenuItem, Select, FormControl } from '@mui/material';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
+import { CustomTypography } from '@/materials/Typography';
+import { useTheme } from '@mui/material/styles';
+
+import Title from '@/components/Title';
+
+interface InstagramGalleryProps {
+  title: string;
+  home?: boolean;
+  color?: string;
+  variant?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'button'
+    | 'caption'
+    | 'overline';
+  routes: Array<{
+    [key: string]: {
+      link: string;
+      coord: string;
+      developed: string;
+      rating?: number;
+      order?: number;
+    };
+  }>;
+}
+
+type SortOrder = 'asc' | 'desc' | 'order';
+
+export default function InstagramGallery({
+  routes,
+  title,
+  variant,
+  home,
+}: InstagramGalleryProps) {
+  const theme = useTheme();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState<SortOrder>('order');
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+
+  const allPosts = Object.entries(routes[0]).map(
+    ([name, { link, coord, developed, rating, order }]) => ({
+      name: name.replace(/_/g, ' '),
+      link,
+      coord,
+      developed,
+      rating: rating || 0,
+      order: order || 999,
+    })
+  );
+
+  const handleItemsPerPageChange = (event: React.ChangeEvent<unknown>) => {
+    const value = (event.target as HTMLSelectElement).value;
+    if (value === 'all') {
+      setItemsPerPage(allPosts.length);
+    } else {
+      setItemsPerPage(Number(value));
+    }
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (event: React.ChangeEvent<unknown>) => {
+    setSortOrder((event.target as HTMLSelectElement).value as SortOrder);
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    if (window.instgrm) {
+      window.instgrm.Embed.process();
+    }
+  }, [currentPage, routes, sortOrder]);
+
+  const parseDate = (dateStr: string): Date => {
+    return new Date(dateStr);
+  };
+
+  const sortedPosts = [...allPosts].sort((a, b) => {
+    if (sortOrder === 'order') {
+      return a.order - b.order;
+    }
+    const dateA = parseDate(a.developed);
+    const dateB = parseDate(b.developed);
+    return sortOrder === 'desc'
+      ? dateB.getTime() - dateA.getTime()
+      : dateA.getTime() - dateB.getTime();
+  });
+
+  const totalPages = Math.ceil(sortedPosts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const posts = sortedPosts.slice(startIndex, endIndex);
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, delay: i * 0.1 },
+    }),
+  };
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
+  };
+
+  return (
+    <>
+      <motion.div
+        initial="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+        style={{
+          backgroundColor: theme.palette.secondary.main,
+          boxShadow: `0 8px 32px ${theme.palette.primary.dark}`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          borderRadius: '8px',
+        }}
+      >
+        <Title color={theme.palette.primary.main} variant={home ? variant : 'h5'}>
+          {title}
+        </Title>
+
+        <Box display="flex" flexDirection="row" gap={2}>
+          <FormControl sx={{ mb: 3, minWidth: 200 }}>
+            <Select
+              value={itemsPerPage}
+              onChange={() => handleItemsPerPageChange}
+              sx={{
+                backgroundColor: theme.palette.primary.contrastText,
+                color: theme.palette.primary.main,
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: theme.palette.primary.main,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: theme.palette.primary.main,
+                },
+                '& .MuiSvgIcon-root': {
+                  color: theme.palette.primary.main,
+                },
+              }}
+            >
+              <MenuItem value={3}>3 per page</MenuItem>
+              <MenuItem value={6}>6 per page</MenuItem>
+              <MenuItem value={12}>12 per page</MenuItem>
+              <MenuItem value={sortedPosts.length}>All ({sortedPosts.length})</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ mb: 3, minWidth: 200 }}>
+            <Select
+              value={sortOrder}
+              onChange={() => handleSortChange}
+              sx={{
+                backgroundColor: theme.palette.primary.contrastText,
+                color: theme.palette.primary.main,
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: theme.palette.primary.main,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: theme.palette.primary.main,
+                },
+                '& .MuiSvgIcon-root': {
+                  color: theme.palette.primary.main,
+                },
+              }}
+            >
+              <MenuItem value="order">Original Order</MenuItem>
+              <MenuItem value="desc">Date: New to Old</MenuItem>
+              <MenuItem value="asc">Date: Old to New</MenuItem>
+            </Select>
+          </FormControl>
+          {totalPages > 1 && (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexGrow: 1,
+              }}
+            >
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+                size="large"
+                sx={{
+                  '& .MuiPaginationItem-root': {
+                    color: theme.palette.primary.main,
+                    '&:hover': {
+                      backgroundColor: theme.palette.secondary.light,
+                    },
+                  },
+                  '& .Mui-selected': {
+                    backgroundColor: theme.palette.secondary.main,
+                    color: theme.palette.primary.contrastText,
+                  },
+                }}
+              />
+            </Box>
+          )}
+        </Box>
+        <Box
+          sx={{
+            p: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: '1fr 1fr 1fr' },
+              gap: '2rem',
+            }}
+          >
+            {posts.map((post, index) => (
+              <motion.div
+                key={`${title}-${currentPage}-${index}`}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={itemVariants}
+              >
+                <Box
+                  sx={{
+                    textAlign: 'center',
+                    boxShadow: `0 4px 16px ${theme.palette.secondary.light}`,
+                    borderRadius: `8px`,
+                    height: `20rem`,
+                  }}
+                >
+                  {post.name && (
+                    <CustomTypography
+                      variant="h6"
+                      sx={{
+                        color: home
+                          ? theme.palette.primary.main
+                          : theme.palette.primary.contrastText,
+                        display: 'block',
+                        textDecoration: 'underline',
+                      }}
+                    >
+                      {post.name}
+                    </CustomTypography>
+                  )}
+                  {post.developed && (
+                    <CustomTypography
+                      variant="h5"
+                      sx={{
+                        color: home
+                          ? theme.palette.primary.main
+                          : theme.palette.primary.contrastText,
+                        display: 'block',
+                        fontSize: '0.75rem',
+                      }}
+                    >
+                      {post.developed}
+                    </CustomTypography>
+                  )}
+                  {post.coord && (
+                    <CustomTypography
+                      variant="caption"
+                      sx={{
+                        display: 'block',
+                        color: home
+                          ? theme.palette.primary.main
+                          : theme.palette.primary.contrastText,
+                        fontSize: '0.75rem',
+                      }}
+                    >
+                      {post.coord}
+                    </CustomTypography>
+                  )}
+
+                  <iframe
+                    src={`https://www.instagram.com${post.link}/embed`}
+                    data-instgrm-ignore="true"
+                    scrolling="no"
+                    style={{
+                      display: 'inline-block',
+                      borderRadius: '8px',
+                      height: '15rem',
+                      clipPath: 'inset(50px 0 4rem 0)',
+                      border: 'none',
+                    }}
+                    title={post.name}
+                  />
+                </Box>
+              </motion.div>
+            ))}
+          </Box>
+        </Box>
+      </motion.div>
+    </>
+  );
+}

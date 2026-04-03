@@ -1,0 +1,36 @@
+# Build/dist
+dist/
+build/
+*.egg-info/
+.next/
+.nuxt/
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Deployment
+*.zip
+deploy.zip
+*.tar.gz

@@ -1,0 +1,153 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Bulk Upload Images - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h1>📤 Bulk Upload Images</h1>
+    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="form-container">
+        {% csrf_token %}
+        
+        <fieldset class="module aligned">
+            <h2>Image Files</h2>
+            
+            <div class="form-row">
+                <div>
+                    <label for="images"><strong>Select Images *</strong></label>
+                    <input type="file" id="images" name="images" multiple accept="image/*" required 
+                           class="vFileUploadInput" onchange="updateFileCount(this)">
+                    <p class="help">Select multiple image files (PNG, JPG, WebP, etc.)</p>
+                    <div id="file-count" style="margin-top: 10px; font-weight: bold; color: #417690;"></div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="module aligned">
+            <h2>Image Settings</h2>
+            
+            <div class="form-row">
+                <div>
+                    <label for="category">Category</label>
+                    <select id="category" name="category" class="vTextField">
+                        <option value="visitors">Regular Visitors</option>
+                        <option value="employers">Potential Employers</option>
+                        <option value="friends">Friends</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="date_taken">Date Taken</label>
+                    <input type="date" id="date_taken" name="date_taken" class="vDateInput">
+                    <p class="help">Leave empty to use today's date</p>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="camera_used">Camera Used</label>
+                    <input type="text" id="camera_used" name="camera_used" class="vTextField" 
+                           placeholder="e.g., Canon EOS 5D Mark IV">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="coordinates">Coordinates</label>
+                    <input type="text" id="coordinates" name="coordinates" class="vTextField" 
+                           placeholder="e.g., 40.7128° N, 74.0060° W">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" class="vLargeTextField" rows="4" 
+                              placeholder="Add a description for all images..."></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="module aligned">
+            <h2>Tags</h2>
+            
+            <div class="form-row">
+                <div>
+                    {% if tags %}
+                        <div style="max-height: 250px; overflow-y: auto; border: 1px solid #ddd; padding: 15px; border-radius: 4px; background-color: #fafafa;">
+                            {% for tag in tags %}
+                                <div style="margin-bottom: 10px;">
+                                    <label style="display: inline-block; margin-right: 10px;">
+                                        <input type="checkbox" name="tags" value="{{ tag.id }}">
+                                        <span style="font-weight: 500;">{{ tag.name }}</span>
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p style="color: #999;">No tags available. <a href="{% url 'admin:images_tag_add' %}">Create one</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="submit-row">
+            <a href="{% url 'admin:images_portfolioimage_changelist' %}" class="button">Cancel</a>
+            <button type="submit" class="button default">Upload Images</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .messages {
+        margin: 20px 0;
+    }
+    .alert {
+        padding: 12px 20px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        border: 1px solid transparent;
+    }
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeaa7;
+        color: #856404;
+    }
+    .form-container {
+        max-width: 800px;
+    }
+    .fieldset {
+        margin-bottom: 30px;
+    }
+</style>
+
+<script>
+    function updateFileCount(input) {
+        const count = input.files.length;
+        const fileCountDiv = document.getElementById('file-count');
+        if (count > 0) {
+            fileCountDiv.textContent = `📁 ${count} file(s) selected`;
+        } else {
+            fileCountDiv.textContent = '';
+        }
+    }
+</script>
+{% endblock %}

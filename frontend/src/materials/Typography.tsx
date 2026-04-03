@@ -1,0 +1,53 @@
+import { Typography, TypographyProps } from '@mui/material';
+import React from 'react';
+
+import { useTheme } from '@mui/material/styles';
+
+interface CustomTypographyProps extends TypographyProps {
+    variant?:
+        | 'h1'
+        | 'h2'
+        | 'h3'
+        | 'h4'
+        | 'h5'
+        | 'h6'
+        | 'subtitle1'
+        | 'subtitle2'
+        | 'body1'
+        | 'body2'
+        | 'button'
+        | 'caption'
+        | 'overline';
+    children: React.ReactNode;
+    gutterBottom?: boolean;
+    color?: string;
+}
+
+export const CustomTypography: React.FC<CustomTypographyProps> = ({
+    variant = 'body1',
+    children,
+    gutterBottom = false,
+    sx = {},
+    color,
+    ...props
+}) => {
+    const theme = useTheme();
+
+    const isInlineVariant =
+        variant === 'button' || variant === 'caption' || variant === 'overline';
+
+    return (
+        <Typography
+            variant={variant}
+            gutterBottom={gutterBottom}
+            sx={{
+                color: color ? color : theme.palette.primary.contrastText,
+                ...(isInlineVariant && { display: 'block' }),
+                ...sx,
+            }}
+            {...props}
+        >
+            {children}
+        </Typography>
+    );
+};

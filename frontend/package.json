@@ -1,0 +1,52 @@
+{
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test"
+  },
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/cutive": "^5.2.8",
+    "@fontsource/cutive-mono": "^5.2.8",
+    "@fontsource/doto": "^5.2.10",
+    "@fontsource/roboto": "^5.2.10",
+    "@mantine/core": "^8.3.17",
+    "@mantine/hooks": "^8.3.17",
+    "@mantine/notifications": "^8.3.17",
+    "@mui/icons-material": "^7.3.9",
+    "@mui/lab": "^7.0.1-beta.23",
+    "@mui/material": "^7.3.9",
+    "@mui/styled-engine-sc": "^7.3.9",
+    "@tabler/icons-react": "^3.40.0",
+    "axios": "^1.13.6",
+    "framer-motion": "^12.38.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.13.1",
+    "react-scripts": "^5.0.1",
+    "styled-components": "^6.3.11"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint-config-prettier": "^10.1.8",
+    "react-app-alias": "^2.2.2",
+    "webpack": "^5.105.4"
+  }
+}
